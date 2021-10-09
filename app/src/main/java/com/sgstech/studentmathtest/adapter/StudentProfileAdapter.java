@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.sgstech.studentmathtest.Database.model.Student;
 import com.sgstech.studentmathtest.R;
-import com.sgstech.studentmathtest.UpdateServiceSummaryActivity;
+import com.sgstech.studentmathtest.UpdateStudentProfileActivity;
 
 import java.util.List;
 
@@ -76,7 +76,7 @@ public class StudentProfileAdapter extends RecyclerView.Adapter<StudentProfileAd
         public void onClick(View view) {
             Student student = studentProfileList.get(getAdapterPosition());
 
-            Intent intent = new Intent(mCtx, UpdateServiceSummaryActivity.class);
+            Intent intent = new Intent(mCtx, UpdateStudentProfileActivity.class);
             intent.putExtra("studentProfile", student);
 
             mCtx.startActivity(intent);

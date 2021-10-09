@@ -42,7 +42,7 @@ import java.util.List;
 import java.util.Locale;
 
 
-public class UpdateServiceGalleryActivity extends AppCompatActivity implements View.OnClickListener {
+public class UpdateStudentMathTestActivity extends AppCompatActivity implements View.OnClickListener {
 
 
     private Manager_Cache managerCacheUpdateServiceGallery;
@@ -212,7 +212,7 @@ public class UpdateServiceGalleryActivity extends AppCompatActivity implements V
     @Override
     public void onBackPressed() {
         finish();
-        Intent intent = new Intent(UpdateServiceGalleryActivity.this, MainActivity_Service_Gallery.class);
+        Intent intent = new Intent(UpdateStudentMathTestActivity.this, MainActivity_Student_Math_Test.class);
         startActivity(intent);
     }
 
@@ -260,7 +260,7 @@ public class UpdateServiceGalleryActivity extends AppCompatActivity implements V
                 Toast.makeText(getApplicationContext(), "Updated", Toast.LENGTH_LONG).show();
 
                 finish();
-                Intent intent = new Intent(UpdateServiceGalleryActivity.this,MainActivity_Service_Gallery.class);
+                Intent intent = new Intent(UpdateStudentMathTestActivity.this, MainActivity_Student_Math_Test.class);
                 intent.putExtra("image_path"       ,image_file_global);
                 startActivity(intent);
             }
@@ -535,7 +535,7 @@ public class UpdateServiceGalleryActivity extends AppCompatActivity implements V
                 .setMessage("Camera needs few permissions to work properly. Grant them in settings.")
                 .setPositiveButton("GOTO SETTINGS", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        CameraUtils.openSettings(UpdateServiceGalleryActivity.this);
+                        CameraUtils.openSettings(UpdateStudentMathTestActivity.this);
                     }
                 })
                 .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {

@@ -14,7 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.sgstech.studentmathtest.Database.model.Student;
 
 
-public class AddServiceSummaryActivity extends AppCompatActivity {
+public class AddStudentProfileActivity extends AppCompatActivity {
 
     private Manager_Cache managerCacheAddServiceSummary;
 
@@ -89,10 +89,6 @@ public class AddServiceSummaryActivity extends AppCompatActivity {
         editTextEmailEight = findViewById(R.id.enterEmail_eight);
         editTextEmailNine = findViewById(R.id.enterEmail_nine);
         editTextEmailTen = findViewById(R.id.enterEmail_ten);
-
-
-
-
 
 
         findViewById(R.id.button_save_service_summary).setOnClickListener(new View.OnClickListener() {
@@ -193,7 +189,7 @@ public class AddServiceSummaryActivity extends AppCompatActivity {
             protected void onPostExecute(Void aVoid) {
                 super.onPostExecute(aVoid);
                 finish();
-                startActivity(new Intent(getApplicationContext(), MainActivity_Service_Summary.class));
+                startActivity(new Intent(getApplicationContext(), MainActivity_Student_Profile.class));
                 Toast.makeText(getApplicationContext(), "Saved", Toast.LENGTH_LONG).show();
             }
         }

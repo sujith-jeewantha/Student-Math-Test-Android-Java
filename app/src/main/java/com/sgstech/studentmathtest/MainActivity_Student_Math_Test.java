@@ -39,7 +39,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class MainActivity_Service_Gallery extends AppCompatActivity {
+public class MainActivity_Student_Math_Test extends AppCompatActivity {
 
 
 
@@ -124,7 +124,7 @@ public class MainActivity_Service_Gallery extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 finish();
-                Intent intent = new Intent(getApplicationContext(), ServiceMain.class);
+                Intent intent = new Intent(getApplicationContext(), StudentMain.class);
                 startActivity(intent);
             }
         });
@@ -204,7 +204,7 @@ public class MainActivity_Service_Gallery extends AppCompatActivity {
             @Override
             protected void onPostExecute(List<Student> serviceGalleries) {
                 super.onPostExecute(serviceGalleries);
-                StudentMathTestAdapter adapter = new StudentMathTestAdapter(MainActivity_Service_Gallery.this, serviceGalleries);
+                StudentMathTestAdapter adapter = new StudentMathTestAdapter(MainActivity_Student_Math_Test.this, serviceGalleries);
                 recyclerView.setAdapter(adapter);
             }
         }
@@ -253,7 +253,7 @@ public class MainActivity_Service_Gallery extends AppCompatActivity {
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
 
-            progressDialog = new ProgressDialog(MainActivity_Service_Gallery.this,ProgressDialog.THEME_HOLO_DARK);
+            progressDialog = new ProgressDialog(MainActivity_Student_Math_Test.this,ProgressDialog.THEME_HOLO_DARK);
             progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
             progressDialog.setTitle("Please wait moment...");
             progressDialog.setMessage("Images uploading to BROWNS ACMS server.Please wait a moment!");
@@ -301,10 +301,10 @@ public class MainActivity_Service_Gallery extends AppCompatActivity {
                 @Override
                 public void onResponse(@NonNull Call<ResponseBody> call, @NonNull Response<ResponseBody> response) {
                     if(response.isSuccessful()) {
-                        Toast.makeText(MainActivity_Service_Gallery.this,
+                        Toast.makeText(MainActivity_Student_Math_Test.this,
                                 "Images successfully uploaded!", Toast.LENGTH_SHORT).show();
                         finish();
-                        Intent intent = new Intent(getApplicationContext(), ServiceMain.class);
+                        Intent intent = new Intent(getApplicationContext(), StudentMain.class);
                         startActivity(intent);
                     } else {
                         Snackbar.make(findViewById(android.R.id.content),"Something wrong", Snackbar.LENGTH_LONG).show();
@@ -320,7 +320,7 @@ public class MainActivity_Service_Gallery extends AppCompatActivity {
             });
 
         } else {
-            Intent intent = new Intent(MainActivity_Service_Gallery.this, AlertNoInternet.class);
+            Intent intent = new Intent(MainActivity_Student_Math_Test.this, AlertNoInternet.class);
             startActivity(intent);
         }
     }

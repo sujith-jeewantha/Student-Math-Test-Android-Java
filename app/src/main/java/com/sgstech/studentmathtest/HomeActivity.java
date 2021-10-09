@@ -30,7 +30,7 @@ public class HomeActivity extends AppCompatActivity {
         btnService.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent       = new Intent(getBaseContext(), ServiceMain.class);
+                Intent intent       = new Intent(getBaseContext(), StudentMain.class);
                 intent.putExtra("user_id",user_id_global);
                 intent.putExtra("user_email",user_email_global);
                 startActivity(intent);

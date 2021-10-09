@@ -2,7 +2,6 @@ package com.sgstech.studentmathtest;
 
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -19,22 +18,13 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.amitshekhar.DebugDB;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 import com.sgstech.studentmathtest.Database.model.Student;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class ServiceMain extends AppCompatActivity {
+public class StudentMain extends AppCompatActivity {
 
 
     private Manager_Cache managerCacheServiceMain;
@@ -215,7 +205,7 @@ public class ServiceMain extends AppCompatActivity {
 
 //                        if (CheckLocation.isGPSEnabled(getApplicationContext())) {
 
-                            Intent intent   = new Intent(getBaseContext(), MainActivity_Service_Summary.class);
+                            Intent intent   = new Intent(getBaseContext(), MainActivity_Student_Profile.class);
                             intent.putExtra("user_id",user_id_global);
                             startActivity(intent);
 
@@ -242,7 +232,7 @@ public class ServiceMain extends AppCompatActivity {
 
                     } else {
 
-                        Intent intent = new Intent(ServiceMain.this, AlertNoInternet.class);
+                        Intent intent = new Intent(StudentMain.this, AlertNoInternet.class);
                         startActivity(intent);
                     }
                 } catch (Exception e) {
@@ -262,7 +252,7 @@ public class ServiceMain extends AppCompatActivity {
 
 //                        if (CheckLocation.isGPSEnabled(getApplicationContext())) {
 
-                            Intent intent   = new Intent(getBaseContext(), MainActivity_Service_Gallery.class);
+                            Intent intent   = new Intent(getBaseContext(), MainActivity_Student_Math_Test.class);
                             intent.putExtra("user_id",user_id_global);
                             startActivity(intent);
 
@@ -289,7 +279,7 @@ public class ServiceMain extends AppCompatActivity {
 
                     } else {
 
-                        Intent intent = new Intent(ServiceMain.this, AlertNoInternet.class);
+                        Intent intent = new Intent(StudentMain.this, AlertNoInternet.class);
                         startActivity(intent);
                     }
                 } catch (Exception e) {
@@ -370,7 +360,7 @@ public class ServiceMain extends AppCompatActivity {
                 super.onPostExecute(aVoid);
                 Toast.makeText(getApplicationContext(), "Service Deleted", Toast.LENGTH_LONG).show();
                 finish();
-                startActivity(new Intent(ServiceMain.this, HomeActivity.class));
+                startActivity(new Intent(StudentMain.this, HomeActivity.class));
             }
         }
 

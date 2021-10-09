@@ -16,7 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.sgstech.studentmathtest.Database.model.Student;
 
-public class UpdateServiceSummaryActivity extends AppCompatActivity {
+public class UpdateStudentProfileActivity extends AppCompatActivity {
 
 
 
@@ -138,7 +138,7 @@ public class UpdateServiceSummaryActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                AlertDialog.Builder builder = new AlertDialog.Builder(UpdateServiceSummaryActivity.this);
+                AlertDialog.Builder builder = new AlertDialog.Builder(UpdateStudentProfileActivity.this);
                 builder.setTitle("Are you sure?");
                 builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
@@ -162,7 +162,7 @@ public class UpdateServiceSummaryActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         finish();
-        Intent intent = new Intent(UpdateServiceSummaryActivity.this, MainActivity_Service_Summary.class);
+        Intent intent = new Intent(UpdateStudentProfileActivity.this, MainActivity_Student_Profile.class);
         startActivity(intent);
     }
 
@@ -291,7 +291,7 @@ public class UpdateServiceSummaryActivity extends AppCompatActivity {
                 super.onPostExecute(aVoid);
                 Toast.makeText(getApplicationContext(), "Updated", Toast.LENGTH_LONG).show();
                 finish();
-                startActivity(new Intent(UpdateServiceSummaryActivity.this, MainActivity_Service_Summary.class));
+                startActivity(new Intent(UpdateStudentProfileActivity.this, MainActivity_Student_Profile.class));
             }
         }
 
@@ -316,7 +316,7 @@ public class UpdateServiceSummaryActivity extends AppCompatActivity {
                 super.onPostExecute(aVoid);
                 Toast.makeText(getApplicationContext(), "Deleted", Toast.LENGTH_LONG).show();
                 finish();
-                startActivity(new Intent(UpdateServiceSummaryActivity.this, MainActivity_Service_Summary.class));
+                startActivity(new Intent(UpdateStudentProfileActivity.this, MainActivity_Student_Profile.class));
             }
         }
 

@@ -97,13 +97,13 @@ public class CameraUtils {
         File mediaStorageDir = new File(
                 Environment
                         .getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES),
-                UpdateServiceGalleryActivity.SERVICE_GALLERY_DIRECTORY_NAME);
+                UpdateStudentMathTestActivity.SERVICE_GALLERY_DIRECTORY_NAME);
 
         // Create the storage directory if it does not exist
         if (!mediaStorageDir.exists()) {
             if (!mediaStorageDir.mkdirs()) {
-                Log.e(UpdateServiceGalleryActivity.SERVICE_GALLERY_DIRECTORY_NAME, "Oops! Failed create "
-                        + UpdateServiceGalleryActivity.SERVICE_GALLERY_DIRECTORY_NAME + " directory");
+                Log.e(UpdateStudentMathTestActivity.SERVICE_GALLERY_DIRECTORY_NAME, "Oops! Failed create "
+                        + UpdateStudentMathTestActivity.SERVICE_GALLERY_DIRECTORY_NAME + " directory");
                 return null;
             }
         }
@@ -114,9 +114,9 @@ public class CameraUtils {
                 Locale.getDefault()).format(new Date());
         File mediaFile;
 
-        if (type == UpdateServiceGalleryActivity.MEDIA_TYPE_IMAGE) {
+        if (type == UpdateStudentMathTestActivity.MEDIA_TYPE_IMAGE) {
             mediaFile = new File(mediaStorageDir.getPath() + File.separator
-                    + "IMG_" + timeStamp + "." + UpdateServiceGalleryActivity.IMAGE_EXTENSION);
+                    + "IMG_" + timeStamp + "." + UpdateStudentMathTestActivity.IMAGE_EXTENSION);
         }
 
         else {

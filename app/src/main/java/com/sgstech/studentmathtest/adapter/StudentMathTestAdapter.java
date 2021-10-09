@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.sgstech.studentmathtest.Database.model.Student;
 import com.sgstech.studentmathtest.R;
-import com.sgstech.studentmathtest.UpdateServiceGalleryActivity;
+import com.sgstech.studentmathtest.UpdateStudentMathTestActivity;
 
 import java.util.List;
 
@@ -72,7 +72,7 @@ public class StudentMathTestAdapter extends RecyclerView.Adapter<StudentMathTest
         public void onClick(View view) {
             Student student = studentList.get(getAdapterPosition());
 
-            Intent intent = new Intent(mCtx, UpdateServiceGalleryActivity.class);
+            Intent intent = new Intent(mCtx, UpdateStudentMathTestActivity.class);
             intent.putExtra("studentMathTest", student);
 
             mCtx.startActivity(intent);

@@ -25,12 +25,12 @@
     </activity>
 
         <activity
-            android:name=".MainActivity_Service_Gallery"
+            android:name=".MainActivity_Student_Math_Test"
             android:configChanges="orientation"
             android:screenOrientation="portrait" />
 
         <activity
-            android:name=".MainActivity_Service_Summary"
+            android:name=".MainActivity_Student_Profile"
             android:configChanges="orientation"
             android:screenOrientation="portrait" />
 
@@ -41,22 +41,22 @@
             android:theme="@style/Theme.AppCompat.Dialog" />
 
         <activity
-            android:name=".ServiceMain"
+            android:name=".StudentMain"
             android:configChanges="orientation"
             android:screenOrientation="portrait" />
 
         <activity
-            android:name=".AddServiceSummaryActivity"
+            android:name=".AddStudentProfileActivity"
             android:configChanges="orientation"
             android:screenOrientation="portrait" />
 
         <activity
-            android:name=".UpdateServiceGalleryActivity"
+            android:name=".UpdateStudentMathTestActivity"
             android:configChanges="orientation"
             android:screenOrientation="portrait" />
 
         <activity
-            android:name=".UpdateServiceSummaryActivity"
+            android:name=".UpdateStudentProfileActivity"
             android:configChanges="orientation"
             android:screenOrientation="portrait" />
 

@@ -24,7 +24,7 @@ import com.sgstech.studentmathtest.adapter.StudentProfileAdapter;
 import java.io.File;
 import java.util.List;
 
-public class MainActivity_Service_Summary extends AppCompatActivity {
+public class MainActivity_Student_Profile extends AppCompatActivity {
 
 
     private Manager_Cache managerCacheUpdateServiceSummary;
@@ -111,7 +111,7 @@ public class MainActivity_Service_Summary extends AppCompatActivity {
         buttonAddServiceSummary.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity_Service_Summary.this, AddServiceSummaryActivity.class);
+                Intent intent = new Intent(MainActivity_Student_Profile.this, AddStudentProfileActivity.class);
                 startActivity(intent);
             }
         });
@@ -120,7 +120,7 @@ public class MainActivity_Service_Summary extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 finish();
-                Intent intent = new Intent(getApplicationContext(), ServiceMain.class);
+                Intent intent = new Intent(getApplicationContext(), StudentMain.class);
                 startActivity(intent);
             }
         });
@@ -197,7 +197,7 @@ public class MainActivity_Service_Summary extends AppCompatActivity {
             @Override
             protected void onPostExecute(List<Student> students) {
                 super.onPostExecute(students);
-                StudentProfileAdapter adapter = new StudentProfileAdapter(MainActivity_Service_Summary.this, students);
+                StudentProfileAdapter adapter = new StudentProfileAdapter(MainActivity_Student_Profile.this, students);
                 recyclerView.setAdapter(adapter);
             }
         }
