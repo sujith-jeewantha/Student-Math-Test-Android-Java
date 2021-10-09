@@ -7,8 +7,7 @@
     android:layout_weight="1"
     android:orientation="vertical"
     android:padding="8dp"
-    android:background="@color/main_blue"
-    tools:context=".MainActivity">
+    android:background="@color/main_blue">
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/pullToRefresh"
@@ -32,7 +31,7 @@
                     android:layout_height="40dp"/>
 
                 <TextView
-                    android:text="SERVICE-SUMMARY"
+                    android:text="@string/students"
                     android:textColor="@color/main_yellow"
                     android:textStyle="bold"
                     android:textSize="20sp"
@@ -44,6 +43,7 @@
 
         <LinearLayout
             android:id="@+id/rec_lay"
+            android:background="@color/main_blue"
             android:layout_weight="1"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -51,10 +51,11 @@
 
 
             <androidx.recyclerview.widget.RecyclerView
-        android:layout_weight="1"
-        android:id="@+id/recyclerview_tasks"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+                android:layout_weight="1"
+                android:id="@+id/recyclerview_tasks"
+                android:background="@color/main_blue"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
 
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -75,14 +76,6 @@
         android:layout_below="@+id/rec_lay"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-
-<!--        <Button-->
-<!--            android:id="@+id/button_upload_service_gallery"-->
-<!--            android:text="UPLOAD SERVICE SUMMARY"-->
-<!--            android:background="@drawable/button_shape_upload"-->
-<!--            android:textColor="@color/main_blue"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"/>-->
 
     </LinearLayout>
 

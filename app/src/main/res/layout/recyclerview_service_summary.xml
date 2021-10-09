@@ -8,6 +8,7 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/main_blue"
         android:layout_marginBottom="3dp">
 
 
@@ -15,45 +16,73 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/layout_shape"
-            android:orientation="vertical"
+            android:orientation="horizontal"
             android:padding="7dp">
 
-            <TextView
-                android:id="@+id/textViewStatus"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                android:background="@drawable/not_completed_shape"
-                android:text="Completed"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-                android:textColor="@color/main_yellow"
-                android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/textView_service_site_id"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Site ID"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Headline" />
+                <LinearLayout
+                    android:id="@+id/serviceSummaryLayout"
+                    android:layout_margin="5dp"
+                    android:background="@color/main_blue"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp">
 
-            <TextView
-                android:id="@+id/textView_service_site_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Site Name"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
 
-            <TextView
-                android:id="@+id/textView_service_unit_no"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Unit No"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+                    <ImageView
+                        android:id="@+id/textVdgdsiewStatus"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/profile_pic"/>
 
+
+                </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/layout_shape"
+                            android:orientation="vertical"
+                            android:padding="7dp">
+
+                            <TextView
+                                android:id="@+id/textViewStatus"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="5dp"
+                                android:background="@drawable/not_completed_shape"
+                                android:text="Completed"
+                                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                                android:textColor="@color/main_yellow"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/textView_service_site_id"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Site ID"
+                                android:textAppearance="@style/Base.TextAppearance.AppCompat.Headline" />
+
+                            <TextView
+                                android:id="@+id/textView_service_site_name"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Site Name"
+                                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+
+                            <TextView
+                                android:id="@+id/textView_service_unit_no"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Unit No"
+                                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+
+
+                        </LinearLayout>
 
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>
-
 
 </RelativeLayout>

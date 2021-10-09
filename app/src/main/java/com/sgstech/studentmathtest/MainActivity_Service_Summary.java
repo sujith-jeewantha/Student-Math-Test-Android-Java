@@ -26,14 +26,6 @@ import java.util.List;
 
 public class MainActivity_Service_Summary extends AppCompatActivity {
 
-    /**
-     *
-     * Developed by : Sujith Jeewantha
-     * email        : sujith@suji-tech.com
-     * Init Date    : 26/06/2021
-     * Updated at   : 12/07/2021
-     *
-     */
 
     private Manager_Cache managerCacheUpdateServiceSummary;
 
@@ -137,13 +129,7 @@ public class MainActivity_Service_Summary extends AppCompatActivity {
 
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        serviceRegion       = managerCacheUpdateServiceSummary.getServiceRegionName();
-        service_site_id     = managerCacheUpdateServiceSummary.getServiceSiteID();
-        service_site_name   = managerCacheUpdateServiceSummary.getServiceSiteName();
-    }
+
 
     private void refreshContent(){
 
@@ -169,9 +155,6 @@ public class MainActivity_Service_Summary extends AppCompatActivity {
             @Override
             protected Void doInBackground(Void... voids) {
 
-                student.setServiceRegion(sRegion);
-                student.setServiceSiteId(sSiteId);
-                student.setServiceSiteName(sSiteName);
                 DatabaseClient.getInstance(getApplicationContext()).getAppDatabase()
                         .studentDao()
                         .update(student);

@@ -38,15 +38,33 @@ public class AddServiceSummaryActivity extends AppCompatActivity {
     private Manager_Cache managerCacheAddServiceSummary;
 
 
-    private String serviceRegion = "";
-    private String service_site_id = "";
-    private String service_site_name = "";
-    private String service_team_name = "";
 
+    private EditText
+            editTextStudentNo,
+            editTextFirstName,
+            editTextLastName,
 
+            editTextPhoneNoOne,
+            editTextPhoneNoTwo,
+            editTextPhoneNoThree,
+            editTextPhoneNoFour,
+            editTextPhoneNoFive,
+            editTextPhoneNoSix,
+            editTextPhoneNoSeven,
+            editTextPhoneNoEight,
+            editTextPhoneNoNine,
+            editTextPhoneNoTen,
 
-
-    private EditText editTextServiceUnitNo, editTextEnterODSN, editTextEnterIDSN, editTextEnterServiceSummaryRemarks, editTextEnterServiceSummaryMaterialUsage;
+            editTextEmailOne,
+            editTextEmailTwo,
+            editTextEmailThree,
+            editTextEmailFour,
+            editTextEmailFive,
+            editTextEmailSix,
+            editTextEmailSeven,
+            editTextEmailEight,
+            editTextEmailNine,
+            editTextEmailTen;
 
 
 
@@ -65,17 +83,31 @@ public class AddServiceSummaryActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
+        editTextStudentNo = findViewById(R.id.student_s_no);
+        editTextFirstName = findViewById(R.id.enter_student_first_name);
+        editTextLastName = findViewById(R.id.enter_student_last_name);
 
+        editTextPhoneNoOne = findViewById(R.id.entertpNo_one);
+        editTextPhoneNoTwo = findViewById(R.id.entertpNo_two);
+        editTextPhoneNoThree = findViewById(R.id.entertpNo_three);
+        editTextPhoneNoFour = findViewById(R.id.entertpNo_four);
+        editTextPhoneNoFive = findViewById(R.id.entertpNo_five);
+        editTextPhoneNoSix = findViewById(R.id.entertpNo_six);
+        editTextPhoneNoSeven = findViewById(R.id.entertpNo_seven);
+        editTextPhoneNoEight = findViewById(R.id.entertpNo_eight);
+        editTextPhoneNoNine = findViewById(R.id.entertpNo_nine);
+        editTextPhoneNoTen = findViewById(R.id.entertpNo_ten);
 
-
-        editTextServiceUnitNo = findViewById(R.id.service_summary_unit_no);
-        editTextEnterODSN = findViewById(R.id.enter_od_sn);
-        editTextEnterIDSN = findViewById(R.id.enter_id_sn);
-        editTextEnterServiceSummaryRemarks = findViewById(R.id.enterServiceSummaryRemarks);
-        editTextEnterServiceSummaryMaterialUsage = findViewById(R.id.enterServiceSummaryMaterialUsage);
-
-
-
+        editTextEmailOne = findViewById(R.id.enterEmail_one);
+        editTextEmailTwo = findViewById(R.id.enterEmail_two);
+        editTextEmailThree = findViewById(R.id.enterEmail_three);
+        editTextEmailFour = findViewById(R.id.enterEmail_four);
+        editTextEmailFive = findViewById(R.id.enterEmail_five);
+        editTextEmailSix = findViewById(R.id.enterEmail_six);
+        editTextEmailSeven = findViewById(R.id.enterEmail_seven);
+        editTextEmailEight = findViewById(R.id.enterEmail_eight);
+        editTextEmailNine = findViewById(R.id.enterEmail_nine);
+        editTextEmailTen = findViewById(R.id.enterEmail_ten);
 
 
 
@@ -85,46 +117,51 @@ public class AddServiceSummaryActivity extends AppCompatActivity {
         findViewById(R.id.button_save_service_summary).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-//                serviceRegion       = managerCacheAddServiceSummary.getServiceRegionName();
-//                service_site_id     = managerCacheAddServiceSummary.getServiceSiteID();
-//                service_site_name   = managerCacheAddServiceSummary.getServiceSiteName();
-//                service_team_name   = managerCacheAddServiceSummary.getServiceTeamName();
                 saveServiceSummary();
             }
         });
     }
 
-
-
     private void saveServiceSummary() {
 
-        final String sRegion = serviceRegion;
-        final String sSiteId = service_site_id;
-        final String sSiteName = service_site_name;
-        final String sTeamName = service_team_name;
-        final String sUnitNo = editTextServiceUnitNo.getText().toString().trim();
-        final String sSummaryODSN = editTextEnterODSN.getText().toString().trim();
-        final String sSummaryIDSN = editTextEnterIDSN.getText().toString().trim();
-        final String sSummaryRemarks = editTextEnterServiceSummaryRemarks.getText().toString().trim();
-        final String sSummaryMaterialUsage = editTextEnterServiceSummaryMaterialUsage.getText().toString().trim();
+         final String sStudentNo  =  editTextStudentNo.getText().toString().trim();
+         final String sFirstName  =  editTextFirstName.getText().toString().trim();
+         final String sLastName  =  editTextLastName .getText().toString().trim();
+
+         final String sPhoneNoOne  =  editTextPhoneNoOne.getText().toString().trim();
+         final String sPhoneNoTwo  =  editTextPhoneNoTwo.getText().toString().trim();
+         final String sPhoneNoThree  =  editTextPhoneNoThree.getText().toString().trim();
+         final String sPhoneNoFour  =  editTextPhoneNoFour.getText().toString().trim();
+         final String sPhoneNoFive  =  editTextPhoneNoFive.getText().toString().trim();
+         final String sPhoneNoSix  =  editTextPhoneNoSix.getText().toString().trim();
+         final String sPhoneNoSeven  =  editTextPhoneNoSeven.getText().toString().trim();
+         final String sPhoneNoEight  =  editTextPhoneNoEight.getText().toString().trim();
+         final String sPhoneNoNine  =  editTextPhoneNoNine.getText().toString().trim();
+         final String sPhoneNoTen  =  editTextPhoneNoTen.getText().toString().trim();
+
+         final String sEmailOne  =  editTextEmailOne.getText().toString().trim();
+         final String sEmailTwo  =  editTextEmailTwo.getText().toString().trim();
+         final String sEmailThree  =  editTextEmailThree.getText().toString().trim();
+         final String sEmailFour  =  editTextEmailFour.getText().toString().trim();
+         final String sEmailFive  =  editTextEmailFive.getText().toString().trim();
+         final String sEmailSix  =  editTextEmailSix.getText().toString().trim();
+         final String sEmailSeven  =  editTextEmailSeven.getText().toString().trim();
+         final String sEmailEight  =  editTextEmailEight.getText().toString().trim();
+         final String sEmailNine  =  editTextEmailNine.getText().toString().trim();
+         final String sEmailTen  =  editTextEmailTen.getText().toString().trim();
+
 
 
         try {
-            if (sUnitNo.isEmpty()) {
-                editTextServiceUnitNo.setError("Unit No required");
-                editTextServiceUnitNo.requestFocus();
+            if (sStudentNo.isEmpty()) {
+                editTextStudentNo.setError("Student No required");
+                editTextStudentNo.requestFocus();
                 return;
 
-//                if(email_global.equals("") || password_global.equals("")){
-//
-//                    Toast.makeText(getBaseContext(),"Please Fill the blanks to Continue!",Toast.LENGTH_SHORT).show();
-//
-//                }
             }
         }catch (Exception e)
         {
-            Toast.makeText(getApplicationContext(),"Unit No required", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(),"Student No required", Toast.LENGTH_LONG).show();
         }
 
 
@@ -135,16 +172,32 @@ public class AddServiceSummaryActivity extends AppCompatActivity {
             protected Void doInBackground(Void... voids) {
 
                 Student student = new Student();
-                student.setServiceRegion(sRegion);
-                student.setServiceSiteId(sSiteId);
-                student.setServiceSiteName(sSiteName);
-                student.setServiceTeamName(sTeamName);
-                student.setUnitNo(sUnitNo);
-                student.setODSN(sSummaryODSN);
-                student.setIDSN(sSummaryIDSN);
-                student.setSummaryRemark(sSummaryRemarks);
-                student.setSummaryMaterialUsage(sSummaryMaterialUsage);
 
+                student.setStudent_no(sStudentNo);
+                student.setStudent_first_name(sFirstName);
+                student.setStudent_last_name(sLastName);
+
+                student.setStudent_phone_one(sPhoneNoOne);
+                student.setStudent_phone_two(sPhoneNoTwo);
+                student.setStudent_phone_three(sPhoneNoThree);
+                student.setStudent_phone_four(sPhoneNoFour);
+                student.setStudent_phone_five(sPhoneNoFive);
+                student.setStudent_phone_six(sPhoneNoSix);
+                student.setStudent_phone_seven(sPhoneNoSeven);
+                student.setStudent_phone_eight(sPhoneNoEight);
+                student.setStudent_phone_nine(sPhoneNoNine);
+                student.setStudent_phone_ten(sPhoneNoTen);
+
+                student.setStudent_email_one(sEmailOne);
+                student.setStudent_email_two(sEmailTwo);
+                student.setStudent_email_three(sEmailThree);
+                student.setStudent_email_four(sEmailFour);
+                student.setStudent_email_five(sEmailFive);
+                student.setStudent_email_six(sEmailSix);
+                student.setStudent_email_seven(sEmailSeven);
+                student.setStudent_email_eight(sEmailEight);
+                student.setStudent_email_nine(sEmailNine);
+                student.setStudent_email_ten(sEmailTen);
 
                 student.setFinished(false);
 
@@ -167,11 +220,6 @@ public class AddServiceSummaryActivity extends AppCompatActivity {
         SaveServiceSummary ssg = new SaveServiceSummary();
         ssg.execute();
     }
-
-
-
-
-
 
 
 

@@ -7,8 +7,7 @@
     android:layout_weight="1"
     android:orientation="vertical"
     android:padding="8dp"
-    android:background="@color/main_blue"
-    tools:context=".MainActivity">
+    android:background="@color/main_blue">
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/pullToRefresh"
@@ -32,7 +31,7 @@
                     android:layout_height="40dp"/>
 
                 <TextView
-                    android:text="SERVICE-GALLERY"
+                    android:text="MATH-TESTS"
                     android:textColor="@color/main_yellow"
                     android:textStyle="bold"
                     android:textSize="20sp"
@@ -77,13 +76,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <Button
-            android:id="@+id/button_upload_service_gallery"
-            android:text="UPLOAD IMAGES"
-            android:background="@drawable/button_shape_upload"
-            android:textColor="@color/main_blue"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+
     </LinearLayout>
 
         </LinearLayout>

@@ -110,14 +110,13 @@ public class ServiceMain extends AppCompatActivity {
 
 
 
-        service_team_info_status  = managerCacheServiceMain.getServiceTeamInfoStatus();
-        service_site_info_status  = managerCacheServiceMain.getServiceSiteInfoStatus();
-        service_summary_status    = managerCacheServiceMain.getServiceSummaryStatus();
-        service_gallery_status    = managerCacheServiceMain.getServiceGalleryStatus();
+//        service_team_info_status  = managerCacheServiceMain.getServiceTeamInfoStatus();
+//        service_site_info_status  = managerCacheServiceMain.getServiceSiteInfoStatus();
+//        service_summary_status    = managerCacheServiceMain.getServiceSummaryStatus();
+//        service_gallery_status    = managerCacheServiceMain.getServiceGalleryStatus();
 
         user_id_global          = getIntent().getStringExtra("user_id");
 
-        Log.d("session_id_team","user-id:   "+user_id_global);
 
         btnLinServiceSummary    = (LinearLayout)findViewById(R.id.btnLinServiceSummary);
         btnLinServiceGallery     = (LinearLayout)findViewById(R.id.btnLinServiceGallery);
@@ -125,8 +124,6 @@ public class ServiceMain extends AppCompatActivity {
         display_summary_status      = (TextView)findViewById(R.id.display_summary_status);
         display_gallery_status      = (TextView)findViewById(R.id.display_gallery_status);
 
-        image_service_summary               = (ImageView)findViewById(R.id.image_service_summary);
-        image_service_gallery               = (ImageView)findViewById(R.id.image_service_gallery);
 
 
 
@@ -138,71 +135,66 @@ public class ServiceMain extends AppCompatActivity {
                 handlerNotoficationWindow.post(new Runnable() {
                     @SuppressLint("SetTextI18n")
                     public void run() {
-                        try
-                        {
-
-
-
-
-                                service_summary_status          = managerCacheServiceMain.getServiceSummaryStatus();
-
-                                switch (service_summary_status){
-
-                                    case "done":
-
-                                        if(service_gallery_status_check.equals("EMPTY") ){
-                                            //table is empty
-
-
-                                        }
-                                        else if(service_gallery_status_check.equals("NOTEMPTY") ){
-
-                                            // table is not empty
-
-                                        }
-
-                                        display_summary_status.setText("Finished");
-                                        image_service_summary.setImageDrawable(getResources().getDrawable(R.drawable.complete));
-
-                                        break;
-
-                                    case "not_done":
-
-                                        display_summary_status.setText("Ongoing");
-                                        image_service_summary.setImageDrawable(getResources().getDrawable(R.drawable.not_complete));
-
-                                        break;
-
-                                }
-
-
-
-                                service_gallery_status          = managerCacheServiceMain.getServiceGalleryStatus();
-
-                                switch (service_gallery_status){
-
-                                    case "done":
-
-                                        display_gallery_status.setText("Finished");
-                                        image_service_gallery.setImageDrawable(getResources().getDrawable(R.drawable.complete));
-
-                                        break;
-
-                                    case "not_done":
-
-                                        display_gallery_status.setText("Ongoing");
-                                        image_service_gallery.setImageDrawable(getResources().getDrawable(R.drawable.not_complete));
-
-                                        break;
-
-                                }
-
-
-                        }
-                        catch (Exception e)
-                        {
-                            finish();
-                        }
+//                        try
+//                        {
+//
+//
+//
+//
+//
+//                                switch (service_summary_status){
+//
+//                                    case "done":
+//
+//                                        if(service_gallery_status_check.equals("EMPTY") ){
+//                                            //table is empty
+//
+//
+//                                        }
+//                                        else if(service_gallery_status_check.equals("NOTEMPTY") ){
+//
+//                                            // table is not empty
+//
+//                                        }
+//
+//                                        display_summary_status.setText("Finished");
+//                                        image_service_summary.setImageDrawable(getResources().getDrawable(R.drawable.complete));
+//
+//                                        break;
+//
+//                                    case "not_done":
+//
+//                                        image_service_summary.setImageDrawable(getResources().getDrawable(R.drawable.not_complete));
+//
+//                                        break;
+//
+//                                }
+//
+//
+//
+//
+//                                switch (service_gallery_status){
+//
+//                                    case "done":
+//
+//                                        image_service_gallery.setImageDrawable(getResources().getDrawable(R.drawable.complete));
+//
+//                                        break;
+//
+//                                    case "not_done":
+//
+//                                        image_service_gallery.setImageDrawable(getResources().getDrawable(R.drawable.not_complete));
+//
+//                                        break;
+//
+//                                }
+//
+//
+//                        }
+//                        catch (Exception e)
+//                        {
+//                            finish();
+//                        }
                     }
                 });
             }
@@ -319,7 +311,7 @@ public class ServiceMain extends AppCompatActivity {
 
     private void loadServiceSummary(Student student) {
         try {
-            check_service_unit =student.getUnitNo();
+            check_service_unit =student.getStudent_no();
         }
         catch (Exception e){
             Toast.makeText(getApplicationContext(),"No unit", Toast.LENGTH_LONG).show();
@@ -361,124 +353,6 @@ public class ServiceMain extends AppCompatActivity {
         gt.execute();
     }
 
-    private void UploadFinalDataController(
-                String user_idP,
-                String site_idP,
-                String site_nameP,
-                String regionP,
-                String team_nameP,
-                String service_dateP,
-                String time_inP,
-                String time_outP,
-                String unit_countP,
-                String capacityP,
-                String brandP,
-                String modelP,
-                String id_snP,
-                String od_snP,
-                String site_info_remarksP,
-                String site_info_material_usageP,
-                String service_summary_remarksP,
-                String service_summary_material_usageP
-
-
-    ) {
-
-
-        String path         = upload_service_final_api_url;
-
-        RequestQueue queue = Volley.newRequestQueue(this);
-
-        String url = path + "?" +
-
-                "user_id"                           +"=" + user_idP                         + "&" +
-                "site_id"                           +"=" + site_idP                         + "&" +
-                "site_name"                         +"=" + site_nameP                       + "&" +
-                "region"                            +"=" + regionP                          + "&" +
-                "team_name"                         +"=" + team_nameP                       + "&" +
-                "service_date"                      +"=" + service_dateP                    + "&" +
-                "time_in"                           +"=" + time_inP                         + "&" +
-                "time_out"                          +"=" + time_outP                        + "&" +
-                "unit_count"                        +"=" + unit_countP                      + "&" +
-                "capacity"                          +"=" + capacityP                        + "&" +
-                "brand"                             +"=" + brandP                           + "&" +
-                "model"                             +"=" + modelP                           + "&" +
-                "id_sn"                             +"=" + id_snP                           + "&" +
-                "od_sn"                             +"=" + od_snP                           + "&" +
-                "site_info_remarks"                 +"=" + site_info_remarksP               + "&" +
-                "site_info_material_usage"          +"=" + site_info_material_usageP        + "&" +
-                "service_summary_remarks"           +"=" + service_summary_remarksP         + "&" +
-                "service_summary_material_usage"    +"=" + service_summary_material_usageP;
-
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-
-                        progressDialog.cancel();
-                        Log.d("kResponse",response);
-
-                        JSONObject jsonObject   = null;
-                        try {
-
-
-                            jsonObject = new JSONObject(response);
-                            String status           = jsonObject.getString("status");
-                            String message          = jsonObject.getString("message");
-
-//                            Intent intent           = new Intent(getBaseContext(), GrandSummary.class);
-//                            intent.putExtra("site_id",site_idP);
-//                            intent.putExtra("site_name",site_nameP);
-//                            intent.putExtra("region",regionP);
-//                            intent.putExtra("team_name",team_nameP);
-//                            intent.putExtra("service_date",service_dateP);
-//                            intent.putExtra("time_in",time_inP);
-//                            intent.putExtra("time_out",time_outP);
-//                            intent.putExtra("unit_count",unit_countP);
-//                            intent.putExtra("capacity",capacityP);
-//                            intent.putExtra("brand",brandP);
-//                            intent.putExtra("model",modelP);
-//                            intent.putExtra("id_sn",id_snP);
-//                            intent.putExtra("od_sn",od_snP);
-//                            intent.putExtra("remarks",remarksP);
-//                            intent.putExtra("m_usage",material_usageP);
-//                            startActivity(intent);
-
-                            /**
-                             * Use this method for delete service table
-                             *
-                             * check the server response is successfully uploaded then call bellow method
-                             *
-                             * ------------------> final Service service = (Service) getIntent().getSerializableExtra("serviceSummary");
-                             * ------------------> deleteServiceSummary(service);
-                             *
-                             *
-                             */
-
-
-
-                            Toast.makeText(getBaseContext(),message,Toast.LENGTH_LONG).show();
-//                            Intent intent           = new Intent(getBaseContext(),Login.class);
-//                            startActivity(intent);
-                            finish();
-
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.d("working_res", "That didn't work!");
-            }
-        });
-
-        queue.add(stringRequest);
-
-
-    }
 
     private void deleteServiceSummary(final Student student) {
         class DeleteServiceSummary extends AsyncTask<Void, Void, Void> {
@@ -496,7 +370,7 @@ public class ServiceMain extends AppCompatActivity {
                 super.onPostExecute(aVoid);
                 Toast.makeText(getApplicationContext(), "Service Deleted", Toast.LENGTH_LONG).show();
                 finish();
-//                startActivity(new Intent(ServiceMain.this, Login.class));
+                startActivity(new Intent(ServiceMain.this, HomeActivity.class));
             }
         }
 

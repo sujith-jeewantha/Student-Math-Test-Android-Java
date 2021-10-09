@@ -95,9 +95,9 @@
                                         android:layout_height="wrap_content">
 
                                         <ImageView
-                                            android:id="@+id/image_service_summary"
-                                            android:layout_width="90sp"
-                                            android:layout_height="90sp"/>
+                                            android:background="@drawable/student"
+                                            android:layout_width="100sp"
+                                            android:layout_height="100sp"/>
 
                                     </LinearLayout>
 
@@ -159,9 +159,9 @@
                                         android:layout_height="wrap_content">
 
                                         <ImageView
-                                            android:id="@+id/image_service_gallery"
-                                            android:layout_width="90sp"
-                                            android:layout_height="90sp"/>
+                                            android:background="@drawable/test"
+                                            android:layout_width="100sp"
+                                            android:layout_height="100sp"/>
 
                                     </LinearLayout>
                                     <LinearLayout

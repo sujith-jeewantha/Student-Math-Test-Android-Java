@@ -4,8 +4,27 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.21145833333333333" />
+        <entry key="app/src/main/res/drawable/button_bg.xml" value="0.21145833333333333" />
+        <entry key="app/src/main/res/drawable/button_final.xml" value="0.21145833333333333" />
+        <entry key="app/src/main/res/drawable/button_final_circle.xml" value="0.21145833333333333" />
+        <entry key="app/src/main/res/drawable/button_shape.xml" value="0.21145833333333333" />
+        <entry key="app/src/main/res/drawable/button_shape_add_new.xml" value="0.21145833333333333" />
+        <entry key="app/src/main/res/drawable/button_shape_delete.xml" value="0.21145833333333333" />
+        <entry key="app/src/main/res/drawable/button_shape_upload.xml" value="0.21145833333333333" />
+        <entry key="app/src/main/res/drawable/complete.xml" value="0.21145833333333333" />
+        <entry key="app/src/main/res/drawable/completed_shape.xml" value="0.21145833333333333" />
+        <entry key="app/src/main/res/drawable/dropdown.xml" value="0.21145833333333333" />
+        <entry key="app/src/main/res/drawable/dropdown_style.xml" value="0.21145833333333333" />
+        <entry key="app/src/main/res/drawable/ic_add.xml" value="0.21145833333333333" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.21145833333333333" />
         <entry key="app/src/main/res/drawable/ic_left_arrow.xml" value="0.21574074074074073" />
+        <entry key="app/src/main/res/drawable/layout_bg.xml" value="0.21145833333333333" />
+        <entry key="app/src/main/res/drawable/layout_shape.xml" value="0.21145833333333333" />
+        <entry key="app/src/main/res/drawable/no_signal.xml" value="0.21145833333333333" />
+        <entry key="app/src/main/res/drawable/not_complete.xml" value="0.21145833333333333" />
+        <entry key="app/src/main/res/drawable/not_completed_shape.xml" value="0.21145833333333333" />
+        <entry key="app/src/main/res/drawable/on_icon.xml" value="0.21145833333333333" />
+        <entry key="app/src/main/res/drawable/photo_image.xml" value="0.21145833333333333" />
         <entry key="app/src/main/res/layout/activity_add_breakdown_summary.xml" value="0.22871376811594202" />
         <entry key="app/src/main/res/layout/activity_add_service_summary.xml" value="0.1953125" />
         <entry key="app/src/main/res/layout/activity_alert_no_internet.xml" value="0.1953125" />

@@ -39,6 +39,32 @@ public class UpdateServiceSummaryActivity extends AppCompatActivity {
     private EditText editTextServiceUnitNo, editTextEnterODSN, editTextEnterIDSN, editTextEnterServiceSummaryRemarks, editTextEnterServiceSummaryMaterialUsage;
     private CheckBox checkBoxFinished, chbNotVisible, chbServiceSummaryNoRemarks, chbServiceSummaryNoMaterialUsage;
 
+    private EditText
+            editTextStudentNo,
+            editTextFirstName,
+            editTextLastName,
+
+            editTextPhoneNoOne,
+            editTextPhoneNoTwo,
+            editTextPhoneNoThree,
+            editTextPhoneNoFour,
+            editTextPhoneNoFive,
+            editTextPhoneNoSix,
+            editTextPhoneNoSeven,
+            editTextPhoneNoEight,
+            editTextPhoneNoNine,
+            editTextPhoneNoTen,
+
+            editTextEmailOne,
+            editTextEmailTwo,
+            editTextEmailThree,
+            editTextEmailFour,
+            editTextEmailFive,
+            editTextEmailSix,
+            editTextEmailSeven,
+            editTextEmailEight,
+            editTextEmailNine,
+            editTextEmailTen;
 
     Button btnUploadImage;
 
@@ -52,11 +78,31 @@ public class UpdateServiceSummaryActivity extends AppCompatActivity {
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
 
-        editTextServiceUnitNo = findViewById(R.id.service_unit_no);
-        editTextEnterODSN = findViewById(R.id.enter_od_sn);
-        editTextEnterIDSN = findViewById(R.id.enter_id_sn);
-        editTextEnterServiceSummaryRemarks = findViewById(R.id.enterServiceSummaryRemarks);
-        editTextEnterServiceSummaryMaterialUsage = findViewById(R.id.enterServiceSummaryMaterialUsage);
+        editTextStudentNo = findViewById(R.id.student_u_no);
+        editTextFirstName = findViewById(R.id.enter_student_first_name);
+        editTextLastName = findViewById(R.id.enter_student_last_name);
+
+        editTextPhoneNoOne = findViewById(R.id.entertpNo_one);
+        editTextPhoneNoTwo = findViewById(R.id.entertpNo_two);
+        editTextPhoneNoThree = findViewById(R.id.entertpNo_three);
+        editTextPhoneNoFour = findViewById(R.id.entertpNo_four);
+        editTextPhoneNoFive = findViewById(R.id.entertpNo_five);
+        editTextPhoneNoSix = findViewById(R.id.entertpNo_six);
+        editTextPhoneNoSeven = findViewById(R.id.entertpNo_seven);
+        editTextPhoneNoEight = findViewById(R.id.entertpNo_eight);
+        editTextPhoneNoNine = findViewById(R.id.entertpNo_nine);
+        editTextPhoneNoTen = findViewById(R.id.entertpNo_ten);
+
+        editTextEmailOne = findViewById(R.id.enterEmail_one);
+        editTextEmailTwo = findViewById(R.id.enterEmail_two);
+        editTextEmailThree = findViewById(R.id.enterEmail_three);
+        editTextEmailFour = findViewById(R.id.enterEmail_four);
+        editTextEmailFive = findViewById(R.id.enterEmail_five);
+        editTextEmailSix = findViewById(R.id.enterEmail_six);
+        editTextEmailSeven = findViewById(R.id.enterEmail_seven);
+        editTextEmailEight = findViewById(R.id.enterEmail_eight);
+        editTextEmailNine = findViewById(R.id.enterEmail_nine);
+        editTextEmailTen = findViewById(R.id.enterEmail_ten);
 
         checkBoxFinished = findViewById(R.id.checkBoxFinished);
 
@@ -126,56 +172,56 @@ public class UpdateServiceSummaryActivity extends AppCompatActivity {
 
 
     private void loadServiceSummary(Student student) {
-        editTextServiceUnitNo.setText(student.getUnitNo());
+        editTextServiceUnitNo.setText(student.getStudent_no());
 //        String [] capacityData = {service.getCapacity().toString()};
 //        String index                            = capacityData[0];
 //        capacitySpinner.setSelection(Integer.parseInt(service.getCapacity(Integer.parseInt(String.valueOf(0)))));
 //        brandSpinner.setSelection(adapterBrand.getPosition(service.getBrand()));
 //        modelSpinner.setSelection(adapterModel.getPosition(service.getModel()));
 
-        editTextEnterIDSN.setText(student.getIDSN());
+//        editTextEnterIDSN.setText(student.getIDSN());
+//
+//        String serviceSummaryODSN = student.getODSN();
 
-        String serviceSummaryODSN = student.getODSN();
+//        if (serviceSummaryODSN.equals("Not Visible"))
+//        {
+//            editTextEnterODSN.setText(serviceSummaryODSN);
+//            editTextEnterODSN.setEnabled(false);
+//        }
+//        else
+//        {
+//            editTextEnterODSN.setText(serviceSummaryODSN);
+//            editTextEnterODSN.setEnabled(true);
+//        }
+//
+//        String serviceSummaryRemark = student.getSummaryRemark();
+//
+//
+//        if (serviceSummaryRemark.equals("No Issue Found in Unit"))
+//        {
+//            editTextEnterServiceSummaryRemarks.setText(serviceSummaryRemark);
+//            editTextEnterServiceSummaryRemarks.setEnabled(false);
+//        }
+//        else
+//        {
+//            editTextEnterServiceSummaryRemarks.setText(serviceSummaryRemark);
+//            editTextEnterServiceSummaryRemarks.setEnabled(true);
+//        }
 
-        if (serviceSummaryODSN.equals("Not Visible"))
-        {
-            editTextEnterODSN.setText(serviceSummaryODSN);
-            editTextEnterODSN.setEnabled(false);
-        }
-        else
-        {
-            editTextEnterODSN.setText(serviceSummaryODSN);
-            editTextEnterODSN.setEnabled(true);
-        }
-
-        String serviceSummaryRemark = student.getSummaryRemark();
-
-
-        if (serviceSummaryRemark.equals("No Issue Found in Unit"))
-        {
-            editTextEnterServiceSummaryRemarks.setText(serviceSummaryRemark);
-            editTextEnterServiceSummaryRemarks.setEnabled(false);
-        }
-        else
-        {
-            editTextEnterServiceSummaryRemarks.setText(serviceSummaryRemark);
-            editTextEnterServiceSummaryRemarks.setEnabled(true);
-        }
-
-        String serviceSummaryMaterialUsage = student.getSummaryMaterialUsage();
+//        String serviceSummaryMaterialUsage = student.getSummaryMaterialUsage();
 
 
-        if (serviceSummaryMaterialUsage.equals("No Material Usage in Unit"))
-        {
-            editTextEnterServiceSummaryMaterialUsage.setText(serviceSummaryMaterialUsage);
-//            chbServiceSummaryNoMaterialUsage.setChecked(true);
-            editTextEnterServiceSummaryMaterialUsage.setEnabled(false);
-        }
-        else
-        {
-            editTextEnterServiceSummaryMaterialUsage.setText(serviceSummaryMaterialUsage);
-            editTextEnterServiceSummaryMaterialUsage.setEnabled(true);
-        }
+//        if (serviceSummaryMaterialUsage.equals("No Material Usage in Unit"))
+//        {
+//            editTextEnterServiceSummaryMaterialUsage.setText(serviceSummaryMaterialUsage);
+////            chbServiceSummaryNoMaterialUsage.setChecked(true);
+//            editTextEnterServiceSummaryMaterialUsage.setEnabled(false);
+//        }
+//        else
+//        {
+//            editTextEnterServiceSummaryMaterialUsage.setText(serviceSummaryMaterialUsage);
+//            editTextEnterServiceSummaryMaterialUsage.setEnabled(true);
+//        }
 
         checkBoxFinished.setChecked(student.isFinished());
     }
@@ -212,15 +258,29 @@ public class UpdateServiceSummaryActivity extends AppCompatActivity {
             @Override
             protected Void doInBackground(Void... voids) {
 
-                student.setServiceRegion(sRegion);
-                student.setServiceSiteId(sSiteId);
-                student.setServiceSiteName(sSiteName);
-                student.setServiceTeamName(sTeamName);
-                student.setUnitNo(sUnitNo);
-                student.setODSN(sSummaryODSN);
-                student.setIDSN(sSummaryIDSN);
-                student.setSummaryRemark(sSummaryRemarks);
-                student.setSummaryMaterialUsage(sSummaryMaterialUsage);
+                student.setStudent_no(sRegion);
+                student.setStudent_first_name(sSiteId);
+                student.setStudent_last_name(sSiteName);
+                student.setStudent_phone_one(sTeamName);
+                student.setStudent_phone_two(sTeamName);
+                student.setStudent_phone_three(sTeamName);
+                student.setStudent_phone_four(sTeamName);
+                student.setStudent_phone_five(sTeamName);
+                student.setStudent_phone_six(sTeamName);
+                student.setStudent_phone_seven(sTeamName);
+                student.setStudent_phone_eight(sTeamName);
+                student.setStudent_phone_nine(sTeamName);
+                student.setStudent_phone_ten(sTeamName);
+                student.setStudent_email_one(sTeamName);
+                student.setStudent_email_two(sTeamName);
+                student.setStudent_email_three(sTeamName);
+                student.setStudent_email_four(sTeamName);
+                student.setStudent_email_five(sTeamName);
+                student.setStudent_email_six(sTeamName);
+                student.setStudent_email_seven(sTeamName);
+                student.setStudent_email_eight(sTeamName);
+                student.setStudent_email_nine(sTeamName);
+                student.setStudent_email_ten(sTeamName);
 
                 student.setFinished(checkBoxFinished.isChecked());
                 DatabaseClient.getInstance(getApplicationContext()).getAppDatabase()

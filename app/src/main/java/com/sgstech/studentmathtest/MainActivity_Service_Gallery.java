@@ -119,21 +119,12 @@ public class MainActivity_Service_Gallery extends AppCompatActivity {
 
         //////////////////////////////////
 
-        btnUploadImage          = (Button)findViewById(R.id.button_upload_service_gallery);
         btnServiceBackToHome    = (Button)findViewById(R.id.button_back_service_main);
 
 
         recyclerView = findViewById(R.id.recyclerview_tasks);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-//        buttonAddServiceGallery = findViewById(R.id.floating_button_add);
-//        buttonAddServiceGallery.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent = new Intent(MainActivity_Service_Gallery.this, AddServiceGalleryActivity.class);
-//                startActivity(intent);
-//            }
-//        });
 
         btnServiceBackToHome.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -144,93 +135,12 @@ public class MainActivity_Service_Gallery extends AppCompatActivity {
             }
         });
 
-        btnUploadImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-                Student student = new Student();
-
-                String image_path = student.getServiceChecklistImg();
-//
-//                Log.d("image_file_from_db",image_path );
-//                image_file_global = "/storage/emulated/0/Pictures/BROWNS-ACMS/SERVICE/IMG_1624596816.jpg";
-//                image_file_global = null ; // =image_file_global_;
-                if(image_file_global == null){
-
-
-                    Toast.makeText(getBaseContext(),"This area is under developing",Toast.LENGTH_LONG).show();
-//                    Toast.makeText(getBaseContext(),"Null Image File",Toast.LENGTH_LONG).show();
-
-                }
-                else {
-
-
-                    progressDialog            = new ProgressDialog(MainActivity_Service_Gallery.this,ProgressDialog.THEME_HOLO_DARK);
-                    progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-                    progressDialog.setTitle("UPLOADING");
-                    progressDialog.setMessage("IMAGE IS UPLOADING");
-                    progressDialog.setCanceledOnTouchOutside(false);
-                    progressDialog.setCancelable(false);
-                    progressDialog.setButton(DialogInterface.BUTTON_NEGATIVE, "Cancel", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-
-
-                            dialog.dismiss();
-                            onBackPressed();
-                            finish();
-
-                        }
-                    });
-                    progressDialog.show();
-
-                    Thread thread = new Thread(new Runnable() {
-
-                        @Override
-                        public void run() {
-                            try  {
-
-
-                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-
-
-                                }
-
-
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
-                        }
-                    });
-
-                    thread.start();
-
-
-
-
-                }
-
-
-
-            }
-        });
-
-//        btnUploadImage.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                uploadImagesToServer();
-//            }
-//        });
         getServiceGallerys();
 
 
     }
 
-//    @Override
-//    protected void onRestart() {
-//        super.onRestart();
-//        File image_file_global_          = new File(getIntent().getStringExtra("image_path"));
-//    }
 
     @Override
     protected void onStart() {
@@ -420,9 +330,5 @@ public class MainActivity_Service_Gallery extends AppCompatActivity {
             startActivity(intent);
         }
     }
-
-    /**
-     * retrofit uploader init over------------------------------------------------------------------
-     */
 
 }

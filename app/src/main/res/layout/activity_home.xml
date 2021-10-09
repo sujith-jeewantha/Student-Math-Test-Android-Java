@@ -81,12 +81,27 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent">
 
+                                <LinearLayout
+                                    android:gravity="center"
+                                    android:layout_weight="1"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent">
+
+
+                                    <ImageView
+                                        android:background="@drawable/homebg"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"/>
+
+                                </LinearLayout>
 
                                 <LinearLayout
                                     android:gravity="center"
                                     android:layout_weight="1"
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent">
+
+
 
                                     <Button
                                         android:id="@+id/btnService"
@@ -94,33 +109,15 @@
                                         android:textColor="@color/pureBlack"
                                         android:textSize="30dp"
                                         android:text="Get Start"
-                                        android:layout_margin="30sp"
-                                        android:background="@drawable/button_shape"
+                                        android:background="@drawable/button_final"
                                         android:layout_width="match_parent"
-                                        android:layout_height="match_parent"/>
+                                        android:layout_height="wrap_content"/>
 
                                 </LinearLayout>
 
 
 
 
-                            </LinearLayout>
-                            <LinearLayout
-                                android:orientation="vertical"
-                                android:gravity="center"
-                                android:layout_weight="2"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent">
-
-                                <LinearLayout
-                                    android:gravity="center"
-                                    android:layout_weight="1"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent">
-
-
-
-                                </LinearLayout>
                             </LinearLayout>
 
 

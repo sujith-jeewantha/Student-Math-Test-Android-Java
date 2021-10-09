@@ -118,14 +118,7 @@ public class CameraUtils {
             mediaFile = new File(mediaStorageDir.getPath() + File.separator
                     + "IMG_" + timeStamp + "." + UpdateServiceGalleryActivity.IMAGE_EXTENSION);
         }
-//        if (type == UpdateServiceGalleryActivity.MEDIA_TYPE_IMAGE) {
-//            mediaFile = new File(mediaStorageDir.getPath() + File.separator
-//                    + "IMG_BEFORE" + timeStamp + "." + UpdateServiceGalleryActivity.IMAGE_EXTENSION);
-//        }
-//        if (type == UpdateServiceGalleryActivity.MEDIA_TYPE_IMAGE) {
-//            mediaFile = new File(mediaStorageDir.getPath() + File.separator
-//                    + "IMG_AFTER" + timeStamp + "." + UpdateServiceGalleryActivity.IMAGE_EXTENSION);
-//        }
+
         else {
             return null;
         }

@@ -34,9 +34,9 @@ public class StudentMathTestAdapter extends RecyclerView.Adapter<StudentMathTest
     @Override
     public void onBindViewHolder(StudentMathTestsViewHolder holder, int position) {
         Student ss = studentList.get(position);
-        holder.textView_service_site_id.setText("Site ID :"+ss.getServiceSiteId());
-        holder.textView_service_site_name.setText("Site Name :"+ss.getServiceSiteName());
-        holder.textView_service_unit_no.setText("Unit No :"+ss.getUnitNo());
+//        holder.textView_service_site_id.setText("Site ID :"+ss.getServiceSiteId());
+//        holder.textView_service_site_name.setText("Site Name :"+ss.getServiceSiteName());
+//        holder.textView_service_unit_no.setText("Unit No :"+ss.getUnitNo());
 
         if (ss.isFinished()) {
             holder.textViewStatus.setText("Completed");

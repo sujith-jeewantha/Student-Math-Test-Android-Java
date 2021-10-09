@@ -38,9 +38,9 @@ public class StudentProfileAdapter extends RecyclerView.Adapter<StudentProfileAd
     public void onBindViewHolder(StudentProfilesViewHolder holder, int position) {
 
         Student ss = studentProfileList.get(position);
-        holder.textView_service_site_id.setText("Site ID :"+ss.getServiceSiteId());
-        holder.textView_service_site_name.setText("Site Name :"+ss.getServiceSiteName());
-        holder.textView_service_unit_no.setText("Unit No :"+ss.getUnitNo());
+//        holder.textView_service_site_id.setText("Site ID :"+ss.getServiceSiteId());
+//        holder.textView_service_site_name.setText("Site Name :"+ss.getServiceSiteName());
+//        holder.textView_service_unit_no.setText("Unit No :"+ss.getUnitNo());
 
         if (ss.isFinished()) {
             holder.textViewStatus.setText("Completed");

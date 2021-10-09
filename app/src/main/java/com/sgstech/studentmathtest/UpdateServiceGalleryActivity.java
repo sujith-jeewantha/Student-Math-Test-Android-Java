@@ -85,7 +85,7 @@ public class UpdateServiceGalleryActivity extends AppCompatActivity implements V
     public static final int BITMAP_SAMPLE_SIZE = 2;
 
     // Gallery directory name to store the images or videos
-    public static final String SERVICE_GALLERY_DIRECTORY_NAME = "STUDENT-MATH-TEST/PROFILE";
+    public static final String SERVICE_GALLERY_DIRECTORY_NAME = "STUDENT-MATH/PROFILE";
 
     // Image and Video file extensions
     public static final String IMAGE_EXTENSION = "jpg";
@@ -120,10 +120,10 @@ public class UpdateServiceGalleryActivity extends AppCompatActivity implements V
         loadServiceGallery(student);
 
 
-        serviceRegion       = managerCacheUpdateServiceGallery.getServiceRegionName();
-        service_site_id     = managerCacheUpdateServiceGallery.getServiceSiteID();
-        service_site_name   = managerCacheUpdateServiceGallery.getServiceSiteName();
-        service_team_global = managerCacheUpdateServiceGallery.getServiceTeamName();
+//        serviceRegion       = managerCacheUpdateServiceGallery.getServiceRegionName();
+//        service_site_id     = managerCacheUpdateServiceGallery.getServiceSiteID();
+//        service_site_name   = managerCacheUpdateServiceGallery.getServiceSiteName();
+//        service_team_global = managerCacheUpdateServiceGallery.getServiceTeamName();
 
 
         /**
@@ -219,9 +219,9 @@ public class UpdateServiceGalleryActivity extends AppCompatActivity implements V
 
     private void loadServiceGallery(Student student) {
 
-        txtServiceUnitNo.setText(student.getUnitNo());
+        txtServiceUnitNo.setText(student.getStudent_no());
 
-        service_unit_no_global = student.getUnitNo();
+        service_unit_no_global = student.getStudent_no();
 
 
     }

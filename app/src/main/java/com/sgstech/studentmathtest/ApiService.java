@@ -12,13 +12,13 @@ import retrofit2.http.Part;
 
 
 public interface ApiService {
-    String BASE_URL = "https://brownsacms.com/image_api_bydate/.ret_date_upload.php/";
+    String BASE_URL = "https://web.com/image_api_bydate/.ret_date_upload.php/";
 
     @Multipart
     @POST(".ret_date_upload.php")
     Call<ResponseBody> uploadMultiple(
             @Part("region") RequestBody region,
-            @Part("service_breakdown") RequestBody service_breakdown,
+            @Part("sdgsd") RequestBody service_breakdown,
             @Part("site_id_name") RequestBody site_id_name,
             @Part("unit_name") RequestBody unit_name,
             @Part("stage_before_after") RequestBody stage_before_after,

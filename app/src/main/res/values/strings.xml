@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Student Math Test</string>
+    <string name="students">STUDENTS</string>
 </resources>
