@@ -27,7 +27,7 @@ public class StudentMathTestAdapter extends RecyclerView.Adapter<StudentMathTest
 
     @Override
     public StudentMathTestsViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(mCtx).inflate(R.layout.recyclerview_service_gallery, parent, false);
+        View view = LayoutInflater.from(mCtx).inflate(R.layout.recyclerview_student_math_test, parent, false);
         return new StudentMathTestsViewHolder(view);
     }
 
