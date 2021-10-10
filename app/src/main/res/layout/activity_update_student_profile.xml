@@ -87,7 +87,7 @@
 
 
                         <Button
-                            android:id="@+id/serhbjvice_summary_unit_no"
+                            android:id="@+id/btnProfilePic"
                             android:text="..."
                             android:layout_width="25dp"
                             android:layout_height="20dp"
@@ -314,6 +314,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/layoutPhone_2"
                     android:layout_marginTop="20dp"
                     android:orientation="vertical"
                     android:gravity="center"
@@ -337,7 +338,7 @@
                             <TextView
                                 android:textSize="20sp"
                                 android:textColor="@color/main_yellow"
-                                android:text="Phone Number : "
+                                android:text="Phone Number 2 : "
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"/>
 
@@ -365,6 +366,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/layoutPhone_3"
                     android:layout_marginTop="20dp"
                     android:orientation="vertical"
                     android:gravity="center"
@@ -388,7 +390,7 @@
                             <TextView
                                 android:textSize="20sp"
                                 android:textColor="@color/main_yellow"
-                                android:text="Phone Number : "
+                                android:text="Phone Number 3 : "
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"/>
 
@@ -416,6 +418,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/layoutPhone_4"
                     android:layout_marginTop="20dp"
                     android:orientation="vertical"
                     android:gravity="center"
@@ -439,7 +442,7 @@
                             <TextView
                                 android:textSize="20sp"
                                 android:textColor="@color/main_yellow"
-                                android:text="Phone Number : "
+                                android:text="Phone Number 4 : "
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"/>
 
@@ -467,6 +470,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/layoutPhone_5"
                     android:layout_marginTop="20dp"
                     android:orientation="vertical"
                     android:gravity="center"
@@ -490,7 +494,7 @@
                             <TextView
                                 android:textSize="20sp"
                                 android:textColor="@color/main_yellow"
-                                android:text="Phone Number : "
+                                android:text="Phone Number 5 : "
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"/>
 
@@ -518,6 +522,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/layoutPhone_6"
                     android:layout_marginTop="20dp"
                     android:orientation="vertical"
                     android:gravity="center"
@@ -541,7 +546,7 @@
                             <TextView
                                 android:textSize="20sp"
                                 android:textColor="@color/main_yellow"
-                                android:text="Phone Number : "
+                                android:text="Phone Number 6 : "
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"/>
 
@@ -569,6 +574,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/layoutPhone_7"
                     android:layout_marginTop="20dp"
                     android:orientation="vertical"
                     android:gravity="center"
@@ -592,7 +598,7 @@
                             <TextView
                                 android:textSize="20sp"
                                 android:textColor="@color/main_yellow"
-                                android:text="Phone Number : "
+                                android:text="Phone Number 7 : "
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"/>
 
@@ -620,6 +626,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/layoutPhone_8"
                     android:layout_marginTop="20dp"
                     android:orientation="vertical"
                     android:gravity="center"
@@ -643,7 +650,7 @@
                             <TextView
                                 android:textSize="20sp"
                                 android:textColor="@color/main_yellow"
-                                android:text="Phone Number : "
+                                android:text="Phone Number 8 : "
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"/>
 
@@ -671,6 +678,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/layoutPhone_9"
                     android:layout_marginTop="20dp"
                     android:orientation="vertical"
                     android:gravity="center"
@@ -694,7 +702,7 @@
                             <TextView
                                 android:textSize="20sp"
                                 android:textColor="@color/main_yellow"
-                                android:text="Phone Number : "
+                                android:text="Phone Number 9 : "
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"/>
 
@@ -722,6 +730,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/layoutPhone_10"
                     android:layout_marginTop="20dp"
                     android:orientation="vertical"
                     android:gravity="center"
@@ -745,7 +754,7 @@
                             <TextView
                                 android:textSize="20sp"
                                 android:textColor="@color/main_yellow"
-                                android:text="Phone Number : "
+                                android:text="Phone Number 10 : "
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"/>
 
@@ -836,6 +845,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/layoutEmail_2"
                     android:layout_marginTop="20dp"
                     android:orientation="vertical"
                     android:gravity="center"
@@ -859,7 +869,7 @@
                             <TextView
                                 android:textSize="20sp"
                                 android:textColor="@color/main_yellow"
-                                android:text="Email: "
+                                android:text="Email 2 : "
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"/>
 
@@ -886,6 +896,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/layoutEmail_3"
                     android:layout_marginTop="20dp"
                     android:orientation="vertical"
                     android:gravity="center"
@@ -909,7 +920,7 @@
                             <TextView
                                 android:textSize="20sp"
                                 android:textColor="@color/main_yellow"
-                                android:text="Email: "
+                                android:text="Email 3 : "
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"/>
 
@@ -936,6 +947,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/layoutEmail_4"
                     android:layout_marginTop="20dp"
                     android:orientation="vertical"
                     android:gravity="center"
@@ -959,7 +971,7 @@
                             <TextView
                                 android:textSize="20sp"
                                 android:textColor="@color/main_yellow"
-                                android:text="Email: "
+                                android:text="Email 4 : "
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"/>
 
@@ -986,6 +998,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/layoutEmail_5"
                     android:layout_marginTop="20dp"
                     android:orientation="vertical"
                     android:gravity="center"
@@ -1009,7 +1022,7 @@
                             <TextView
                                 android:textSize="20sp"
                                 android:textColor="@color/main_yellow"
-                                android:text="Email: "
+                                android:text="Email 5 : "
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"/>
 
@@ -1036,6 +1049,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/layoutEmail_6"
                     android:layout_marginTop="20dp"
                     android:orientation="vertical"
                     android:gravity="center"
@@ -1059,7 +1073,7 @@
                             <TextView
                                 android:textSize="20sp"
                                 android:textColor="@color/main_yellow"
-                                android:text="Email: "
+                                android:text="Email 6 : "
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"/>
 
@@ -1086,6 +1100,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/layoutEmail_7"
                     android:layout_marginTop="20dp"
                     android:orientation="vertical"
                     android:gravity="center"
@@ -1109,7 +1124,7 @@
                             <TextView
                                 android:textSize="20sp"
                                 android:textColor="@color/main_yellow"
-                                android:text="Email: "
+                                android:text="Email 7 : "
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"/>
 
@@ -1136,6 +1151,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/layoutEmail_8"
                     android:layout_marginTop="20dp"
                     android:orientation="vertical"
                     android:gravity="center"
@@ -1159,7 +1175,7 @@
                             <TextView
                                 android:textSize="20sp"
                                 android:textColor="@color/main_yellow"
-                                android:text="Email: "
+                                android:text="Email 8 : "
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"/>
 
@@ -1186,6 +1202,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/layoutEmail_9"
                     android:layout_marginTop="20dp"
                     android:orientation="vertical"
                     android:gravity="center"
@@ -1209,7 +1226,7 @@
                             <TextView
                                 android:textSize="20sp"
                                 android:textColor="@color/main_yellow"
-                                android:text="Email: "
+                                android:text="Email 9 : "
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"/>
 
@@ -1236,6 +1253,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/layoutEmail_10"
                     android:layout_marginTop="20dp"
                     android:orientation="vertical"
                     android:gravity="center"
@@ -1259,7 +1277,7 @@
                             <TextView
                                 android:textSize="20sp"
                                 android:textColor="@color/main_yellow"
-                                android:text="Email: "
+                                android:text="Email 10: "
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"/>
 

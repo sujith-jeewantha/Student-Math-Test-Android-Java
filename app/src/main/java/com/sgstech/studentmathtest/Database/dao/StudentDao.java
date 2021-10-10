@@ -28,6 +28,6 @@ public interface StudentDao {
     void update(Student student);
 
     @Query("DELETE FROM student")
-    void deleteService();
+    void deleteStudent();
 
 }

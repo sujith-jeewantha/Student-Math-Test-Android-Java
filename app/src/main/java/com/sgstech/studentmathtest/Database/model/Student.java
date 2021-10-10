@@ -347,22 +347,6 @@ public class Student implements Serializable {
 
 
 
-
-
-
-    /**
-     * profile image
-     */
-        public String getServiceChecklistImg() {
-        return student_profile_img;
-    }
-
-        public void setServiceChecklistImg(String student_profile_img) {
-            this.student_profile_img = student_profile_img;
-    }
-
-
-
     public boolean isFinished() {
         return finished;
     }

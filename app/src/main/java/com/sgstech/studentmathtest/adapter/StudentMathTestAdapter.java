@@ -34,9 +34,9 @@ public class StudentMathTestAdapter extends RecyclerView.Adapter<StudentMathTest
     @Override
     public void onBindViewHolder(StudentMathTestsViewHolder holder, int position) {
         Student ss = studentList.get(position);
-//        holder.textView_service_site_id.setText("Site ID :"+ss.getServiceSiteId());
-//        holder.textView_service_site_name.setText("Site Name :"+ss.getServiceSiteName());
-//        holder.textView_service_unit_no.setText("Unit No :"+ss.getUnitNo());
+        holder.textView_student_first_name.setText("First Name :"+ss.getStudent_first_name());
+        holder.textView_student_last_name.setText("Last Name :"+ss.getStudent_last_name());
+        holder.textView_student_no.setText("Student No :"+ss.getStudent_no());
 
         if (ss.isFinished()) {
             holder.textViewStatus.setText("Completed");
@@ -54,15 +54,15 @@ public class StudentMathTestAdapter extends RecyclerView.Adapter<StudentMathTest
 
     class StudentMathTestsViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        TextView textViewStatus,textView_service_site_id, textView_service_site_name, textView_service_unit_no;
+        TextView textViewStatus,textView_student_first_name, textView_student_last_name, textView_student_no;
 
         public StudentMathTestsViewHolder(View itemView) {
             super(itemView);
 
             textViewStatus = itemView.findViewById(R.id.textViewStatus);
-            textView_service_site_id = itemView.findViewById(R.id.textView_service_site_id);
-            textView_service_site_name = itemView.findViewById(R.id.textView_service_site_name);
-            textView_service_unit_no = itemView.findViewById(R.id.textView_service_unit_no);
+            textView_student_first_name = itemView.findViewById(R.id.textView_student_first_name);
+            textView_student_last_name = itemView.findViewById(R.id.textView_student_last_name);
+            textView_student_no = itemView.findViewById(R.id.textView_student_no);
 
 
             itemView.setOnClickListener(this);

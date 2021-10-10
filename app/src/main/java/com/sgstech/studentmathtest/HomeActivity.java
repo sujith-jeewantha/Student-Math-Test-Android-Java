@@ -11,7 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 public class HomeActivity extends AppCompatActivity {
 
 
-    Button btnService, btnBreakdown;
+    Button btnGetStart;
 
     String  user_id_global , user_email_global;
 
@@ -25,9 +25,9 @@ public class HomeActivity extends AppCompatActivity {
         user_id_global          = getIntent().getStringExtra("user_id");
         user_email_global       = getIntent().getStringExtra("user_email");
 
-        btnService = (Button) findViewById(R.id.btnService);
+        btnGetStart = (Button) findViewById(R.id.btnGetStart);
 
-        btnService.setOnClickListener(new View.OnClickListener() {
+        btnGetStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent       = new Intent(getBaseContext(), StudentMain.class);

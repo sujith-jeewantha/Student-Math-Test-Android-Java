@@ -351,7 +351,7 @@ public class StudentMain extends AppCompatActivity {
             protected Void doInBackground(Void... voids) {
                 DatabaseClient.getInstance(getApplicationContext()).getAppDatabase()
                         .studentDao()
-                        .deleteService();
+                        .deleteStudent();
                 return null;
             }
 

@@ -91,19 +91,19 @@ public class CameraUtils {
     /**
      * Creates and returns the image or video file before opening the camera
      */
-    public static File getServiceOutputMediaFile(int type) {
+    public static File getStudentOutputMediaFile(int type) {
 
         // External sdcard location
         File mediaStorageDir = new File(
                 Environment
                         .getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES),
-                UpdateStudentMathTestActivity.SERVICE_GALLERY_DIRECTORY_NAME);
+                AddStudentProfileActivity.STUDENT_GALLERY_DIRECTORY_NAME);
 
         // Create the storage directory if it does not exist
         if (!mediaStorageDir.exists()) {
             if (!mediaStorageDir.mkdirs()) {
-                Log.e(UpdateStudentMathTestActivity.SERVICE_GALLERY_DIRECTORY_NAME, "Oops! Failed create "
-                        + UpdateStudentMathTestActivity.SERVICE_GALLERY_DIRECTORY_NAME + " directory");
+                Log.e(AddStudentProfileActivity.STUDENT_GALLERY_DIRECTORY_NAME, "Oops! Failed create "
+                        + AddStudentProfileActivity.STUDENT_GALLERY_DIRECTORY_NAME + " directory");
                 return null;
             }
         }
@@ -114,9 +114,44 @@ public class CameraUtils {
                 Locale.getDefault()).format(new Date());
         File mediaFile;
 
-        if (type == UpdateStudentMathTestActivity.MEDIA_TYPE_IMAGE) {
+        if (type == AddStudentProfileActivity.MEDIA_TYPE_IMAGE) {
             mediaFile = new File(mediaStorageDir.getPath() + File.separator
-                    + "IMG_" + timeStamp + "." + UpdateStudentMathTestActivity.IMAGE_EXTENSION);
+                    + "IMG_" + timeStamp + "." + AddStudentProfileActivity.IMAGE_EXTENSION);
+        }
+
+        else {
+            return null;
+        }
+
+        return mediaFile;
+    }
+
+    public static File getStudentUpdateOutputMediaFile(int type) {
+
+        // External sdcard location
+        File mediaStorageDir = new File(
+                Environment
+                        .getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES),
+                UpdateStudentProfileActivity.STUDENT_GALLERY_DIRECTORY_NAME);
+
+        // Create the storage directory if it does not exist
+        if (!mediaStorageDir.exists()) {
+            if (!mediaStorageDir.mkdirs()) {
+                Log.e(UpdateStudentProfileActivity.STUDENT_GALLERY_DIRECTORY_NAME, "Oops! Failed create "
+                        + UpdateStudentProfileActivity.STUDENT_GALLERY_DIRECTORY_NAME + " directory");
+                return null;
+            }
+        }
+
+        // Preparing media file naming convention
+        // adds timestamp
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss",
+                Locale.getDefault()).format(new Date());
+        File mediaFile;
+
+        if (type == UpdateStudentProfileActivity.MEDIA_TYPE_IMAGE) {
+            mediaFile = new File(mediaStorageDir.getPath() + File.separator
+                    + "IMG_" + timeStamp + "." + UpdateStudentProfileActivity.IMAGE_EXTENSION);
         }
 
         else {

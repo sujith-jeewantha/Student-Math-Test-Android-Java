@@ -19,6 +19,7 @@
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.21145833333333333" />
         <entry key="app/src/main/res/drawable/ic_left_arrow.xml" value="0.21574074074074073" />
         <entry key="app/src/main/res/drawable/layout_bg.xml" value="0.21145833333333333" />
+        <entry key="app/src/main/res/drawable/layout_bg_l.xml" value="0.21145833333333333" />
         <entry key="app/src/main/res/drawable/layout_shape.xml" value="0.21145833333333333" />
         <entry key="app/src/main/res/drawable/no_signal.xml" value="0.21145833333333333" />
         <entry key="app/src/main/res/drawable/not_complete.xml" value="0.21145833333333333" />
@@ -27,19 +28,26 @@
         <entry key="app/src/main/res/drawable/photo_image.xml" value="0.21145833333333333" />
         <entry key="app/src/main/res/layout/activity_add_breakdown_summary.xml" value="0.22871376811594202" />
         <entry key="app/src/main/res/layout/activity_add_service_summary.xml" value="0.1953125" />
+        <entry key="app/src/main/res/layout/activity_add_student_profile.xml" value="0.1953125" />
         <entry key="app/src/main/res/layout/activity_alert_no_internet.xml" value="0.1953125" />
         <entry key="app/src/main/res/layout/activity_home.xml" value="0.1953125" />
         <entry key="app/src/main/res/layout/activity_main_service_gallery.xml" value="0.1953125" />
         <entry key="app/src/main/res/layout/activity_main_service_site_info.xml" value="0.1953125" />
         <entry key="app/src/main/res/layout/activity_main_service_summmary.xml" value="0.1953125" />
+        <entry key="app/src/main/res/layout/activity_main_student_math_test.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_main_student_profile.xml" value="0.1953125" />
         <entry key="app/src/main/res/layout/activity_update_service_gallery.xml" value="0.1953125" />
         <entry key="app/src/main/res/layout/activity_update_service_summary.xml" value="0.1953125" />
+        <entry key="app/src/main/res/layout/activity_update_student_math_test.xml" value="0.1953125" />
+        <entry key="app/src/main/res/layout/activity_update_student_profile.xml" value="0.1953125" />
         <entry key="app/src/main/res/layout/b_main.xml" value="0.1953125" />
         <entry key="app/src/main/res/layout/b_team_info.xml" value="0.1953125" />
         <entry key="app/src/main/res/layout/grand_summary.xml" value="0.1953125" />
         <entry key="app/src/main/res/layout/list_content.xml" value="0.1953125" />
         <entry key="app/src/main/res/layout/recyclerview_service_gallery.xml" value="0.1953125" />
         <entry key="app/src/main/res/layout/recyclerview_service_summary.xml" value="0.1953125" />
+        <entry key="app/src/main/res/layout/recyclerview_student_math_test.xml" value="0.1953125" />
+        <entry key="app/src/main/res/layout/recyclerview_student_profile.xml" value="0.1953125" />
         <entry key="app/src/main/res/layout/s_main.xml" value="0.1953125" />
         <entry key="app/src/main/res/layout/s_team_info.xml" value="0.1953125" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.21145833333333333" />

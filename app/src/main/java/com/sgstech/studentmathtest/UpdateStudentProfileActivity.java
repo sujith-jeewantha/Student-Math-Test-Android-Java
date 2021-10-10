@@ -1,40 +1,69 @@
 package com.sgstech.studentmathtest;
 
+import android.Manifest;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.karumi.dexter.Dexter;
+import com.karumi.dexter.MultiplePermissionsReport;
+import com.karumi.dexter.PermissionToken;
+import com.karumi.dexter.listener.PermissionRequest;
+import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 import com.sgstech.studentmathtest.Database.model.Student;
 
-public class UpdateStudentProfileActivity extends AppCompatActivity {
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.List;
 
+public class UpdateStudentProfileActivity extends AppCompatActivity implements View.OnClickListener {
 
+    public String GLOBAL_IMAGE_NO = "";
+    File image_file_global = null;
 
+    // Activity request codes
+    private static final int CAMERA_CAPTURE_IMAGE_REQUEST_CODE = 100;
 
-    private String serviceRegion = "";
-    private String service_site_id = "";
-    private String service_site_name = "";
-    private String service_team_name = "";
+    // key to store image path in savedInstance state
+    public static final String KEY_IMAGE_STORAGE_PATH = "image_path";
 
-    Student studentCheckBox = new Student();
+    public static final int MEDIA_TYPE_IMAGE = 1;
 
+    // Bitmap sampling size
+    public static final int BITMAP_SAMPLE_SIZE = 2;
 
-    String selectedCapacity = "";
-    String selectedBrand ="";
-    String selectedModel  = "";
+    // Gallery directory name to store the images or videos
+    public static final String STUDENT_GALLERY_DIRECTORY_NAME = "STUDENT-MATH/PROFILE";
 
-    private EditText editTextServiceUnitNo, editTextEnterODSN, editTextEnterIDSN, editTextEnterServiceSummaryRemarks, editTextEnterServiceSummaryMaterialUsage;
-    private CheckBox checkBoxFinished, chbNotVisible, chbServiceSummaryNoRemarks, chbServiceSummaryNoMaterialUsage;
+    // Image and Video file extensions
+    public static final String IMAGE_EXTENSION = "jpg";
+
+    private static String imageStoragePath;
+
+    private CheckBox checkBoxFinished;
+
+    /**
+     * Global image
+     */
+    public String global_Img;
 
     private EditText
             editTextStudentNo,
@@ -63,8 +92,28 @@ public class UpdateStudentProfileActivity extends AppCompatActivity {
             editTextEmailNine,
             editTextEmailTen;
 
-    Button btnUploadImage;
+    LinearLayout
+            phoneTwoLayout,
+            phoneThreeLayout,
+            phoneFourLayout,
+            phoneFiveLayout,
+            phoneSixLayout,
+            phoneSevenLayout,
+            phoneEightLayout,
+            phoneNineNLayout,
+            phoneTenLayout,
 
+            emailTwoLayout,
+            emailThreeLayout,
+            emailFourLayout,
+            emailFiveLayout,
+            emailSixLayout,
+            emailSevenLayout,
+            emailEightLayout,
+            emailNineLayout,
+            emailTenLayout;
+
+    ImageView ivProfilePic;
 
 
     @Override
@@ -98,19 +147,63 @@ public class UpdateStudentProfileActivity extends AppCompatActivity {
         editTextEmailSix = findViewById(R.id.enterEmail_six);
         editTextEmailSeven = findViewById(R.id.enterEmail_seven);
         editTextEmailEight = findViewById(R.id.enterEmail_eight);
-        editTextEmailNine = findViewById(R.id.enterEmail_nine);
         editTextEmailTen = findViewById(R.id.enterEmail_ten);
+        editTextEmailNine = findViewById(R.id.enterEmail_nine);
 
         checkBoxFinished = findViewById(R.id.checkBoxFinished);
 
 
+        phoneTwoLayout = (LinearLayout) findViewById(R.id.layoutPhone_2);
+        phoneThreeLayout = (LinearLayout) findViewById(R.id.layoutPhone_3);
+        phoneFourLayout = (LinearLayout) findViewById(R.id.layoutPhone_4);
+        phoneFiveLayout = (LinearLayout) findViewById(R.id.layoutPhone_5);
+        phoneSixLayout = (LinearLayout) findViewById(R.id.layoutPhone_6);
+        phoneSevenLayout = (LinearLayout) findViewById(R.id.layoutPhone_7);
+        phoneEightLayout = (LinearLayout) findViewById(R.id.layoutPhone_8);
+        phoneNineNLayout = (LinearLayout) findViewById(R.id.layoutPhone_9);
+        phoneTenLayout = (LinearLayout) findViewById(R.id.layoutPhone_10);
+
+        emailTwoLayout = (LinearLayout) findViewById(R.id.layoutEmail_2);
+        emailThreeLayout = (LinearLayout) findViewById(R.id.layoutEmail_3);
+        emailFourLayout = (LinearLayout) findViewById(R.id.layoutEmail_4);
+        emailFiveLayout = (LinearLayout) findViewById(R.id.layoutEmail_5);
+        emailSixLayout = (LinearLayout) findViewById(R.id.layoutEmail_6);
+        emailSevenLayout = (LinearLayout) findViewById(R.id.layoutEmail_7);
+        emailEightLayout = (LinearLayout) findViewById(R.id.layoutEmail_8);
+        emailNineLayout = (LinearLayout) findViewById(R.id.layoutEmail_9);
+        emailTenLayout = (LinearLayout) findViewById(R.id.layoutEmail_10);
+
+
+
+
+
+
+
+        phoneSevenLayout.setVisibility(View.GONE);
+        phoneEightLayout.setVisibility(View.GONE);
+        phoneNineNLayout.setVisibility(View.GONE);
+        phoneTenLayout.setVisibility(View.GONE);
+
+
+
+
+
+
+
+
+
+
+
+
+        ivProfilePic = (ImageView) findViewById(R.id.ivProfile);
+
+        ivProfilePic.setOnClickListener( this);
 
 
         final Student student = (Student) getIntent().getSerializableExtra("studentProfile");
 
-        loadServiceSummary(student);
+        loadStudentProfile(student);
 
-        editTextEnterODSN = findViewById(R.id.enter_od_sn);
 
 
 
@@ -126,11 +219,9 @@ public class UpdateStudentProfileActivity extends AppCompatActivity {
         findViewById(R.id.button_update).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                serviceRegion       = managerCacheUpdateServiceSummary.getServiceRegionName();
-//                service_site_id     = managerCacheUpdateServiceSummary.getServiceSiteID();
-//                service_site_name   = managerCacheUpdateServiceSummary.getServiceSiteName();
-//                service_team_name   = managerCacheUpdateServiceSummary.getServiceTeamName();
-                updateServiceSummary(student);
+
+                updateStudentProfile(student);
+
             }
         });
 
@@ -143,7 +234,7 @@ public class UpdateStudentProfileActivity extends AppCompatActivity {
                 builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        deleteServiceSummary(student);
+                        deleteStudentProfile(student);
                     }
                 });
                 builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -160,6 +251,26 @@ public class UpdateStudentProfileActivity extends AppCompatActivity {
     }
 
     @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+
+            /**
+             * Profile image
+             */
+            case R.id.ivProfile:
+
+                GLOBAL_IMAGE_NO = "C" ;
+                if (CameraUtils.checkPermissions(getApplicationContext())) {
+                    captureImage();
+                } else {
+                    requestCameraPermission(MEDIA_TYPE_IMAGE);
+                }
+                break;
+
+        }
+    }
+
+    @Override
     public void onBackPressed() {
         finish();
         Intent intent = new Intent(UpdateStudentProfileActivity.this, MainActivity_Student_Profile.class);
@@ -168,116 +279,320 @@ public class UpdateStudentProfileActivity extends AppCompatActivity {
 
 
 
-    private void loadServiceSummary(Student student) {
-        editTextServiceUnitNo.setText(student.getStudent_no());
-//        String [] capacityData = {service.getCapacity().toString()};
-//        String index                            = capacityData[0];
-//        capacitySpinner.setSelection(Integer.parseInt(service.getCapacity(Integer.parseInt(String.valueOf(0)))));
-//        brandSpinner.setSelection(adapterBrand.getPosition(service.getBrand()));
-//        modelSpinner.setSelection(adapterModel.getPosition(service.getModel()));
+    private void loadStudentProfile(Student student) {
+        editTextStudentNo.setText(student.getStudent_no());
+        editTextFirstName.setText(student.getStudent_first_name());
+        editTextLastName.setText(student.getStudent_last_name());
 
-//        editTextEnterIDSN.setText(student.getIDSN());
-//
-//        String serviceSummaryODSN = student.getODSN();
+        editTextPhoneNoOne.setText(student.getStudent_phone_one());
+        editTextEmailOne.setText(student.getStudent_email_one());
 
-//        if (serviceSummaryODSN.equals("Not Visible"))
-//        {
-//            editTextEnterODSN.setText(serviceSummaryODSN);
-//            editTextEnterODSN.setEnabled(false);
-//        }
-//        else
-//        {
-//            editTextEnterODSN.setText(serviceSummaryODSN);
-//            editTextEnterODSN.setEnabled(true);
-//        }
-//
-//        String serviceSummaryRemark = student.getSummaryRemark();
-//
-//
-//        if (serviceSummaryRemark.equals("No Issue Found in Unit"))
-//        {
-//            editTextEnterServiceSummaryRemarks.setText(serviceSummaryRemark);
-//            editTextEnterServiceSummaryRemarks.setEnabled(false);
-//        }
-//        else
-//        {
-//            editTextEnterServiceSummaryRemarks.setText(serviceSummaryRemark);
-//            editTextEnterServiceSummaryRemarks.setEnabled(true);
-//        }
+        String phoneNo_2 = student.getStudent_phone_two();
 
-//        String serviceSummaryMaterialUsage = student.getSummaryMaterialUsage();
+        /**
+         * Phone Layout
+         */
+        if (!phoneNo_2.equals(""))
+        {
+            editTextPhoneNoTwo.setText(phoneNo_2);
+            editTextPhoneNoTwo.setVisibility(View.VISIBLE);
+        }
+            else
+        {
+            phoneTwoLayout.setVisibility(View.GONE);
+        }
 
+        String phoneNo_3 = student.getStudent_phone_three();
 
-//        if (serviceSummaryMaterialUsage.equals("No Material Usage in Unit"))
-//        {
-//            editTextEnterServiceSummaryMaterialUsage.setText(serviceSummaryMaterialUsage);
-////            chbServiceSummaryNoMaterialUsage.setChecked(true);
-//            editTextEnterServiceSummaryMaterialUsage.setEnabled(false);
-//        }
-//        else
-//        {
-//            editTextEnterServiceSummaryMaterialUsage.setText(serviceSummaryMaterialUsage);
-//            editTextEnterServiceSummaryMaterialUsage.setEnabled(true);
-//        }
+        if (!phoneNo_3.equals(""))
+        {
+            editTextPhoneNoThree.setText(phoneNo_3);
+            phoneThreeLayout.setVisibility(View.VISIBLE);
+        }
+        else
+        {
+            phoneThreeLayout.setVisibility(View.GONE);
+        }
+
+        String phoneNo_4 = student.getStudent_phone_four();
+
+        if (!phoneNo_4.equals(""))
+        {
+            editTextPhoneNoFour.setText(phoneNo_4);
+            phoneFourLayout.setVisibility(View.VISIBLE);
+        }
+        else
+        {
+            phoneFourLayout.setVisibility(View.GONE);
+        }
+
+        String phoneNo_5 = student.getStudent_phone_five();
+
+        if (!phoneNo_5.equals(""))
+        {
+            editTextPhoneNoFive.setText(phoneNo_5);
+            phoneFiveLayout.setVisibility(View.VISIBLE);
+        }
+        else
+        {
+            phoneFiveLayout.setVisibility(View.GONE);
+        }
+
+        String phoneNo_6 = student.getStudent_phone_six();
+
+        if (!phoneNo_6.equals(""))
+        {
+            editTextPhoneNoSix.setText(phoneNo_6);
+            phoneSixLayout.setVisibility(View.VISIBLE);
+        }
+        else
+        {
+            phoneSixLayout.setVisibility(View.GONE);
+        }
+
+        String phoneNo_7 = student.getStudent_phone_seven();
+
+        if (!phoneNo_7.equals(""))
+        {
+            editTextPhoneNoSeven.setText(phoneNo_7);
+            editTextPhoneNoTwo.setVisibility(View.VISIBLE);
+        }
+        else
+        {
+            phoneTwoLayout.setVisibility(View.GONE);
+        }
+
+        String phoneNo_8 = student.getStudent_phone_eight();
+
+        if (!phoneNo_8.equals(""))
+        {
+            editTextPhoneNoEight.setText(phoneNo_8);
+            editTextPhoneNoTwo.setVisibility(View.VISIBLE);
+        }
+        else
+        {
+            phoneTwoLayout.setVisibility(View.GONE);
+        }
+
+        String phoneNo_9 = student.getStudent_phone_nine();
+
+        if (!phoneNo_9.equals(""))
+        {
+            editTextPhoneNoNine.setText(phoneNo_9);
+            editTextPhoneNoTwo.setVisibility(View.VISIBLE);
+        }
+        else
+        {
+            phoneTwoLayout.setVisibility(View.GONE);
+        }
+
+        String phoneNo_10 = student.getStudent_phone_ten();
+
+        if (!phoneNo_10.equals(""))
+        {
+            editTextPhoneNoTen.setText(phoneNo_10);
+            editTextPhoneNoTwo.setVisibility(View.VISIBLE);
+        }
+        else
+        {
+            phoneTwoLayout.setVisibility(View.GONE);
+        }
+        /**
+         *  Email layout
+         */
+
+        String email_2 = student.getStudent_email_two();
+
+        if (!email_2.equals(""))
+        {
+            editTextEmailTwo.setText(email_2);
+            emailTwoLayout.setVisibility(View.VISIBLE);
+        }
+        else
+        {
+            emailTwoLayout.setVisibility(View.GONE);
+        }
+
+        String email_3 = student.getStudent_phone_three();
+
+        if (!email_3.equals(""))
+        {
+            editTextEmailThree.setText(email_3);
+            emailThreeLayout.setVisibility(View.VISIBLE);
+        }
+        else
+        {
+            emailThreeLayout.setVisibility(View.GONE);
+        }
+
+        String email_4 = student.getStudent_phone_four();
+
+        if (!email_4.equals(""))
+        {
+            editTextEmailFour.setText(email_4);
+            emailFourLayout.setVisibility(View.VISIBLE);
+        }
+        else
+        {
+            emailFourLayout.setVisibility(View.GONE);
+        }
+
+        String email_5 = student.getStudent_phone_five();
+
+        if (!email_5.equals(""))
+        {
+            editTextEmailFive.setText(email_5);
+            emailFiveLayout.setVisibility(View.VISIBLE);
+        }
+        else
+        {
+            emailFiveLayout.setVisibility(View.GONE);
+        }
+
+        String email_6 = student.getStudent_phone_six();
+
+        if (!email_6.equals(""))
+        {
+            editTextEmailSix.setText(email_6);
+            emailSixLayout.setVisibility(View.VISIBLE);
+        }
+        else
+        {
+            emailSixLayout.setVisibility(View.GONE);
+        }
+
+        String email_7 = student.getStudent_phone_seven();
+
+        if (!email_7.equals(""))
+        {
+            editTextEmailSeven.setText(email_7);
+            emailSevenLayout.setVisibility(View.VISIBLE);
+        }
+        else
+        {
+            emailSevenLayout.setVisibility(View.GONE);
+        }
+
+        String email_8 = student.getStudent_phone_eight();
+
+        if (!email_8.equals(""))
+        {
+            editTextEmailEight.setText(email_8);
+            emailEightLayout.setVisibility(View.VISIBLE);
+        }
+        else
+        {
+            emailEightLayout.setVisibility(View.GONE);
+        }
+
+        String email_9 = student.getStudent_phone_nine();
+
+        if (!email_9.equals(""))
+        {
+            editTextEmailNine.setText(email_9);
+            emailNineLayout.setVisibility(View.VISIBLE);
+        }
+        else
+        {
+            emailNineLayout.setVisibility(View.GONE);
+        }
+
+        String email_10 = student.getStudent_phone_ten();
+
+        if (!email_10.equals(""))
+        {
+            editTextEmailTen.setText(email_10);
+            emailTenLayout.setVisibility(View.VISIBLE);
+        }
+        else
+        {
+            emailTenLayout.setVisibility(View.GONE);
+        }
+
 
         checkBoxFinished.setChecked(student.isFinished());
     }
 
-    private void updateServiceSummary(final Student student) {
+    private void updateStudentProfile(final Student student) {
 
-        final String sRegion = serviceRegion;
-        final String sSiteId = service_site_id;
-        final String sSiteName = service_site_name;
-        final String sTeamName = service_team_name;
-        final String sUnitNo = editTextServiceUnitNo.getText().toString().trim();
-        final String sCapacity = selectedCapacity;
-        final String sBrand = selectedBrand;
-        final String sModel  = selectedModel;
-        final String sSummaryODSN = editTextEnterODSN.getText().toString().trim();
-        final String sSummaryIDSN = editTextEnterIDSN.getText().toString().trim();
-        final String sSummaryRemarks = editTextEnterServiceSummaryRemarks.getText().toString().trim();
-        final String sSummaryMaterialUsage = editTextEnterServiceSummaryMaterialUsage.getText().toString().trim();
+        final String sStudentNo  =  editTextStudentNo.getText().toString().trim();
+        final String sFirstName  =  editTextFirstName.getText().toString().trim();
+        final String sLastName  =  editTextLastName .getText().toString().trim();
+
+        final String sPhoneNoOne  =  editTextPhoneNoOne.getText().toString().trim();
+        final String sPhoneNoTwo  =  editTextPhoneNoTwo.getText().toString().trim();
+        final String sPhoneNoThree  =  editTextPhoneNoThree.getText().toString().trim();
+        final String sPhoneNoFour  =  editTextPhoneNoFour.getText().toString().trim();
+        final String sPhoneNoFive  =  editTextPhoneNoFive.getText().toString().trim();
+        final String sPhoneNoSix  =  editTextPhoneNoSix.getText().toString().trim();
+        final String sPhoneNoSeven  =  editTextPhoneNoSeven.getText().toString().trim();
+        final String sPhoneNoEight  =  editTextPhoneNoEight.getText().toString().trim();
+        final String sPhoneNoNine  =  editTextPhoneNoNine.getText().toString().trim();
+        final String sPhoneNoTen  =  editTextPhoneNoTen.getText().toString().trim();
+
+        final String sEmailOne  =  editTextEmailOne.getText().toString().trim();
+        final String sEmailTwo  =  editTextEmailTwo.getText().toString().trim();
+        final String sEmailThree  =  editTextEmailThree.getText().toString().trim();
+        final String sEmailFour  =  editTextEmailFour.getText().toString().trim();
+        final String sEmailFive  =  editTextEmailFive.getText().toString().trim();
+        final String sEmailSix  =  editTextEmailSix.getText().toString().trim();
+        final String sEmailSeven  =  editTextEmailSeven.getText().toString().trim();
+        final String sEmailEight  =  editTextEmailEight.getText().toString().trim();
+        final String sEmailNine  =  editTextEmailNine.getText().toString().trim();
+        final String sEmailTen  =  editTextEmailTen.getText().toString().trim();
+
+
+
 
         try {
-            if (sUnitNo.isEmpty()) {
-                editTextServiceUnitNo.setError("Unit No required");
-                editTextServiceUnitNo.requestFocus();
+            if (sStudentNo.isEmpty()) {
+                editTextStudentNo.setError("Student No required");
+                editTextStudentNo.requestFocus();
                 return;
             }
         }catch (Exception e)
         {
-            Toast.makeText(getApplicationContext(),"Unit No required", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(),"Student No required", Toast.LENGTH_LONG).show();
         }
 
 
-        class UpdateServiceSummary extends AsyncTask<Void, Void, Void> {
+        class UpdateStudentProfile extends AsyncTask<Void, Void, Void> {
 
             @Override
             protected Void doInBackground(Void... voids) {
 
-                student.setStudent_no(sRegion);
-                student.setStudent_first_name(sSiteId);
-                student.setStudent_last_name(sSiteName);
-                student.setStudent_phone_one(sTeamName);
-                student.setStudent_phone_two(sTeamName);
-                student.setStudent_phone_three(sTeamName);
-                student.setStudent_phone_four(sTeamName);
-                student.setStudent_phone_five(sTeamName);
-                student.setStudent_phone_six(sTeamName);
-                student.setStudent_phone_seven(sTeamName);
-                student.setStudent_phone_eight(sTeamName);
-                student.setStudent_phone_nine(sTeamName);
-                student.setStudent_phone_ten(sTeamName);
-                student.setStudent_email_one(sTeamName);
-                student.setStudent_email_two(sTeamName);
-                student.setStudent_email_three(sTeamName);
-                student.setStudent_email_four(sTeamName);
-                student.setStudent_email_five(sTeamName);
-                student.setStudent_email_six(sTeamName);
-                student.setStudent_email_seven(sTeamName);
-                student.setStudent_email_eight(sTeamName);
-                student.setStudent_email_nine(sTeamName);
-                student.setStudent_email_ten(sTeamName);
+                /**
+                 * Profile image
+                 */
+                if(GLOBAL_IMAGE_NO == "C" ) {
+                    student.setStudent_profile_img(global_Img);
+                }
+
+                student.setStudent_no(sStudentNo);
+                student.setStudent_first_name(sFirstName);
+                student.setStudent_last_name(sLastName);
+
+                student.setStudent_phone_one(sPhoneNoOne);
+                student.setStudent_phone_two(sPhoneNoTwo);
+                student.setStudent_phone_three(sPhoneNoThree);
+                student.setStudent_phone_four(sPhoneNoFour);
+                student.setStudent_phone_five(sPhoneNoFive);
+                student.setStudent_phone_six(sPhoneNoSix);
+                student.setStudent_phone_seven(sPhoneNoSeven);
+                student.setStudent_phone_eight(sPhoneNoEight);
+                student.setStudent_phone_nine(sPhoneNoNine);
+                student.setStudent_phone_ten(sPhoneNoTen);
+
+                student.setStudent_email_one(sEmailOne);
+                student.setStudent_email_two(sEmailTwo);
+                student.setStudent_email_three(sEmailThree);
+                student.setStudent_email_four(sEmailFour);
+                student.setStudent_email_five(sEmailFive);
+                student.setStudent_email_six(sEmailSix);
+                student.setStudent_email_seven(sEmailSeven);
+                student.setStudent_email_eight(sEmailEight);
+                student.setStudent_email_nine(sEmailNine);
+                student.setStudent_email_ten(sEmailTen);
 
                 student.setFinished(checkBoxFinished.isChecked());
                 DatabaseClient.getInstance(getApplicationContext()).getAppDatabase()
@@ -295,13 +610,13 @@ public class UpdateStudentProfileActivity extends AppCompatActivity {
             }
         }
 
-        UpdateServiceSummary ut = new UpdateServiceSummary();
+        UpdateStudentProfile ut = new UpdateStudentProfile();
         ut.execute();
     }
 
 
-    private void deleteServiceSummary(final Student student) {
-        class DeleteServiceSummary extends AsyncTask<Void, Void, Void> {
+    private void deleteStudentProfile(final Student student) {
+        class DeleteStudentProfile extends AsyncTask<Void, Void, Void> {
 
             @Override
             protected Void doInBackground(Void... voids) {
@@ -320,9 +635,208 @@ public class UpdateStudentProfileActivity extends AppCompatActivity {
             }
         }
 
-        DeleteServiceSummary dt = new DeleteServiceSummary();
+        DeleteStudentProfile dt = new DeleteStudentProfile();
         dt.execute();
 
+    }
+
+
+    /**
+     * Capturing Camera Image will launch camera app requested image capture
+     */
+    private void captureImage() {
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+
+        File file = CameraUtils.getStudentUpdateOutputMediaFile(MEDIA_TYPE_IMAGE);
+        if (file != null) {
+            imageStoragePath = file.getAbsolutePath();
+        }
+
+        Uri fileUri = CameraUtils.getOutputMediaFileUri(getApplicationContext(), file);
+
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
+
+        // start the image capture Intent
+        startActivityForResult(intent, CAMERA_CAPTURE_IMAGE_REQUEST_CODE);
+    }
+
+    /**
+     * Saving stored image path to saved instance state
+     */
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        // save file url in bundle as it will be null on screen orientation
+        // changes
+        outState.putString(KEY_IMAGE_STORAGE_PATH, imageStoragePath);
+    }
+
+    /**
+     * Restoring image path from saved instance state
+     */
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+
+        // get the file url
+        imageStoragePath = savedInstanceState.getString(KEY_IMAGE_STORAGE_PATH);
+
+        Log.d("img_store_path",imageStoragePath);
+    }
+
+
+    /**
+     * Activity result method will be called after closing the camera
+     */
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        // if the result is capturing Image
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == CAMERA_CAPTURE_IMAGE_REQUEST_CODE) {
+            if (resultCode == RESULT_OK) {
+
+                CameraUtils.refreshGallery(getApplicationContext(), imageStoragePath);
+
+                previewCapturedImage();
+
+
+
+            } else if (resultCode == RESULT_CANCELED) {
+                // user cancelled Image capture
+                Toast.makeText(getApplicationContext(),
+                        "User cancelled image capture", Toast.LENGTH_SHORT)
+                        .show();
+            } else {
+                // failed to capture image
+                Toast.makeText(getApplicationContext(),
+                        "Sorry! Failed to capture image", Toast.LENGTH_SHORT)
+                        .show();
+            }
+        }
+    }
+
+    /**
+     * Display image from gallery
+     */
+    private void previewCapturedImage() {
+        try {
+
+            //changed
+
+            //new step
+
+
+            String timeStamp      = getCurrentTimeStamp();
+
+            File mediaStorageDir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES),STUDENT_GALLERY_DIRECTORY_NAME);
+            File mediaFileUpdated = new File(mediaStorageDir.getPath() + File.separator + "IMG_" + timeStamp + "." + IMAGE_EXTENSION);
+
+            global_Img  = String.valueOf(mediaFileUpdated);
+
+            FileOutputStream out = null;
+            BitmapFactory.Options options = new BitmapFactory.Options();
+            options.inPreferredConfig = Bitmap.Config.ARGB_8888;
+            Bitmap bmp = BitmapFactory.decodeFile(imageStoragePath, options);
+
+            ////////////////////////////////--------------------------------------------------------------------------------------/////////////////////////////////
+
+            Bitmap.Config config = bmp.getConfig();
+
+            int width = bmp.getWidth();
+            int height = bmp.getHeight();
+
+            Bitmap imgNew = Bitmap.createBitmap(width, height, config);
+
+            ///////////////////////--------------------------------------------------------------------------------------///////////////////////////
+
+            try {
+
+                out = new FileOutputStream(mediaFileUpdated);
+
+                imgNew.compress(Bitmap.CompressFormat.JPEG, 50, out);
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                try {
+                    if (out != null) {
+                        out.close();
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            image_file_global   = mediaFileUpdated;
+
+
+            ivProfilePic.setVisibility(View.VISIBLE);
+            File newFile        = new File(mediaFileUpdated.getAbsolutePath());
+            global_Img = String.valueOf(newFile);
+
+
+            /**
+             * file path here
+             */
+
+            ivProfilePic.setImageURI(Uri.fromFile(newFile));
+
+            Log.d("img_store_path_file", String.valueOf(newFile));
+
+
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Requesting permissions using Dexter library
+     */
+    private void requestCameraPermission(final int type) {
+        Dexter.withActivity(this)
+                .withPermissions(Manifest.permission.CAMERA,
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                .withListener(new MultiplePermissionsListener() {
+                    @Override
+                    public void onPermissionsChecked(MultiplePermissionsReport report) {
+                        if (report.areAllPermissionsGranted()) {
+
+                            if (type == MEDIA_TYPE_IMAGE) {
+                                // capture picture
+                                captureImage();
+                            }
+
+                        } else if (report.isAnyPermissionPermanentlyDenied()) {
+                            showPermissionsAlert();
+                        }
+                    }
+
+                    @Override
+                    public void onPermissionRationaleShouldBeShown(List<PermissionRequest> permissions, PermissionToken token) {
+                        token.continuePermissionRequest();
+                    }
+                }).check();
+    }
+
+    /**
+     * Alert dialog to navigate to app settings
+     * to enable necessary permissions
+     */
+    private void showPermissionsAlert() {
+        androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(this);
+        builder.setTitle("Permissions required!")
+                .setMessage("Camera needs few permissions to work properly. Grant them in settings.")
+                .setPositiveButton("GOTO SETTINGS", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        CameraUtils.openSettings(UpdateStudentProfileActivity.this);
+                    }
+                })
+                .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                }).show();
     }
 
 
