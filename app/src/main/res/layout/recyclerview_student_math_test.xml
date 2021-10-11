@@ -22,7 +22,7 @@
             <LinearLayout
                 android:id="@+id/serviceSummaryLayout"
                 android:layout_margin="5dp"
-                android:background="@color/main_blue"
+                android:background="@color/myFav"
                 android:gravity="center"
                 android:orientation="vertical"
                 android:layout_width="80dp"
@@ -30,10 +30,9 @@
 
 
                 <ImageView
-                    android:id="@+id/textVdgdsiewStatus"
+                    android:id="@+id/ivProfilePicMin"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/profile_pic"/>
+                    android:layout_height="match_parent"/>
 
 
             </LinearLayout>

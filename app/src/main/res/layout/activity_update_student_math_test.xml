@@ -12,193 +12,404 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:orientation="vertical"
-        android:padding="16dp">
-
-        <TextView
-            android:gravity="center"
-            android:textStyle="bold"
-            android:textSize="25sp"
-            android:textColor="@color/main_yellow"
-            android:text="MATH-TEST"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
         <LinearLayout
-            android:background="@drawable/layout_shape"
-            android:layout_width="match_parent"
-            android:layout_height="10sp">
-
-        </LinearLayout>
-
-        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/main_yellow"
-            android:text="Update Math Test"
-            android:textAlignment="center"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Headline"
-            android:gravity="center_horizontal" />
-
-        <LinearLayout
-            android:layout_weight="1"
+            android:layout_centerVertical="true"
             android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:padding="16dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="MATH-TEST"
+                android:textColor="@color/main_yellow"
+                android:textSize="25sp"
+                android:textStyle="bold" />
 
             <LinearLayout
-                android:orientation="vertical"
-                android:layout_weight="1"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="10sp"
+                android:background="@drawable/layout_shape">
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="Update Math Test"
+                android:textAlignment="center"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Headline"
+                android:textColor="@color/main_yellow" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
 
                 <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_weight="1"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
 
                     <LinearLayout
-                        android:id="@+id/beforeLayout"
-                        android:gravity="left"
-                        android:orientation="vertical"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent">
-
-                        <TextView
-                            android:gravity="left"
-                            android:textSize="28dp"
-                            android:textColor="@color/main_yellow"
-                            android:layout_marginLeft="20dp"
-                            android:text="Student NO : "
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"/>
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:gravity="right"
-                        android:orientation="vertical"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-
-                        <TextView
-                            android:id="@+id/service_gallery_unit_no"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:textColor="@color/main_yellow"
-                            android:textSize="28dp"
-                            android:gravity="center"/>
-
-                    </LinearLayout>
-
-
-                </LinearLayout>
-
-
-                <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_weight="1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <LinearLayout
-                        android:id="@+id/checkoutLayout"
-                        android:gravity="left"
+                        android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:orientation="vertical"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-
+                        android:orientation="horizontal">
 
                         <LinearLayout
-                            android:id="@+id/ll_multi_img_holder_s_checkout"
-                            android:layout_marginTop="10dp"
-                            android:orientation="vertical"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
+                            android:id="@+id/beforeLayout"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:gravity="left"
+                            android:orientation="vertical">
 
-                          <TextView
-                              android:text="sample"
-                              android:layout_width="match_parent"
-                              android:layout_height="match_parent"/>
                             <TextView
-                                android:text="sample"
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent"/>
+                                android:layout_height="match_parent"
+                                android:layout_marginLeft="20dp"
+                                android:gravity="left"
+                                android:text="Student NO : "
+                                android:textColor="@color/main_yellow"
+                                android:textSize="28dp" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="right"
+                            android:orientation="vertical">
+
                             <TextView
-                                android:text="sample"
+                                android:id="@+id/service_gallery_unit_no"
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent"/>
-                            <TextView
-                                android:text="sample"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"/>
-                            <TextView
-                                android:text="sample"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"/>
-                            <TextView
-                                android:text="sample"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"/>
-                            <TextView
-                                android:text="sample"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"/>
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:textColor="@color/main_yellow"
+                                android:textSize="28dp" />
 
                         </LinearLayout>
 
 
                     </LinearLayout>
 
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:id="@+id/checkoutLayout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="left"
+                            android:orientation="vertical">
+
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="40dp"
+                                android:orientation="vertical">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginBottom="10dp"
+                                    android:layout_weight="1"
+                                    android:gravity="center"
+                                    android:orientation="horizontal">
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_weight="1"
+                                        android:gravity="center">
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:text="Total Questions : "
+                                            android:textColor="@color/main_yellow"
+                                            android:textSize="20sp" />
+
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_weight="1"
+                                        android:gravity="center">
+
+                                        <TextView
+                                            android:id="@+id/txtQuestionQty"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:textStyle="bold"
+                                            android:gravity="left"
+                                            android:textColor="@color/orange4"
+                                            android:textSize="25sp" />
+
+                                    </LinearLayout>
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginBottom="10dp"
+                                    android:layout_weight="1"
+                                    android:gravity="center"
+                                    android:orientation="horizontal">
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_weight="1"
+                                        android:gravity="center">
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:text="Question : "
+                                            android:textColor="@color/main_yellow"
+                                            android:textSize="20sp" />
+
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_weight="1"
+                                        android:gravity="center">
+
+                                        <TextView
+                                            android:id="@+id/txtQuestion"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:gravity="left"
+                                            android:textColor="@color/pureWhite"
+                                            android:textSize="18sp" />
+
+                                    </LinearLayout>
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginBottom="10dp"
+                                    android:layout_weight="1"
+                                    android:gravity="center"
+                                    android:orientation="horizontal">
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_weight="1"
+                                        android:gravity="center">
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:text="Options : "
+                                            android:textColor="@color/main_yellow"
+                                            android:textSize="20sp" />
+
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_weight="1"
+                                        android:gravity="center">
+
+                                        <TextView
+                                            android:id="@+id/txtOptions"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:gravity="left"
+                                            android:textColor="@color/pureWhite"
+                                            android:textSize="18sp" />
+
+                                    </LinearLayout>
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginBottom="10dp"
+                                    android:layout_weight="1"
+                                    android:gravity="center"
+                                    android:orientation="horizontal">
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_weight="1"
+                                        android:gravity="center">
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:text="Time To Solve : "
+                                            android:textColor="@color/main_yellow"
+                                            android:textSize="20sp" />
+
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_weight="1"
+                                        android:gravity="center">
+
+                                        <TextView
+                                            android:id="@+id/txtTimeToSolve"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:textStyle="bold"
+                                            android:gravity="left"
+                                            android:textColor="@color/colorRed"
+                                            android:textSize="18sp" />
+
+                                    </LinearLayout>
+                                </LinearLayout>
+
+
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginBottom="10dp"
+                                    android:layout_weight="1"
+                                    android:gravity="center"
+                                    android:orientation="horizontal">
+
+
+
+                                    <com.sgstech.studentmathtest.ProgressBar.FloatTextProgressBar
+                                        android:id="@+id/floatTextProgressBar"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="40dp"
+                                        app:backgroundColor="#d8d8d8"
+                                        app:fillColor="#ff0000"
+                                        app:triangleColor="#ff0000"
+                                        app:rectColor="#ff0000"
+                                        app:maxProgress="200"
+                                        app:textColor="#fff"/>
+
+
+
+
+                                </LinearLayout>
+
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginBottom="10dp"
+                                    android:layout_weight="1"
+                                    android:gravity="center"
+                                    android:orientation="horizontal">
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_weight="1"
+                                        android:gravity="center">
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:text="Answer : "
+                                            android:textColor="@color/main_yellow"
+                                            android:textSize="20sp" />
+
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_weight="1"
+                                        android:gravity="center">
+
+                                        <EditText
+                                            android:id="@+id/enterAnswer"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:background="@color/pureWhite"
+                                            android:gravity="left"
+                                            android:textColor="@color/black"
+                                            android:textSize="18sp" />
+
+                                    </LinearLayout>
+                                </LinearLayout>
+
+
+                                <TextView
+                                    android:id="@+id/txtResult"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:text="sample" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:text="sample" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:text="sample" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:text="sample" />
+
+                            </LinearLayout>
+
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+
                 </LinearLayout>
-
-
 
             </LinearLayout>
 
+
+            <CheckBox
+                android:id="@+id/checkBoxFinished"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/main_yellow"
+                android:text="Mark as finished"
+                android:textColor="@color/main_yellow" />
+
+            <Button
+                android:id="@+id/button_update"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/button_final_circle"
+                android:text="Submit"
+                android:textAllCaps="true" />
+
+
+
+
         </LinearLayout>
-
-
-
-
-        <CheckBox
-            android:id="@+id/checkBoxFinished"
-            android:textColor="@color/main_yellow"
-            android:buttonTint="@color/main_yellow"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Mark as finished" />
-
-        <Button
-            android:id="@+id/button_update"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="15dp"
-            android:background="@drawable/button_shape"
-            android:text="Update"
-            android:textAllCaps="true" />
-
-
-<!--        <Button-->
-<!--            android:id="@+id/button_delete"-->
-<!--            android:layout_width="200dp"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_gravity="center_horizontal"-->
-<!--            android:layout_marginTop="15dp"-->
-<!--            android:background="@drawable/button_shape_delete"-->
-<!--            android:text="Delete"-->
-<!--            android:textAllCaps="true"/>-->
-
-
-    </LinearLayout>
 
     </ScrollView>
 

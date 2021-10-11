@@ -2,17 +2,21 @@ package com.sgstech.studentmathtest.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.sgstech.studentmathtest.Database.model.Student;
 import com.sgstech.studentmathtest.R;
 import com.sgstech.studentmathtest.UpdateStudentMathTestActivity;
 
+import java.io.File;
 import java.util.List;
 
 public class StudentMathTestAdapter extends RecyclerView.Adapter<StudentMathTestAdapter.StudentMathTestsViewHolder> {
@@ -34,6 +38,18 @@ public class StudentMathTestAdapter extends RecyclerView.Adapter<StudentMathTest
     @Override
     public void onBindViewHolder(StudentMathTestsViewHolder holder, int position) {
         Student ss = studentList.get(position);
+
+        String studentImg = ss.getStudent_profile_img();
+
+
+        File file = new File(studentImg);
+        Uri imageUri = Uri.fromFile(file);
+
+        Glide.with(holder.ivProfilePicMin)
+                .load(imageUri)
+                .circleCrop()
+                .into(holder.ivProfilePicMin);
+
         holder.textView_student_first_name.setText("First Name :"+ss.getStudent_first_name());
         holder.textView_student_last_name.setText("Last Name :"+ss.getStudent_last_name());
         holder.textView_student_no.setText("Student No :"+ss.getStudent_no());
@@ -55,11 +71,13 @@ public class StudentMathTestAdapter extends RecyclerView.Adapter<StudentMathTest
     class StudentMathTestsViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         TextView textViewStatus,textView_student_first_name, textView_student_last_name, textView_student_no;
+        ImageView ivProfilePicMin;
 
         public StudentMathTestsViewHolder(View itemView) {
             super(itemView);
 
             textViewStatus = itemView.findViewById(R.id.textViewStatus);
+            ivProfilePicMin = itemView.findViewById(R.id.ivProfilePicMin);
             textView_student_first_name = itemView.findViewById(R.id.textView_student_first_name);
             textView_student_last_name = itemView.findViewById(R.id.textView_student_last_name);
             textView_student_no = itemView.findViewById(R.id.textView_student_no);

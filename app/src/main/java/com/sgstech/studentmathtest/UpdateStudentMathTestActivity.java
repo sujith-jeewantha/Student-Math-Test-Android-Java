@@ -1,73 +1,72 @@
 package com.sgstech.studentmathtest;
 
-import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Matrix;
-import android.graphics.Paint;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Environment;
-import android.provider.MediaStore;
-import android.text.TextUtils;
+import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.ImageView;
+import android.widget.EditText;
+import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.karumi.dexter.Dexter;
-import com.karumi.dexter.MultiplePermissionsReport;
-import com.karumi.dexter.PermissionToken;
-import com.karumi.dexter.listener.PermissionRequest;
-import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.Volley;
 import com.sgstech.studentmathtest.Database.model.Student;
+import com.sgstech.studentmathtest.ProgressBar.FloatTextProgressBar;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-import java.util.Locale;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 
-public class UpdateStudentMathTestActivity extends AppCompatActivity implements View.OnClickListener {
+public class UpdateStudentMathTestActivity extends AppCompatActivity {
 
 
-    private Manager_Cache managerCacheUpdateServiceGallery;
+    private String math_question_api_url = new Manager_API().math_question_api_url;
 
-    private String serviceRegion = "";
-    private String service_site_id = "";
-    private String service_site_name = "";
-    private String service_team_global = "";
+    private int intAnswer ;
+    private int intResult;
 
-    private String service_unit_no_global = "";
+    private int intTimerProgress;
+    private int intProgressBarProgress;
+    private int intProgressBar = 0;
 
-    private TextView txtServiceUnitNo ;
+    private String student_no_global = "";
+
+    private TextView txtStudentNo;
     private CheckBox checkBoxFinished;
 
-    /**
-     * cmara freatures init
-     */
+    ProgressDialog  progressDialog;
 
-    private ImageView ivSChecListImg, ivSBefore1Img1, ivSBefore1Img2, ivSBefore1Img3, ivSBefore1Img4 , ivSBefore1Img5,ivSBefore2Img1, ivSBefore2Img2, ivSBefore2Img3, ivSBefore2Img4, ivSBefore2Img5, ivSDuring1Img1, ivSDuring1Img2, ivSDuring1Img3, ivSDuring1Img4, ivSDuring1Img5, ivSDuring2Img1, ivSDuring2Img2, ivSDuring2Img3, ivSDuring2Img4, ivSDuring2Img5, ivSDuring3Img1, ivSDuring3Img2, ivSDuring3Img3, ivSDuring3Img4, ivSDuring3Img5, ivSAfter1Img1, ivSAfter1Img2, ivSAfter1Img3, ivSAfter1Img4, ivSAfter1Img5, ivSAfter2Img1, ivSAfter2Img2, ivSAfter2Img3, ivSAfter2Img4, ivSAfter2Img5;
+    TextView    txtQuestionsQty,
+                txtQuestions ,
+                txtResult ,
+                txtOptions ,
+                txtTimeToSolve;
 
 
-    String region_dir ,service_breakdown_dir,date_dir,site_id_dir, site_name_dir,unit_dir, stage_dir,dateDir, datePrint, team, company;
+    EditText    etAnswer;
+    SeekBar seekBar;
+
+    Button btnSFinalSubmit;
 
 
-    ProgressDialog progressDialog;
+    FloatTextProgressBar floatTextProgressBar;
+
+
 
 
     @Override
@@ -77,33 +76,47 @@ public class UpdateStudentMathTestActivity extends AppCompatActivity implements 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
-        managerCacheUpdateServiceGallery = Manager_Cache.getPreferences(this);
 
         final Student student = (Student) getIntent().getSerializableExtra("studentMathTest");
 
 
-        txtServiceUnitNo = findViewById(R.id.service_gallery_unit_no);
+        progressDialog            = new ProgressDialog(UpdateStudentMathTestActivity.this,ProgressDialog.THEME_HOLO_DARK);
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDialog.setTitle("Please wait moment...!");
+        progressDialog.setMessage("Retrieve Data From Question server...");
+        progressDialog.setCanceledOnTouchOutside(false);
+        progressDialog.setCancelable(false);
+        progressDialog.setButton(DialogInterface.BUTTON_NEGATIVE, "Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                onBackPressed();
+                finish();
+
+            }
+        });
+        progressDialog.show();
+
+
+        txtQuestionsQty     = (TextView)findViewById(R.id.txtQuestionQty);
+        txtQuestions        = (TextView)findViewById(R.id.txtQuestion);
+        txtResult           = (TextView)findViewById(R.id.txtResult);
+        txtOptions          = (TextView)findViewById(R.id.txtOptions);
+        txtTimeToSolve      = (TextView)findViewById(R.id.txtTimeToSolve);
+
+        etAnswer = (EditText) findViewById(R.id.enterAnswer);
+
+//        btnSFinalSubmit          = (Button)findViewById(R.id.btnSFinalSubmit);
+
+        getData();
+
+        floatTextProgressBar = findViewById(R.id.floatTextProgressBar);
+
+        txtStudentNo = findViewById(R.id.service_gallery_unit_no);
         checkBoxFinished = findViewById(R.id.checkBoxFinished);
 
 
         loadServiceGallery(student);
-
-
-
-
-        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-//        ivSChecListImg          = findViewById(R.id.ivImgSChecklistU);
-
-
-
-
-//        ivSChecListImg.setOnClickListener( this);
-
-
-
-
 
 
         findViewById(R.id.button_update).setOnClickListener(new View.OnClickListener() {
@@ -121,47 +134,169 @@ public class UpdateStudentMathTestActivity extends AppCompatActivity implements 
 //
     }
 
-//    @Override
-//    protected void onRestart() {
-//        super.onRestart();
-//        final Service service = (Service) getIntent().getSerializableExtra("serviceGallery");
-//        loadServiceGallery(service);
-//    }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-
-            /**
-             * Checklist image
-             */
-//            case R.id.ivImgSChecklistU:
-//
-//                GLOBAL_IMAGE_NO = "C" ;
-//                if (CameraUtils.checkPermissions(getApplicationContext())) {
-//                    captureImage();
-//                } else {
-//                    requestCameraPermission(MEDIA_TYPE_IMAGE);
-//                }
-//                break;
-
-        }
-    }
-
-    @Override
-    public void onBackPressed() {
-        finish();
-        Intent intent = new Intent(UpdateStudentMathTestActivity.this, MainActivity_Student_Math_Test.class);
-        startActivity(intent);
-    }
 
     private void loadServiceGallery(Student student) {
 
-        txtServiceUnitNo.setText(student.getStudent_no());
+        txtStudentNo.setText(student.getStudent_no());
 
-        service_unit_no_global = student.getStudent_no();
+        student_no_global = student.getStudent_no();
 
 
+    }
+
+
+    private void getData() {
+
+        String path         = math_question_api_url;
+        String url = path;
+        // creating a new variable for our request queue
+        RequestQueue queue = Volley.newRequestQueue(UpdateStudentMathTestActivity.this);
+
+        // of array so we are making a json array request.
+        // request and then extracting data from each json object.
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+
+
+                Log.d("res_s", String.valueOf(response));
+                Log.d("res_s", String.valueOf(response.length()));
+
+                int questionQty =response.length();
+
+                txtQuestionsQty.setText(String.valueOf(questionQty));
+
+                int questionArray[]=new int[questionQty];
+
+
+                    try {
+
+
+//                        for (int i = 0; i < questionQty; i++) {
+
+                        // we are getting each json object.
+                        JSONObject responseObj = response.getJSONObject(questionArray[0]);
+
+                        String strQuestion = responseObj.getString("question");
+                        String strResult = responseObj.getString("result");
+                        String strTimeToSolve = responseObj.getString("timetosolve");
+
+
+//                        String strOptions = responseObj.getString("options");
+
+//                        JSONArray array = (JSONArray)responseObj.get(strOptions);
+
+                        JSONArray jsonarray = responseObj.getJSONArray("options");
+
+                        Log.d("res_s", String.valueOf(jsonarray));
+
+                        for (int j = 0; j < jsonarray.length(); j++) {
+
+                            Log.d("res_s", String.valueOf(jsonarray.length()));
+//                            JSONObject jsonobject = jsonarray.getJSONObject(i);
+//                            Toast.makeText(UpdateStudentMathTestActivity.this, (CharSequence) jsonobject, Toast.LENGTH_SHORT).show();
+
+
+                        }
+
+                        progressDialog.cancel();
+
+                        /**
+                         * Progress Bar-------------------------------------------------------------
+                         */
+
+                        intTimerProgress = Integer.parseInt(strTimeToSolve);
+                            Log.d("res_p", String.valueOf(intTimerProgress));
+                        intProgressBarProgress = Integer.parseInt(strTimeToSolve);
+                            Log.d("res_p", String.valueOf(intProgressBarProgress));
+                        intProgressBarProgress = (intProgressBarProgress *100 /intProgressBarProgress)/2;
+                            Log.d("res_pm", String.valueOf(intProgressBarProgress));
+
+//                        percentage = (score * 100/ total);
+
+                        int questionTime = intTimerProgress * 1000;
+
+                        if (intTimerProgress > 0) {
+                            new CountDownTimer(questionTime, 1000) {
+                                public void onTick(long millisUntilFinished) {
+
+                                    txtTimeToSolve.setText(String.valueOf(intTimerProgress + " Seconds"));
+                                    intTimerProgress--;
+
+                                    intProgressBar++;
+                                    floatTextProgressBar.setProgress(intProgressBar);
+
+                                }
+
+                                public void onFinish() {
+                                    txtTimeToSolve.setText("FINISH!!");
+                                }
+                            }.start();
+                        }
+
+
+//                        intProgress = intProgress*2;
+
+
+                        /**
+                         * Progress Bar-------------------------------------------------------------
+                         */
+
+
+//
+//                        for (int i = 0; i < array.length(); i++) {
+//
+//                            JSONObject childObject = array.getJSONObject(i);
+//
+//                            String id = childObject.getString("id");
+//
+//
+//                        }
+
+//                        JSONObject responseSubObj = response.getJSONObject(Integer.parseInt(strOptions));
+//
+//                        String strInnerOptions = responseSubObj.getString("options");
+//
+//                        Toast.makeText(UpdateStudentMathTestActivity.this, strInnerOptions, Toast.LENGTH_SHORT).show();
+
+
+                        txtQuestions.setText(strQuestion);
+                        txtResult.setText(strResult);
+//                        txtOptions.setText(strOptions);
+//                        txtTimeToSolve.setText(strTimeToSolve + " seconds");
+
+//                        String value = etAnswer.getText().toString();
+//                        intAnswer=Integer.parseInt(value);
+//
+//                        intResult = Integer.parseInt(strResult);
+
+//                        if( intAnswer == intResult)
+//                        {
+//                            Toast.makeText(UpdateStudentMathTestActivity.this, "Correct Answer..", Toast.LENGTH_SHORT).show();
+//                        }
+//                        else
+//                        {
+//                            Toast.makeText(UpdateStudentMathTestActivity.this, "Wrong Answer..", Toast.LENGTH_SHORT).show();
+//                        }
+
+                        progressDialog.cancel();
+
+//                    }
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(UpdateStudentMathTestActivity.this, "Fail to get the data..", Toast.LENGTH_SHORT).show();
+            }
+        });
+        queue.add(jsonArrayRequest);
     }
 
 
@@ -210,54 +345,11 @@ public class UpdateStudentMathTestActivity extends AppCompatActivity implements 
     }
 
 
-//    private void deleteServiceGallery(final Student service) {
-//        class DeleteServiceGallery extends AsyncTask<Void, Void, Void> {
-//
-//            @Override
-//            protected Void doInBackground(Void... voids) {
-//                DatabaseClient.getInstance(getApplicationContext()).getAppDatabase()
-//                        .studentDao()
-//                        .delete(student);
-//                return null;
-//            }
-//
-//            @Override
-//            protected void onPostExecute(Void aVoid) {
-//                super.onPostExecute(aVoid);
-//                Toast.makeText(getApplicationContext(), "Deleted", Toast.LENGTH_LONG).show();
-//                finish();
-//                startActivity(new Intent(UpdateServiceGalleryActivity.this, MainActivity_Service_Gallery.class));
-//            }
-//        }
-//
-//        DeleteServiceGallery dt = new DeleteServiceGallery();
-//        dt.execute();
-//
-//    }
 
 
-
-
-
-    public static Bitmap RotateBitmap(Bitmap source, float angle)
-    {
-        Matrix matrix = new Matrix();
-        matrix.postRotate(angle);
-        return Bitmap.createBitmap(source, 0, 0, source.getWidth(), source.getHeight(), matrix, true);
-    }
-
-
-
-
-
-    public String getCurrentTimeStamp()
-    {
-        Long tsLong     = System.currentTimeMillis()/1000;
-        String ts       = tsLong.toString();
-        return ts;
-    }
 
 
 
 
 }
+

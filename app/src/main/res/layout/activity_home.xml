@@ -109,7 +109,7 @@
                                         android:textColor="@color/pureBlack"
                                         android:textSize="30dp"
                                         android:text="Get Start"
-                                        android:background="@drawable/button_final"
+                                        android:background="@drawable/button_final_circle"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"/>
 

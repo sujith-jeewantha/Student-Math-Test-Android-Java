@@ -6,19 +6,26 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.CheckBox;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupMenu;
 import android.widget.Toast;
+
+import com.bumptech.glide.Glide;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -34,7 +41,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
 
-public class UpdateStudentProfileActivity extends AppCompatActivity implements View.OnClickListener {
+public class UpdateStudentProfileActivity extends AppCompatActivity {
 
     public String GLOBAL_IMAGE_NO = "";
     File image_file_global = null;
@@ -58,7 +65,11 @@ public class UpdateStudentProfileActivity extends AppCompatActivity implements V
 
     private static String imageStoragePath;
 
-    private CheckBox checkBoxFinished;
+    private String noImageText = "NOIMG";
+    private String sChecklistImg;
+
+    private int targetHeight = 100;
+    private int targetWidth = 130;
 
     /**
      * Global image
@@ -100,7 +111,7 @@ public class UpdateStudentProfileActivity extends AppCompatActivity implements V
             phoneSixLayout,
             phoneSevenLayout,
             phoneEightLayout,
-            phoneNineNLayout,
+            phoneNineLayout,
             phoneTenLayout,
 
             emailTwoLayout,
@@ -114,6 +125,7 @@ public class UpdateStudentProfileActivity extends AppCompatActivity implements V
             emailTenLayout;
 
     ImageView ivProfilePic;
+    Button  btnProfilePic;
 
 
     @Override
@@ -150,7 +162,6 @@ public class UpdateStudentProfileActivity extends AppCompatActivity implements V
         editTextEmailTen = findViewById(R.id.enterEmail_ten);
         editTextEmailNine = findViewById(R.id.enterEmail_nine);
 
-        checkBoxFinished = findViewById(R.id.checkBoxFinished);
 
 
         phoneTwoLayout = (LinearLayout) findViewById(R.id.layoutPhone_2);
@@ -160,7 +171,7 @@ public class UpdateStudentProfileActivity extends AppCompatActivity implements V
         phoneSixLayout = (LinearLayout) findViewById(R.id.layoutPhone_6);
         phoneSevenLayout = (LinearLayout) findViewById(R.id.layoutPhone_7);
         phoneEightLayout = (LinearLayout) findViewById(R.id.layoutPhone_8);
-        phoneNineNLayout = (LinearLayout) findViewById(R.id.layoutPhone_9);
+        phoneNineLayout = (LinearLayout) findViewById(R.id.layoutPhone_9);
         phoneTenLayout = (LinearLayout) findViewById(R.id.layoutPhone_10);
 
         emailTwoLayout = (LinearLayout) findViewById(R.id.layoutEmail_2);
@@ -173,40 +184,69 @@ public class UpdateStudentProfileActivity extends AppCompatActivity implements V
         emailNineLayout = (LinearLayout) findViewById(R.id.layoutEmail_9);
         emailTenLayout = (LinearLayout) findViewById(R.id.layoutEmail_10);
 
-
-
-
-
-
-
-        phoneSevenLayout.setVisibility(View.GONE);
-        phoneEightLayout.setVisibility(View.GONE);
-        phoneNineNLayout.setVisibility(View.GONE);
-        phoneTenLayout.setVisibility(View.GONE);
-
-
-
-
-
-
-
-
-
-
-
-
         ivProfilePic = (ImageView) findViewById(R.id.ivProfile);
 
-        ivProfilePic.setOnClickListener( this);
+        btnProfilePic = (Button) findViewById(R.id.btnProfilePic);
+
+        btnProfilePic.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                //Creating the instance of PopupMenu
+                PopupMenu popup = new PopupMenu(UpdateStudentProfileActivity.this, btnProfilePic);
+                //Inflating the Popup using xml file
+                popup.getMenuInflater().inflate(R.menu.popup_menu, popup.getMenu());
+
+                //registering popup with OnMenuItemClickListener
+                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    public boolean onMenuItemClick(MenuItem item) {
+                        Toast.makeText(UpdateStudentProfileActivity.this,"You Clicked : " + item.getTitle(), Toast.LENGTH_SHORT).show();
+
+                        switch (item.getItemId()) {
+                            case R.id.id_camera:
+                                // do your code
+
+                                if (CameraUtils.checkPermissions(getApplicationContext())) {
+                                    captureImage();
+                                } else {
+                                    requestCameraPermission(MEDIA_TYPE_IMAGE);
+                                }
+
+                                return true;
+                            case R.id.id_files:
+                                // do your code
+
+
+                                Toast.makeText(getApplicationContext(),"F", Toast.LENGTH_LONG).show();
+
+
+                                return true;
+                            case R.id.id_internet:
+                                // do your code
+
+                                Toast.makeText(getApplicationContext(),"I", Toast.LENGTH_LONG).show();
+
+
+                                return true;
+
+                            default:
+                                return false;
+                        }
+
+
+                    }
+                });
+
+                popup.show();//showing popup menu
+            }
+        });
+
+
 
 
         final Student student = (Student) getIntent().getSerializableExtra("studentProfile");
 
         loadStudentProfile(student);
-
-
-
-
 
 
 
@@ -250,25 +290,7 @@ public class UpdateStudentProfileActivity extends AppCompatActivity implements V
         });
     }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
 
-            /**
-             * Profile image
-             */
-            case R.id.ivProfile:
-
-                GLOBAL_IMAGE_NO = "C" ;
-                if (CameraUtils.checkPermissions(getApplicationContext())) {
-                    captureImage();
-                } else {
-                    requestCameraPermission(MEDIA_TYPE_IMAGE);
-                }
-                break;
-
-        }
-    }
 
     @Override
     public void onBackPressed() {
@@ -280,6 +302,49 @@ public class UpdateStudentProfileActivity extends AppCompatActivity implements V
 
 
     private void loadStudentProfile(Student student) {
+
+
+
+        String studentImg = student.getStudent_profile_img();
+
+//        this.sChecklistImg = studentImg;
+//        if (studentImg.equals(this.noImageText)) {
+//            imageView = (ImageView) findViewById(R.id.ivProfile);
+//            this.ivProfilePic = imageView;
+//            imageView.setImageDrawable(getResources().getDrawable(R.drawable.profile_pic));
+//        } else {
+//            imgFile = new File(this.sChecklistImg);
+//            if (imgFile.exists()) {
+//                this.ivProfilePic = (ImageView) findViewById(R.id.ivProfile);
+//                Picasso.get().load(imgFile).resize(this.targetWidth, this.targetHeight).into(this.ivProfilePic);
+//            } else {
+////                imageView2 = (ImageView) findViewById(R.id.ivImgSChecklistU);
+////                this.ivProfilePic = imageView2;
+////                imageView2.setImageDrawable(getResources().getDrawable(R.drawable.not_complete));
+//            }
+//        }
+
+
+        try {
+
+            File file = new File(studentImg);
+            Uri imageUri = Uri.fromFile(file);
+
+            Glide.with(this)
+                    .load(imageUri)
+                    .circleCrop()
+                    .into(ivProfilePic);
+
+        }
+
+        catch (Exception e)
+        {
+
+        }
+
+
+
+
         editTextStudentNo.setText(student.getStudent_no());
         editTextFirstName.setText(student.getStudent_first_name());
         editTextLastName.setText(student.getStudent_last_name());
@@ -355,11 +420,11 @@ public class UpdateStudentProfileActivity extends AppCompatActivity implements V
         if (!phoneNo_7.equals(""))
         {
             editTextPhoneNoSeven.setText(phoneNo_7);
-            editTextPhoneNoTwo.setVisibility(View.VISIBLE);
+            phoneSevenLayout.setVisibility(View.VISIBLE);
         }
         else
         {
-            phoneTwoLayout.setVisibility(View.GONE);
+            phoneSevenLayout.setVisibility(View.GONE);
         }
 
         String phoneNo_8 = student.getStudent_phone_eight();
@@ -367,11 +432,11 @@ public class UpdateStudentProfileActivity extends AppCompatActivity implements V
         if (!phoneNo_8.equals(""))
         {
             editTextPhoneNoEight.setText(phoneNo_8);
-            editTextPhoneNoTwo.setVisibility(View.VISIBLE);
+            phoneEightLayout.setVisibility(View.VISIBLE);
         }
         else
         {
-            phoneTwoLayout.setVisibility(View.GONE);
+            phoneEightLayout.setVisibility(View.GONE);
         }
 
         String phoneNo_9 = student.getStudent_phone_nine();
@@ -379,11 +444,11 @@ public class UpdateStudentProfileActivity extends AppCompatActivity implements V
         if (!phoneNo_9.equals(""))
         {
             editTextPhoneNoNine.setText(phoneNo_9);
-            editTextPhoneNoTwo.setVisibility(View.VISIBLE);
+            phoneNineLayout.setVisibility(View.VISIBLE);
         }
         else
         {
-            phoneTwoLayout.setVisibility(View.GONE);
+            phoneNineLayout.setVisibility(View.GONE);
         }
 
         String phoneNo_10 = student.getStudent_phone_ten();
@@ -391,11 +456,11 @@ public class UpdateStudentProfileActivity extends AppCompatActivity implements V
         if (!phoneNo_10.equals(""))
         {
             editTextPhoneNoTen.setText(phoneNo_10);
-            editTextPhoneNoTwo.setVisibility(View.VISIBLE);
+            phoneTenLayout.setVisibility(View.VISIBLE);
         }
         else
         {
-            phoneTwoLayout.setVisibility(View.GONE);
+            phoneTenLayout.setVisibility(View.GONE);
         }
         /**
          *  Email layout
@@ -413,7 +478,7 @@ public class UpdateStudentProfileActivity extends AppCompatActivity implements V
             emailTwoLayout.setVisibility(View.GONE);
         }
 
-        String email_3 = student.getStudent_phone_three();
+        String email_3 = student.getStudent_email_three();
 
         if (!email_3.equals(""))
         {
@@ -425,7 +490,7 @@ public class UpdateStudentProfileActivity extends AppCompatActivity implements V
             emailThreeLayout.setVisibility(View.GONE);
         }
 
-        String email_4 = student.getStudent_phone_four();
+        String email_4 = student.getStudent_email_four();
 
         if (!email_4.equals(""))
         {
@@ -437,7 +502,7 @@ public class UpdateStudentProfileActivity extends AppCompatActivity implements V
             emailFourLayout.setVisibility(View.GONE);
         }
 
-        String email_5 = student.getStudent_phone_five();
+        String email_5 = student.getStudent_email_five();
 
         if (!email_5.equals(""))
         {
@@ -449,7 +514,7 @@ public class UpdateStudentProfileActivity extends AppCompatActivity implements V
             emailFiveLayout.setVisibility(View.GONE);
         }
 
-        String email_6 = student.getStudent_phone_six();
+        String email_6 = student.getStudent_email_six();
 
         if (!email_6.equals(""))
         {
@@ -461,7 +526,7 @@ public class UpdateStudentProfileActivity extends AppCompatActivity implements V
             emailSixLayout.setVisibility(View.GONE);
         }
 
-        String email_7 = student.getStudent_phone_seven();
+        String email_7 = student.getStudent_email_seven();
 
         if (!email_7.equals(""))
         {
@@ -473,7 +538,7 @@ public class UpdateStudentProfileActivity extends AppCompatActivity implements V
             emailSevenLayout.setVisibility(View.GONE);
         }
 
-        String email_8 = student.getStudent_phone_eight();
+        String email_8 = student.getStudent_email_eight();
 
         if (!email_8.equals(""))
         {
@@ -485,7 +550,7 @@ public class UpdateStudentProfileActivity extends AppCompatActivity implements V
             emailEightLayout.setVisibility(View.GONE);
         }
 
-        String email_9 = student.getStudent_phone_nine();
+        String email_9 = student.getStudent_email_nine();
 
         if (!email_9.equals(""))
         {
@@ -497,7 +562,7 @@ public class UpdateStudentProfileActivity extends AppCompatActivity implements V
             emailNineLayout.setVisibility(View.GONE);
         }
 
-        String email_10 = student.getStudent_phone_ten();
+        String email_10 = student.getStudent_email_ten();
 
         if (!email_10.equals(""))
         {
@@ -509,8 +574,6 @@ public class UpdateStudentProfileActivity extends AppCompatActivity implements V
             emailTenLayout.setVisibility(View.GONE);
         }
 
-
-        checkBoxFinished.setChecked(student.isFinished());
     }
 
     private void updateStudentProfile(final Student student) {
@@ -594,7 +657,6 @@ public class UpdateStudentProfileActivity extends AppCompatActivity implements V
                 student.setStudent_email_nine(sEmailNine);
                 student.setStudent_email_ten(sEmailTen);
 
-                student.setFinished(checkBoxFinished.isChecked());
                 DatabaseClient.getInstance(getApplicationContext()).getAppDatabase()
                         .studentDao()
                         .update(student);
@@ -734,6 +796,8 @@ public class UpdateStudentProfileActivity extends AppCompatActivity implements V
 
             global_Img  = String.valueOf(mediaFileUpdated);
 
+            Log.d("img_path_file", global_Img);
+
             FileOutputStream out = null;
             BitmapFactory.Options options = new BitmapFactory.Options();
             options.inPreferredConfig = Bitmap.Config.ARGB_8888;
@@ -746,7 +810,15 @@ public class UpdateStudentProfileActivity extends AppCompatActivity implements V
             int width = bmp.getWidth();
             int height = bmp.getHeight();
 
+            int contentTagX                     = (width/100);
+            int contentTagBeginY                = (height/2)+(height/4);
+
             Bitmap imgNew = Bitmap.createBitmap(width, height, config);
+
+            Canvas c = new Canvas(imgNew);
+            c.drawBitmap(bmp, 0, 0, null);
+
+
 
             ///////////////////////--------------------------------------------------------------------------------------///////////////////////////
 
@@ -775,12 +847,20 @@ public class UpdateStudentProfileActivity extends AppCompatActivity implements V
             File newFile        = new File(mediaFileUpdated.getAbsolutePath());
             global_Img = String.valueOf(newFile);
 
+            Log.d("img_path_file", global_Img);
+
 
             /**
              * file path here
              */
 
-            ivProfilePic.setImageURI(Uri.fromFile(newFile));
+
+            Uri imageUri = Uri.fromFile(newFile);
+
+            Glide.with(this)
+                    .load(imageUri)
+                    .circleCrop()
+                    .into(ivProfilePic);
 
             Log.d("img_store_path_file", String.valueOf(newFile));
 
@@ -846,9 +926,5 @@ public class UpdateStudentProfileActivity extends AppCompatActivity implements V
         String ts       = tsLong.toString();
         return ts;
     }
-
-
-
-
 
 }

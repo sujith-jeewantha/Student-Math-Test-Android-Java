@@ -6,22 +6,26 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupMenu;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.bumptech.glide.Glide;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.MultiplePermissionsReport;
 import com.karumi.dexter.PermissionToken;
@@ -30,12 +34,14 @@ import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 import com.sgstech.studentmathtest.Database.model.Student;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 
 
-public class AddStudentProfileActivity extends AppCompatActivity implements View.OnClickListener {
+public class AddStudentProfileActivity extends AppCompatActivity {
 
     private Manager_Cache managerCacheAddStudentProfile;
 
@@ -51,7 +57,7 @@ public class AddStudentProfileActivity extends AppCompatActivity implements View
     public static final int MEDIA_TYPE_IMAGE = 1;
 
     // Bitmap sampling size
-    public static final int BITMAP_SAMPLE_SIZE = 2;
+    public static final int RESULT_LOAD_IMG = 2;
 
     // Gallery directory name to store the images or videos
     public static final String STUDENT_GALLERY_DIRECTORY_NAME = "STUDENT-MATH/PROFILE";
@@ -60,6 +66,8 @@ public class AddStudentProfileActivity extends AppCompatActivity implements View
     public static final String IMAGE_EXTENSION = "jpg";
 
     private static String imageStoragePath;
+
+    private String noImageText = "NOIMG";
 
 
     /**
@@ -160,65 +168,120 @@ public class AddStudentProfileActivity extends AppCompatActivity implements View
         LinearLayout emailTenLayout = (LinearLayout) findViewById(R.id.layoutEmail_10);
 
 
-        phoneTwoLayout.setVisibility(View.GONE);
-        phoneThreeLayout.setVisibility(View.GONE);
-        phoneFourLayout.setVisibility(View.GONE);
-        phoneFiveLayout.setVisibility(View.GONE);
-        phoneSixLayout.setVisibility(View.GONE);
-        phoneSevenLayout.setVisibility(View.GONE);
-        phoneEightLayout.setVisibility(View.GONE);
-        phoneNineNLayout.setVisibility(View.GONE);
-        phoneTenLayout.setVisibility(View.GONE);
-
-        emailTwoLayout.setVisibility(View.GONE);
-        emailThreeLayout.setVisibility(View.GONE);
-        emailFourLayout.setVisibility(View.GONE);
-        emailFiveLayout.setVisibility(View.GONE);
-        emailSixLayout.setVisibility(View.GONE);
-        emailSevenLayout.setVisibility(View.GONE);
-        emailEightLayout.setVisibility(View.GONE);
-        emailNineLayout.setVisibility(View.GONE);
-        emailTenLayout.setVisibility(View.GONE);
+//        phoneTwoLayout.setVisibility(View.GONE);
+//        phoneThreeLayout.setVisibility(View.GONE);
+//        phoneFourLayout.setVisibility(View.GONE);
+//        phoneFiveLayout.setVisibility(View.GONE);
+//        phoneSixLayout.setVisibility(View.GONE);
+//        phoneSevenLayout.setVisibility(View.GONE);
+//        phoneEightLayout.setVisibility(View.GONE);
+//        phoneNineNLayout.setVisibility(View.GONE);
+//        phoneTenLayout.setVisibility(View.GONE);
+//
+//        emailTwoLayout.setVisibility(View.GONE);
+//        emailThreeLayout.setVisibility(View.GONE);
+//        emailFourLayout.setVisibility(View.GONE);
+//        emailFiveLayout.setVisibility(View.GONE);
+//        emailSixLayout.setVisibility(View.GONE);
+//        emailSevenLayout.setVisibility(View.GONE);
+//        emailEightLayout.setVisibility(View.GONE);
+//        emailNineLayout.setVisibility(View.GONE);
+//        emailTenLayout.setVisibility(View.GONE);
 
 
         ivProfilePic = (ImageView) findViewById(R.id.ivProfile);
 
         btnProfilePic = (Button) findViewById(R.id.btnProfilePic);
 
+        btnProfilePic.setOnClickListener(new View.OnClickListener() {
 
-        ivProfilePic.setOnClickListener( this);
+            @Override
+            public void onClick(View v) {
+                //Creating the instance of PopupMenu
+                PopupMenu popup = new PopupMenu(AddStudentProfileActivity.this, btnProfilePic);
+                //Inflating the Popup using xml file
+                popup.getMenuInflater().inflate(R.menu.popup_menu, popup.getMenu());
+
+                //registering popup with OnMenuItemClickListener
+                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    public boolean onMenuItemClick(MenuItem item) {
+                        Toast.makeText(AddStudentProfileActivity.this,"You Clicked : " + item.getTitle(), Toast.LENGTH_SHORT).show();
+
+                        switch (item.getItemId()) {
+                            case R.id.id_camera:
+                                // do your code
+
+                                if (CameraUtils.checkPermissions(getApplicationContext())) {
+                                    captureImage();
+                                } else {
+                                    requestCameraPermission(MEDIA_TYPE_IMAGE);
+                                }
+
+                                return true;
+                            case R.id.id_files:
+                                // do your code
 
 
+                                Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
+                                photoPickerIntent.setType("image/*");
+                                startActivityForResult(photoPickerIntent, RESULT_LOAD_IMG);
+
+
+                                return true;
+                            case R.id.id_internet:
+                                // do your code
+
+                                Toast.makeText(getApplicationContext(),"I", Toast.LENGTH_LONG).show();
+
+
+                                return true;
+
+                            default:
+                                return false;
+                        }
+
+
+                    }
+                });
+
+                popup.show();//showing popup menu
+            }
+        });
 
         findViewById(R.id.button_save_student_profile).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                saveStudentProfile();
+
+                try {
+                    if(global_Img.isEmpty())
+                    {
+                        Toast.makeText(getApplicationContext(),"Student Image required", Toast.LENGTH_LONG).show();
+                    }
+                    else
+                    {
+                        saveStudentProfile();
+                    }
+                }
+                catch (Exception e)
+                {
+                    e.printStackTrace();
+                    Toast.makeText(getApplicationContext(),"Student Image required", Toast.LENGTH_LONG).show();
+                    Intent intent       = new Intent(getBaseContext(), AddStudentProfileActivity.class);
+                    startActivity(intent);
+
+                }
+
+
             }
         });
     }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
 
-            /**
-             * Profile image
-             */
-            case R.id.ivProfile:
 
-                GLOBAL_IMAGE_NO = "C" ;
-                if (CameraUtils.checkPermissions(getApplicationContext())) {
-                    captureImage();
-                } else {
-                    requestCameraPermission(MEDIA_TYPE_IMAGE);
-                }
-                break;
-
-        }
-    }
 
     private void saveStudentProfile() {
+
+        final String sStudentPic  =  global_Img;
 
          final String sStudentNo  =  editTextStudentNo.getText().toString().trim();
          final String sFirstName  =  editTextFirstName.getText().toString().trim();
@@ -255,6 +318,16 @@ public class AddStudentProfileActivity extends AppCompatActivity implements View
                 return;
 
             }
+
+            else if (sStudentPic.isEmpty()) {
+//                editTextStudentNo.setError("Student No required");
+//                editTextStudentNo.requestFocus();
+                Toast.makeText(getApplicationContext(),"Student Image required", Toast.LENGTH_LONG).show();
+                return;
+
+            }
+
+
         }catch (Exception e)
         {
             Toast.makeText(getApplicationContext(),"Student No required", Toast.LENGTH_LONG).show();
@@ -269,12 +342,18 @@ public class AddStudentProfileActivity extends AppCompatActivity implements View
 
                 Student student = new Student();
 
-                /**
-                 * Profile image
-                 */
-                if(GLOBAL_IMAGE_NO == "C" ) {
-                    student.setStudent_profile_img(global_Img);
-                }
+
+
+
+//                /**
+//                 * Profile image
+//                 */
+//                if(GLOBAL_IMAGE_NO == "C" ) {
+//
+//                    student.setStudent_profile_img(global_Img);
+//                }
+
+                student.setStudent_profile_img(sStudentPic);
 
                 student.setStudent_no(sStudentNo);
                 student.setStudent_first_name(sFirstName);
@@ -377,6 +456,7 @@ public class AddStudentProfileActivity extends AppCompatActivity implements View
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         // if the result is capturing Image
         super.onActivityResult(requestCode, resultCode, data);
+
         if (requestCode == CAMERA_CAPTURE_IMAGE_REQUEST_CODE) {
             if (resultCode == RESULT_OK) {
 
@@ -398,6 +478,44 @@ public class AddStudentProfileActivity extends AppCompatActivity implements View
                         .show();
             }
         }
+
+
+//        if (resultCode == RESULT_OK) {
+//            try {
+//
+//
+//                final Uri imageUri = data.getData();
+//                final InputStream imageStream = getContentResolver().openInputStream(imageUri);
+//                final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
+//
+//
+//                global_Img = String.valueOf(selectedImage);
+//
+//                Log.d("f_img",global_Img);
+//
+//                /**
+//                 * file path here
+//                 */
+//
+//
+//                Glide.with(this)
+//                        .load(imageUri)
+//                        .circleCrop()
+//                        .into(ivProfilePic);
+//
+//
+////                ivProfilePic.setImageBitmap(selectedImage);
+//
+//            } catch (FileNotFoundException e) {
+//                e.printStackTrace();
+//                Toast.makeText(AddStudentProfileActivity.this, "Something went wrong", Toast.LENGTH_LONG).show();
+//            }
+//
+//        }else {
+//            Toast.makeText(AddStudentProfileActivity.this, "You haven't picked Image",Toast.LENGTH_LONG).show();
+//        }
+
+
     }
 
     /**
@@ -423,42 +541,20 @@ public class AddStudentProfileActivity extends AppCompatActivity implements View
             options.inPreferredConfig = Bitmap.Config.ARGB_8888;
             Bitmap bmp = BitmapFactory.decodeFile(imageStoragePath, options);
 
-            ////////////////////////////////--------------------------------------------------------------------------------------/////////////////////////////////
+            ////////////////////////////////-------------------------------------------------------------------------------///////////////////////////
 
             Bitmap.Config config = bmp.getConfig();
 
             int width = bmp.getWidth();
             int height = bmp.getHeight();
 
+            int contentTagX                     = (width/100);
+            int contentTagBeginY                = (height/2)+(height/4);
+
             Bitmap imgNew = Bitmap.createBitmap(width, height, config);
 
-//            Bitmap.Config config = bmp.getConfig();
-//
-//            int width = bmp.getWidth();
-//            int height = bmp.getHeight();
-//
-//            int contentTagX                     = (width/100);
-//            int contentTagBeginY                = (height/2)+(height/4);
-//
-//            Bitmap imgNew = Bitmap.createBitmap(width, height, config);
-//
-//            Canvas c = new Canvas(imgNew);
-//            c.drawBitmap(bmp, 0, 0, null);
-//
-//            if(GLOBAL_IMAGE_NO.equals("C"))
-//            {
-//                Paint paint = new Paint();
-//                paint.setColor(Color.WHITE);
-//                paint.setStyle(Paint.Style.FILL);
-//                paint.setTextSize(bmp.getHeight()/30);
-//                c.drawText(team                                         , contentTagX, contentTagBeginY+(width/35*4), paint);
-//                c.drawText(datePrint                                    , contentTagX, contentTagBeginY+(width/35*5), paint);
-//            }
-//
-//            else{
-//
-//
-//            }
+            Canvas c = new Canvas(imgNew);
+            c.drawBitmap(bmp, 0, 0, null);
 
             ///////////////////////--------------------------------------------------------------------------------------///////////////////////////
 
@@ -495,7 +591,14 @@ public class AddStudentProfileActivity extends AppCompatActivity implements View
              * file path here
              */
 
-            ivProfilePic.setImageURI(Uri.fromFile(newFile));
+//            ivProfilePic.setImageURI(Uri.fromFile(newFile));
+
+            Uri imageUri = Uri.fromFile(newFile);
+
+            Glide.with(this)
+                    .load(imageUri)
+                    .circleCrop()
+                    .into(ivProfilePic);
 
             Log.d("img_store_path_file", String.valueOf(newFile));
 

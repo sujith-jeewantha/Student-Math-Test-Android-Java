@@ -20,7 +20,7 @@
     <color name="orange5">#3f36e7</color>
     <color name="red2">#7c2549d2</color>
     <color name="orange4">#e6560e</color>
-    <color name="myFav">#424242</color>
+    <color name="myFav">#013f51</color>
     <color name="disabled">#425050</color>
     <color name="guardian_color">#015579</color>
     <color name="pureBlack">#000000</color>
@@ -38,6 +38,7 @@
 
     <color name="main_yellow">#f6d403</color>
     <color name="pureWhite">#ffffff</color>
+
 
     <color name="main_blue">#FF018786</color>
 </resources>
