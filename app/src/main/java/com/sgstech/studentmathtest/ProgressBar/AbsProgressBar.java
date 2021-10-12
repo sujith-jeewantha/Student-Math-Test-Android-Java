@@ -29,7 +29,7 @@ public class AbsProgressBar extends View {
     protected int textColor;
 
     /**进度条*/
-    protected int progress;
+    protected float progress;
 
     /**最大进度*/
     protected int maxProgress;
@@ -130,7 +130,7 @@ public class AbsProgressBar extends View {
      * 设置进度
      * @param progress
      */
-    public void setProgress(int progress) {
+    public void setProgress(float progress) {
         this.progress = Math.min(progress, maxProgress);
         invalidate();
     }

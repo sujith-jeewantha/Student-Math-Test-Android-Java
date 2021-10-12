@@ -34,10 +34,8 @@ import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 import com.sgstech.studentmathtest.Database.model.Student;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.List;
 
 
@@ -69,6 +67,9 @@ public class AddStudentProfileActivity extends AppCompatActivity {
 
     private String noImageText = "NOIMG";
 
+    int etPhoneNo = -1;
+    int etEmailNo = -1;
+
 
     /**
      * Global image
@@ -81,30 +82,30 @@ public class AddStudentProfileActivity extends AppCompatActivity {
             editTextFirstName,
             editTextLastName,
 
-            editTextPhoneNoOne,
-            editTextPhoneNoTwo,
-            editTextPhoneNoThree,
-            editTextPhoneNoFour,
-            editTextPhoneNoFive,
-            editTextPhoneNoSix,
-            editTextPhoneNoSeven,
-            editTextPhoneNoEight,
-            editTextPhoneNoNine,
-            editTextPhoneNoTen,
+            editTextPhone_1,
+            editTextPhone_2,
+            editTextPhone_3,
+            editTextPhone_4,
+            editTextPhone_5,
+            editTextPhone_6,
+            editTextPhone_7,
+            editTextPhone_8,
+            editTextPhone_9,
+            editTextPhone_10,
 
-            editTextEmailOne,
-            editTextEmailTwo,
-            editTextEmailThree,
-            editTextEmailFour,
-            editTextEmailFive,
-            editTextEmailSix,
-            editTextEmailSeven,
-            editTextEmailEight,
-            editTextEmailNine,
-            editTextEmailTen;
+            editTextEmail_1,
+            editTextEmail_2,
+            editTextEmail_3,
+            editTextEmail_4,
+            editTextEmail_5,
+            editTextEmail_6,
+            editTextEmail_7,
+            editTextEmail_8,
+            editTextEmail_9,
+            editTextEmail_10;
 
     ImageView ivProfilePic;
-    Button  btnProfilePic;
+    Button  btnProfilePic, btnAddMorePhone, btnAddMoreEmail;
 
     ProgressDialog progressDialog;
 
@@ -125,27 +126,28 @@ public class AddStudentProfileActivity extends AppCompatActivity {
         editTextFirstName = findViewById(R.id.enter_student_first_name);
         editTextLastName = findViewById(R.id.enter_student_last_name);
 
-        editTextPhoneNoOne = findViewById(R.id.entertpNo_one);
-        editTextPhoneNoTwo = findViewById(R.id.entertpNo_two);
-        editTextPhoneNoThree = findViewById(R.id.entertpNo_three);
-        editTextPhoneNoFour = findViewById(R.id.entertpNo_four);
-        editTextPhoneNoFive = findViewById(R.id.entertpNo_five);
-        editTextPhoneNoSix = findViewById(R.id.entertpNo_six);
-        editTextPhoneNoSeven = findViewById(R.id.entertpNo_seven);
-        editTextPhoneNoEight = findViewById(R.id.entertpNo_eight);
-        editTextPhoneNoNine = findViewById(R.id.entertpNo_nine);
-        editTextPhoneNoTen = findViewById(R.id.entertpNo_ten);
+        editTextPhone_1 = findViewById(R.id.entertpNo_one);
+        editTextPhone_2 = findViewById(R.id.entertpNo_two);
+        editTextPhone_3 = findViewById(R.id.entertpNo_three);
+        editTextPhone_4 = findViewById(R.id.entertpNo_four);
+        editTextPhone_5 = findViewById(R.id.entertpNo_five);
+        editTextPhone_6 = findViewById(R.id.entertpNo_six);
+        editTextPhone_7 = findViewById(R.id.entertpNo_seven);
+        editTextPhone_8 = findViewById(R.id.entertpNo_eight);
+        editTextPhone_9 = findViewById(R.id.entertpNo_nine);
+        editTextPhone_10 = findViewById(R.id.entertpNo_ten);
 
-        editTextEmailOne = findViewById(R.id.enterEmail_one);
-        editTextEmailTwo = findViewById(R.id.enterEmail_two);
-        editTextEmailThree = findViewById(R.id.enterEmail_three);
-        editTextEmailFour = findViewById(R.id.enterEmail_four);
-        editTextEmailFive = findViewById(R.id.enterEmail_five);
-        editTextEmailSix = findViewById(R.id.enterEmail_six);
-        editTextEmailSeven = findViewById(R.id.enterEmail_seven);
-        editTextEmailEight = findViewById(R.id.enterEmail_eight);
-        editTextEmailNine = findViewById(R.id.enterEmail_nine);
-        editTextEmailTen = findViewById(R.id.enterEmail_ten);
+        editTextEmail_1 = findViewById(R.id.enterEmail_one);
+        editTextEmail_2 = findViewById(R.id.enterEmail_two);
+        editTextEmail_3 = findViewById(R.id.enterEmail_three);
+        editTextEmail_4 = findViewById(R.id.enterEmail_four);
+        editTextEmail_5 = findViewById(R.id.enterEmail_five);
+        editTextEmail_6 = findViewById(R.id.enterEmail_six);
+        editTextEmail_7 = findViewById(R.id.enterEmail_seven);
+        editTextEmail_8 = findViewById(R.id.enterEmail_eight);
+        editTextEmail_9 = findViewById(R.id.enterEmail_nine);
+        editTextEmail_10 = findViewById(R.id.enterEmail_ten);
+
 
         LinearLayout phoneTwoLayout = (LinearLayout) findViewById(R.id.layoutPhone_2);
         LinearLayout phoneThreeLayout = (LinearLayout) findViewById(R.id.layoutPhone_3);
@@ -167,27 +169,59 @@ public class AddStudentProfileActivity extends AppCompatActivity {
         LinearLayout emailNineLayout = (LinearLayout) findViewById(R.id.layoutEmail_9);
         LinearLayout emailTenLayout = (LinearLayout) findViewById(R.id.layoutEmail_10);
 
+        LinearLayout[] phoneLayouts = new LinearLayout[]{
 
-//        phoneTwoLayout.setVisibility(View.GONE);
-//        phoneThreeLayout.setVisibility(View.GONE);
-//        phoneFourLayout.setVisibility(View.GONE);
-//        phoneFiveLayout.setVisibility(View.GONE);
-//        phoneSixLayout.setVisibility(View.GONE);
-//        phoneSevenLayout.setVisibility(View.GONE);
-//        phoneEightLayout.setVisibility(View.GONE);
-//        phoneNineNLayout.setVisibility(View.GONE);
-//        phoneTenLayout.setVisibility(View.GONE);
-//
-//        emailTwoLayout.setVisibility(View.GONE);
-//        emailThreeLayout.setVisibility(View.GONE);
-//        emailFourLayout.setVisibility(View.GONE);
-//        emailFiveLayout.setVisibility(View.GONE);
-//        emailSixLayout.setVisibility(View.GONE);
-//        emailSevenLayout.setVisibility(View.GONE);
-//        emailEightLayout.setVisibility(View.GONE);
-//        emailNineLayout.setVisibility(View.GONE);
-//        emailTenLayout.setVisibility(View.GONE);
+                phoneTwoLayout,
+                phoneThreeLayout,
+                phoneFourLayout,
+                phoneFiveLayout,
+                phoneSixLayout,
+                phoneSevenLayout,
+                phoneEightLayout,
+                phoneNineNLayout,
+                phoneTenLayout
 
+        };
+
+        LinearLayout[] emailLayouts = new LinearLayout[]{
+
+                emailTwoLayout,
+                emailThreeLayout,
+                emailFourLayout,
+                emailFiveLayout,
+                emailSixLayout,
+                emailSevenLayout,
+                emailEightLayout,
+                emailNineLayout,
+                emailTenLayout
+
+        };
+
+
+        phoneTwoLayout.setVisibility(View.GONE);
+        phoneThreeLayout.setVisibility(View.GONE);
+        phoneFourLayout.setVisibility(View.GONE);
+        phoneFiveLayout.setVisibility(View.GONE);
+        phoneSixLayout.setVisibility(View.GONE);
+        phoneSevenLayout.setVisibility(View.GONE);
+        phoneEightLayout.setVisibility(View.GONE);
+        phoneNineNLayout.setVisibility(View.GONE);
+        phoneTenLayout.setVisibility(View.GONE);
+
+
+
+        emailTwoLayout.setVisibility(View.GONE);
+        emailThreeLayout.setVisibility(View.GONE);
+        emailFourLayout.setVisibility(View.GONE);
+        emailFiveLayout.setVisibility(View.GONE);
+        emailSixLayout.setVisibility(View.GONE);
+        emailSevenLayout.setVisibility(View.GONE);
+        emailEightLayout.setVisibility(View.GONE);
+        emailNineLayout.setVisibility(View.GONE);
+        emailTenLayout.setVisibility(View.GONE);
+
+        btnAddMorePhone = (Button) findViewById(R.id.btnAddMorePhone);
+        btnAddMoreEmail = (Button) findViewById(R.id.btnAddMoreEmail);
 
         ivProfilePic = (ImageView) findViewById(R.id.ivProfile);
 
@@ -274,6 +308,46 @@ public class AddStudentProfileActivity extends AppCompatActivity {
 
             }
         });
+
+        btnAddMorePhone.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                try {
+                    if(etPhoneNo < 10 ) {
+                        etPhoneNo++;
+                        Log.d("btn_idp", String.valueOf(etPhoneNo));
+                        phoneLayouts[etPhoneNo].setVisibility(View.VISIBLE);
+                    }
+                }catch (Exception e)
+                {
+                    System.out.println(e);
+                }
+
+
+
+
+            }
+        });
+
+        btnAddMoreEmail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                try {
+                    if(etEmailNo < 10 ) {
+                        etEmailNo++;
+                        Log.d("btn_ide", String.valueOf(etEmailNo));
+                        emailLayouts[etEmailNo].setVisibility(View.VISIBLE);
+                    }
+                }catch (Exception e)
+                {
+                    System.out.println(e);
+                }
+
+
+            }
+        });
     }
 
 
@@ -287,27 +361,27 @@ public class AddStudentProfileActivity extends AppCompatActivity {
          final String sFirstName  =  editTextFirstName.getText().toString().trim();
          final String sLastName  =  editTextLastName .getText().toString().trim();
 
-         final String sPhoneNoOne  =  editTextPhoneNoOne.getText().toString().trim();
-         final String sPhoneNoTwo  =  editTextPhoneNoTwo.getText().toString().trim();
-         final String sPhoneNoThree  =  editTextPhoneNoThree.getText().toString().trim();
-         final String sPhoneNoFour  =  editTextPhoneNoFour.getText().toString().trim();
-         final String sPhoneNoFive  =  editTextPhoneNoFive.getText().toString().trim();
-         final String sPhoneNoSix  =  editTextPhoneNoSix.getText().toString().trim();
-         final String sPhoneNoSeven  =  editTextPhoneNoSeven.getText().toString().trim();
-         final String sPhoneNoEight  =  editTextPhoneNoEight.getText().toString().trim();
-         final String sPhoneNoNine  =  editTextPhoneNoNine.getText().toString().trim();
-         final String sPhoneNoTen  =  editTextPhoneNoTen.getText().toString().trim();
+         final String sPhoneNoOne  =  editTextPhone_1.getText().toString().trim();
+         final String sPhoneNoTwo  =  editTextPhone_2.getText().toString().trim();
+         final String sPhoneNoThree  =  editTextPhone_3.getText().toString().trim();
+         final String sPhoneNoFour  =  editTextPhone_4.getText().toString().trim();
+         final String sPhoneNoFive  =  editTextPhone_5.getText().toString().trim();
+         final String sPhoneNoSix  =  editTextPhone_6.getText().toString().trim();
+         final String sPhoneNoSeven  =  editTextPhone_7.getText().toString().trim();
+         final String sPhoneNoEight  =  editTextPhone_8.getText().toString().trim();
+         final String sPhoneNoNine  =  editTextPhone_9.getText().toString().trim();
+         final String sPhoneNoTen  =  editTextPhone_10.getText().toString().trim();
 
-         final String sEmailOne  =  editTextEmailOne.getText().toString().trim();
-         final String sEmailTwo  =  editTextEmailTwo.getText().toString().trim();
-         final String sEmailThree  =  editTextEmailThree.getText().toString().trim();
-         final String sEmailFour  =  editTextEmailFour.getText().toString().trim();
-         final String sEmailFive  =  editTextEmailFive.getText().toString().trim();
-         final String sEmailSix  =  editTextEmailSix.getText().toString().trim();
-         final String sEmailSeven  =  editTextEmailSeven.getText().toString().trim();
-         final String sEmailEight  =  editTextEmailEight.getText().toString().trim();
-         final String sEmailNine  =  editTextEmailNine.getText().toString().trim();
-         final String sEmailTen  =  editTextEmailTen.getText().toString().trim();
+         final String sEmailOne  =  editTextEmail_1.getText().toString().trim();
+         final String sEmailTwo  =  editTextEmail_2.getText().toString().trim();
+         final String sEmailThree  = editTextEmail_3.getText().toString().trim();
+         final String sEmailFour  = editTextEmail_4.getText().toString().trim();
+         final String sEmailFive  = editTextEmail_5.getText().toString().trim();
+         final String sEmailSix  =  editTextEmail_6.getText().toString().trim();
+         final String sEmailSeven  =editTextEmail_7.getText().toString().trim();
+         final String sEmailEight  =editTextEmail_8.getText().toString().trim();
+         final String sEmailNine  = editTextEmail_9.getText().toString().trim();
+         final String sEmailTen  =  editTextEmail_10.getText().toString().trim();
 
 
 

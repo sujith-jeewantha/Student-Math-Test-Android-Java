@@ -397,7 +397,7 @@
                 android:textColor="@color/main_yellow" />
 
             <Button
-                android:id="@+id/button_update"
+                android:id="@+id/btn_submit_ans"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"

@@ -31,6 +31,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DecimalFormat;
+
 
 public class UpdateStudentMathTestActivity extends AppCompatActivity {
 
@@ -39,10 +41,13 @@ public class UpdateStudentMathTestActivity extends AppCompatActivity {
 
     private int intAnswer ;
     private int intResult;
+    private int t = 100;
+    private int percentage ;
 
     private int intTimerProgress;
-    private int intProgressBarProgress;
-    private int intProgressBar = 0;
+    private float floatProgressBarProgress;
+    private float floatTimeToSolve;
+    private float floatProgressBar = 0;
 
     private String student_no_global = "";
 
@@ -106,7 +111,7 @@ public class UpdateStudentMathTestActivity extends AppCompatActivity {
 
         etAnswer = (EditText) findViewById(R.id.enterAnswer);
 
-//        btnSFinalSubmit          = (Button)findViewById(R.id.btnSFinalSubmit);
+        btnSFinalSubmit          = (Button)findViewById(R.id.btn_submit_ans);
 
         getData();
 
@@ -119,17 +124,17 @@ public class UpdateStudentMathTestActivity extends AppCompatActivity {
         loadServiceGallery(student);
 
 
-        findViewById(R.id.button_update).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-//                if(GLOBAL_IMAGE_NO.isEmpty()) {
-//                    Toast.makeText(getApplicationContext(), "Please capture images", Toast.LENGTH_LONG).show();
-//                }
-//                else {
-//                    updateServiceGallery(student);
-//                }
-            }
-        });
+//        findViewById(R.id.button_update).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+////                if(GLOBAL_IMAGE_NO.isEmpty()) {
+////                    Toast.makeText(getApplicationContext(), "Please capture images", Toast.LENGTH_LONG).show();
+////                }
+////                else {
+////                    updateServiceGallery(student);
+////                }
+//            }
+//        });
 
 //
     }
@@ -208,14 +213,34 @@ public class UpdateStudentMathTestActivity extends AppCompatActivity {
 
                         intTimerProgress = Integer.parseInt(strTimeToSolve);
                             Log.d("res_p", String.valueOf(intTimerProgress));
-                        intProgressBarProgress = Integer.parseInt(strTimeToSolve);
-                            Log.d("res_p", String.valueOf(intProgressBarProgress));
-                        intProgressBarProgress = (intProgressBarProgress *100 /intProgressBarProgress)/2;
-                            Log.d("res_pm", String.valueOf(intProgressBarProgress));
+                        floatTimeToSolve = Float.parseFloat(strTimeToSolve);
+                            Log.d("res_p", String.valueOf(floatTimeToSolve));
+//                        floatProgressBarProgress = (floatProgressBarProgress /100.0f);
+//                            Log.d("res_pm", String.valueOf(floatProgressBarProgress));
 
 //                        percentage = (score * 100/ total);
 
+                        percentage = (intTimerProgress * 100/ intTimerProgress);
+
                         int questionTime = intTimerProgress * 1000;
+
+
+                        floatProgressBarProgress = (float)floatTimeToSolve / (float)t;
+
+                        Log.d("res_pc", String.valueOf(floatProgressBarProgress));
+
+                        System.out.println(floatProgressBarProgress);
+
+                        DecimalFormat df = new DecimalFormat("0.0");
+                        double number = (float) floatProgressBarProgress;
+
+                        System.out.println(df.format(number));
+
+                        Log.d("res_pmf", df.format(number));
+
+                        floatProgressBarProgress = Float.parseFloat(df.format(number));
+
+                        Log.d("res_pmfp", String.valueOf(floatProgressBarProgress));
 
                         if (intTimerProgress > 0) {
                             new CountDownTimer(questionTime, 1000) {
@@ -224,8 +249,10 @@ public class UpdateStudentMathTestActivity extends AppCompatActivity {
                                     txtTimeToSolve.setText(String.valueOf(intTimerProgress + " Seconds"));
                                     intTimerProgress--;
 
-                                    intProgressBar++;
-                                    floatTextProgressBar.setProgress(intProgressBar);
+                                    floatProgressBar+=floatProgressBarProgress;
+                                    Log.d("res_pmfpa", String.valueOf(floatProgressBar));
+
+                                    floatTextProgressBar.setProgress(floatProgressBar);
 
                                 }
 

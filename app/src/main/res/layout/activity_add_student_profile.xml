@@ -273,6 +273,7 @@
                                 android:layout_height="match_parent">
 
                                 <Button
+                                    android:id="@+id/btnAddMorePhone"
                                     android:layout_width="wrap_content"
                                     android:layout_height="match_parent"
                                     android:text="Add More"/>
@@ -292,7 +293,9 @@
                                 android:layout_margin="2dp"
                                 android:background="@color/pureWhite"
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent"/>
+                                android:layout_height="match_parent"
+                                android:inputType="number"
+                                android:maxLength="10"/>
 
                         </LinearLayout>
 
@@ -344,7 +347,9 @@
                                 android:layout_margin="2dp"
                                 android:background="@color/pureWhite"
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent"/>
+                                android:layout_height="match_parent"
+                                android:inputType="number"
+                                android:maxLength="10"/>
 
                         </LinearLayout>
 
@@ -396,7 +401,9 @@
                                 android:layout_margin="2dp"
                                 android:background="@color/pureWhite"
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent"/>
+                                android:layout_height="match_parent"
+                                android:inputType="number"
+                                android:maxLength="10"/>
 
                         </LinearLayout>
 
@@ -448,7 +455,9 @@
                                 android:layout_margin="2dp"
                                 android:background="@color/pureWhite"
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent"/>
+                                android:layout_height="match_parent"
+                                android:inputType="number"
+                                android:maxLength="10"/>
 
                         </LinearLayout>
 
@@ -500,7 +509,9 @@
                                 android:layout_margin="2dp"
                                 android:background="@color/pureWhite"
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent"/>
+                                android:layout_height="match_parent"
+                                android:inputType="number"
+                                android:maxLength="10"/>
 
                         </LinearLayout>
 
@@ -552,7 +563,9 @@
                                 android:layout_margin="2dp"
                                 android:background="@color/pureWhite"
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent"/>
+                                android:layout_height="match_parent"
+                                android:inputType="number"
+                                android:maxLength="10"/>
 
                         </LinearLayout>
 
@@ -604,7 +617,9 @@
                                 android:layout_margin="2dp"
                                 android:background="@color/pureWhite"
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent"/>
+                                android:layout_height="match_parent"
+                                android:inputType="number"
+                                android:maxLength="10"/>
 
                         </LinearLayout>
 
@@ -708,7 +723,9 @@
                                 android:layout_margin="2dp"
                                 android:background="@color/pureWhite"
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent"/>
+                                android:layout_height="match_parent"
+                                android:inputType="number"
+                                android:maxLength="10"/>
 
                         </LinearLayout>
 
@@ -760,7 +777,9 @@
                                 android:layout_margin="2dp"
                                 android:background="@color/pureWhite"
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent"/>
+                                android:layout_height="match_parent"
+                                android:inputType="number"
+                                android:maxLength="10"/>
 
                         </LinearLayout>
 
@@ -804,6 +823,7 @@
 
 
                                 <Button
+                                    android:id="@+id/btnAddMoreEmail"
                                     android:layout_width="wrap_content"
                                     android:layout_height="match_parent"
                                     android:text="Add More"/>
