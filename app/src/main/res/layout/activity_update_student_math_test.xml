@@ -284,34 +284,6 @@
                                 </LinearLayout>
 
 
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:layout_marginBottom="10dp"
-                                    android:layout_weight="1"
-                                    android:gravity="center"
-                                    android:orientation="horizontal">
-
-
-
-                                    <com.sgstech.studentmathtest.ProgressBar.FloatTextProgressBar
-                                        android:id="@+id/floatTextProgressBar"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="40dp"
-                                        app:backgroundColor="#d8d8d8"
-                                        app:fillColor="#ff0000"
-                                        app:triangleColor="#ff0000"
-                                        app:rectColor="#ff0000"
-                                        app:maxProgress="200"
-                                        app:textColor="#fff"/>
-
-
-
-
-                                </LinearLayout>
-
-
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"

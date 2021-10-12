@@ -41,13 +41,9 @@ public class UpdateStudentMathTestActivity extends AppCompatActivity {
 
     private int intAnswer ;
     private int intResult;
-    private int t = 100;
-    private int percentage ;
 
     private int intTimerProgress;
-    private float floatProgressBarProgress;
     private float floatTimeToSolve;
-    private float floatProgressBar = 0;
 
     private String student_no_global = "";
 
@@ -64,14 +60,8 @@ public class UpdateStudentMathTestActivity extends AppCompatActivity {
 
 
     EditText    etAnswer;
-    SeekBar seekBar;
 
     Button btnSFinalSubmit;
-
-
-    FloatTextProgressBar floatTextProgressBar;
-
-
 
 
     @Override
@@ -115,7 +105,6 @@ public class UpdateStudentMathTestActivity extends AppCompatActivity {
 
         getData();
 
-        floatTextProgressBar = findViewById(R.id.floatTextProgressBar);
 
         txtStudentNo = findViewById(R.id.service_gallery_unit_no);
         checkBoxFinished = findViewById(R.id.checkBoxFinished);
@@ -215,32 +204,8 @@ public class UpdateStudentMathTestActivity extends AppCompatActivity {
                             Log.d("res_p", String.valueOf(intTimerProgress));
                         floatTimeToSolve = Float.parseFloat(strTimeToSolve);
                             Log.d("res_p", String.valueOf(floatTimeToSolve));
-//                        floatProgressBarProgress = (floatProgressBarProgress /100.0f);
-//                            Log.d("res_pm", String.valueOf(floatProgressBarProgress));
-
-//                        percentage = (score * 100/ total);
-
-                        percentage = (intTimerProgress * 100/ intTimerProgress);
 
                         int questionTime = intTimerProgress * 1000;
-
-
-                        floatProgressBarProgress = (float)floatTimeToSolve / (float)t;
-
-                        Log.d("res_pc", String.valueOf(floatProgressBarProgress));
-
-                        System.out.println(floatProgressBarProgress);
-
-                        DecimalFormat df = new DecimalFormat("0.0");
-                        double number = (float) floatProgressBarProgress;
-
-                        System.out.println(df.format(number));
-
-                        Log.d("res_pmf", df.format(number));
-
-                        floatProgressBarProgress = Float.parseFloat(df.format(number));
-
-                        Log.d("res_pmfp", String.valueOf(floatProgressBarProgress));
 
                         if (intTimerProgress > 0) {
                             new CountDownTimer(questionTime, 1000) {
@@ -248,11 +213,6 @@ public class UpdateStudentMathTestActivity extends AppCompatActivity {
 
                                     txtTimeToSolve.setText(String.valueOf(intTimerProgress + " Seconds"));
                                     intTimerProgress--;
-
-                                    floatProgressBar+=floatProgressBarProgress;
-                                    Log.d("res_pmfpa", String.valueOf(floatProgressBar));
-
-                                    floatTextProgressBar.setProgress(floatProgressBar);
 
                                 }
 
@@ -262,13 +222,6 @@ public class UpdateStudentMathTestActivity extends AppCompatActivity {
                             }.start();
                         }
 
-
-//                        intProgress = intProgress*2;
-
-
-                        /**
-                         * Progress Bar-------------------------------------------------------------
-                         */
 
 
 //
