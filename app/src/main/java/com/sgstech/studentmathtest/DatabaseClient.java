@@ -1,6 +1,6 @@
 package com.sgstech.studentmathtest;
 
-import static com.sgstech.studentmathtest.Database.AppDatabase.MIGRATION_0_1;
+import static com.sgstech.studentmathtest.Database.AppDatabase.MIGRATION_1_2;
 
 import android.content.Context;
 
@@ -11,14 +11,6 @@ import com.sgstech.studentmathtest.Database.AppDatabase;
 
 public class DatabaseClient {
 
-    /**
-     *
-     * Developed by : Sujith Jeewantha
-     * email        : sujith@suji-tech.com
-     * Init Date    : 21/06/2021
-     * Updated at   : 17/06/2021
-     *
-     */
 
     private Context mCtx;
     private static DatabaseClient mInstance;
@@ -33,7 +25,7 @@ public class DatabaseClient {
         //MyToDos is the name of the database
         appDatabase = Room.databaseBuilder(mCtx,
                 AppDatabase.class,                "StudentMathTest")
-                .addMigrations(MIGRATION_0_1)
+                .addMigrations(MIGRATION_1_2)
                 .build();
     }
 

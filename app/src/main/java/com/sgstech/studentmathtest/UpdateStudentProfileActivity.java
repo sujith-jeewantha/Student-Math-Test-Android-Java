@@ -54,8 +54,8 @@ public class UpdateStudentProfileActivity extends AppCompatActivity {
 
     public static final int MEDIA_TYPE_IMAGE = 1;
 
-    // Bitmap sampling size
-    public static final int BITMAP_SAMPLE_SIZE = 2;
+    public static final int RESULT_LOAD_IMG = 2;
+
 
     // Gallery directory name to store the images or videos
     public static final String STUDENT_GALLERY_DIRECTORY_NAME = "STUDENT-MATH/PROFILE";
@@ -217,7 +217,9 @@ public class UpdateStudentProfileActivity extends AppCompatActivity {
                                 // do your code
 
 
-                                Toast.makeText(getApplicationContext(),"F", Toast.LENGTH_LONG).show();
+                                Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
+                                photoPickerIntent.setType("image/*");
+                                startActivityForResult(photoPickerIntent, RESULT_LOAD_IMG);
 
 
                                 return true;
@@ -578,6 +580,8 @@ public class UpdateStudentProfileActivity extends AppCompatActivity {
 
     private void updateStudentProfile(final Student student) {
 
+        final String sStudentPic  =  global_Img;
+
         final String sStudentNo  =  editTextStudentNo.getText().toString().trim();
         final String sFirstName  =  editTextFirstName.getText().toString().trim();
         final String sLastName  =  editTextLastName .getText().toString().trim();
@@ -624,12 +628,7 @@ public class UpdateStudentProfileActivity extends AppCompatActivity {
             @Override
             protected Void doInBackground(Void... voids) {
 
-                /**
-                 * Profile image
-                 */
-                if(GLOBAL_IMAGE_NO == "C" ) {
-                    student.setStudent_profile_img(global_Img);
-                }
+                student.setStudent_profile_img(sStudentPic);
 
                 student.setStudent_no(sStudentNo);
                 student.setStudent_first_name(sFirstName);

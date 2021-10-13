@@ -267,10 +267,17 @@
                             </LinearLayout>
 
                             <LinearLayout
-                                android:gravity="end"
+                                android:gravity="left"
                                 android:layout_weight="1"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent">
+
+                                <Button
+                                    android:id="@+id/btnPhoneFromContact_1"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:textSize="10dp"
+                                    android:text="Import Contact"/>
 
                                 <Button
                                     android:id="@+id/btnAddMorePhone"
@@ -332,6 +339,21 @@
 
                             </LinearLayout>
 
+                            <LinearLayout
+                                android:gravity="left"
+                                android:layout_weight="1"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+
+                                <Button
+                                    android:id="@+id/btnPhoneFromContact_2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:textSize="10dp"
+                                    android:text="Import Contact"/>
+
+                            </LinearLayout>
+
 
 
                         </LinearLayout>
@@ -383,6 +405,21 @@
                                     android:text="Phone Number 3 : "
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"/>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:gravity="left"
+                                android:layout_weight="1"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+
+                                <Button
+                                    android:id="@+id/btnPhoneFromContact_3"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:textSize="10dp"
+                                    android:text="Import Contact"/>
 
                             </LinearLayout>
 
@@ -440,6 +477,21 @@
 
                             </LinearLayout>
 
+                            <LinearLayout
+                                android:gravity="left"
+                                android:layout_weight="1"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+
+                                <Button
+                                    android:id="@+id/btnPhoneFromContact_4"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:textSize="10dp"
+                                    android:text="Import Contact"/>
+
+                            </LinearLayout>
+
 
 
                         </LinearLayout>
@@ -491,6 +543,21 @@
                                     android:text="Phone Number 5 : "
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"/>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:gravity="left"
+                                android:layout_weight="1"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+
+                                <Button
+                                    android:id="@+id/btnPhoneFromContact_5"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:textSize="10dp"
+                                    android:text="Import Contact"/>
 
                             </LinearLayout>
 
@@ -548,6 +615,21 @@
 
                             </LinearLayout>
 
+                            <LinearLayout
+                                android:gravity="left"
+                                android:layout_weight="1"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+
+                                <Button
+                                    android:id="@+id/btnPhoneFromContact_6"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:textSize="10dp"
+                                    android:text="Import Contact"/>
+
+                            </LinearLayout>
+
 
 
                         </LinearLayout>
@@ -599,6 +681,21 @@
                                     android:text="Phone Number 7 : "
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"/>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:gravity="left"
+                                android:layout_weight="1"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+
+                                <Button
+                                    android:id="@+id/btnPhoneFromContact_7"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:textSize="10dp"
+                                    android:text="Import Contact"/>
 
                             </LinearLayout>
 
@@ -656,6 +753,21 @@
 
                             </LinearLayout>
 
+                            <LinearLayout
+                                android:gravity="left"
+                                android:layout_weight="1"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+
+                                <Button
+                                    android:id="@+id/btnPhoneFromContact_8"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:textSize="10dp"
+                                    android:text="Import Contact"/>
+
+                            </LinearLayout>
+
 
 
                         </LinearLayout>
@@ -705,6 +817,21 @@
                                     android:text="Phone Number 9 : "
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"/>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:gravity="left"
+                                android:layout_weight="1"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+
+                                <Button
+                                    android:id="@+id/btnPhoneFromContact_9"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:textSize="10dp"
+                                    android:text="Import Contact"/>
 
                             </LinearLayout>
 
@@ -759,6 +886,21 @@
                                     android:text="Phone Number 10 : "
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"/>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:gravity="left"
+                                android:layout_weight="1"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+
+                                <Button
+                                    android:id="@+id/btnPhoneFromContact_10"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:textSize="10dp"
+                                    android:text="Import Contact"/>
 
                             </LinearLayout>
 

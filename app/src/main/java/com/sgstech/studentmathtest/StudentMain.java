@@ -27,7 +27,7 @@ import java.util.TimerTask;
 public class StudentMain extends AppCompatActivity {
 
 
-    LinearLayout btnLinServiceSummary, btnLinServiceGallery ;
+    LinearLayout btnLinServiceSummary, btnLinServiceGallery , btnLinMathTest ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +38,7 @@ public class StudentMain extends AppCompatActivity {
 
         btnLinServiceSummary    = (LinearLayout)findViewById(R.id.btnLinServiceSummary);
         btnLinServiceGallery     = (LinearLayout)findViewById(R.id.btnLinServiceGallery);
+        btnLinMathTest  = (LinearLayout)findViewById(R.id.btnLinMathTest);
 
         btnLinServiceSummary.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,7 +64,7 @@ public class StudentMain extends AppCompatActivity {
             }
         });
 
-        btnLinServiceGallery.setOnClickListener(new View.OnClickListener() {
+        btnLinMathTest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -71,8 +72,32 @@ public class StudentMain extends AppCompatActivity {
 
                     if (CheckNetworkStatus.isNetworkStatusAvialable(getBaseContext())) {
 
-                            Intent intent   = new Intent(getBaseContext(), MainActivity_Student_Math_Test.class);
+                            Intent intent   = new Intent(getBaseContext(), MainActivity_Math_Test_Sub.class);
                             startActivity(intent);
+
+                    } else {
+
+                        Intent intent = new Intent(StudentMain.this, AlertNoInternet.class);
+                        startActivity(intent);
+                    }
+                } catch (Exception e) {
+                    Log.d("errorBtn_Go", e.toString());
+                }
+
+            }
+        });
+
+        btnLinServiceSummary.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                try {
+
+                    if (CheckNetworkStatus.isNetworkStatusAvialable(getBaseContext())) {
+
+                        Intent intent   = new Intent(getBaseContext(), MainActivity_Student_Profile.class);
+                        startActivity(intent);
+
 
                     } else {
 

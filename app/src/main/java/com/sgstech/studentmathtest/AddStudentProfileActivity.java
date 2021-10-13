@@ -1,16 +1,25 @@
 package com.sgstech.studentmathtest;
 
+import static android.Manifest.permission.READ_CONTACTS;
+
 import android.Manifest;
+import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.provider.ContactsContract;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.MenuItem;
@@ -24,6 +33,8 @@ import android.widget.PopupMenu;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import com.bumptech.glide.Glide;
 import com.karumi.dexter.Dexter;
@@ -34,12 +45,14 @@ import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 import com.sgstech.studentmathtest.Database.model.Student;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 
 
-public class AddStudentProfileActivity extends AppCompatActivity {
+public class AddStudentProfileActivity extends AppCompatActivity{
 
     private Manager_Cache managerCacheAddStudentProfile;
 
@@ -56,6 +69,10 @@ public class AddStudentProfileActivity extends AppCompatActivity {
 
     // Bitmap sampling size
     public static final int RESULT_LOAD_IMG = 2;
+
+    public static final int RESULT_CONTACT = 3;
+
+    public static final int PERMISSIONS_REQUEST_READ_CONTACTS = 4;
 
     // Gallery directory name to store the images or videos
     public static final String STUDENT_GALLERY_DIRECTORY_NAME = "STUDENT-MATH/PROFILE";
@@ -105,10 +122,25 @@ public class AddStudentProfileActivity extends AppCompatActivity {
             editTextEmail_10;
 
     ImageView ivProfilePic;
-    Button  btnProfilePic, btnAddMorePhone, btnAddMoreEmail;
+    Button  btnProfilePic,
+            btnAddMorePhone,
+            btnAddMoreEmail,
+
+            btnPhoneFromContact_1,
+            btnPhoneFromContact_2,
+            btnPhoneFromContact_3,
+            btnPhoneFromContact_4,
+            btnPhoneFromContact_5,
+            btnPhoneFromContact_6,
+            btnPhoneFromContact_7,
+            btnPhoneFromContact_8,
+            btnPhoneFromContact_9,
+            btnPhoneFromContact_10;
+
 
     ProgressDialog progressDialog;
 
+    Manager_Permissions managerPermissions = new Manager_Permissions();
 
 
     /**
@@ -147,6 +179,17 @@ public class AddStudentProfileActivity extends AppCompatActivity {
         editTextEmail_8 = findViewById(R.id.enterEmail_eight);
         editTextEmail_9 = findViewById(R.id.enterEmail_nine);
         editTextEmail_10 = findViewById(R.id.enterEmail_ten);
+
+        btnPhoneFromContact_1 = findViewById(R.id.btnPhoneFromContact_1);
+        btnPhoneFromContact_2 = findViewById(R.id.btnPhoneFromContact_2);
+        btnPhoneFromContact_3 = findViewById(R.id.btnPhoneFromContact_3);
+        btnPhoneFromContact_4 = findViewById(R.id.btnPhoneFromContact_4);
+        btnPhoneFromContact_5 = findViewById(R.id.btnPhoneFromContact_5);
+        btnPhoneFromContact_6 = findViewById(R.id.btnPhoneFromContact_6);
+        btnPhoneFromContact_7 = findViewById(R.id.btnPhoneFromContact_7);
+        btnPhoneFromContact_8 = findViewById(R.id.btnPhoneFromContact_8);
+        btnPhoneFromContact_9 = findViewById(R.id.btnPhoneFromContact_9);
+        btnPhoneFromContact_10 = findViewById(R.id.btnPhoneFromContact_10);
 
 
         LinearLayout phoneTwoLayout = (LinearLayout) findViewById(R.id.layoutPhone_2);
@@ -197,7 +240,6 @@ public class AddStudentProfileActivity extends AppCompatActivity {
 
         };
 
-
         phoneTwoLayout.setVisibility(View.GONE);
         phoneThreeLayout.setVisibility(View.GONE);
         phoneFourLayout.setVisibility(View.GONE);
@@ -207,8 +249,6 @@ public class AddStudentProfileActivity extends AppCompatActivity {
         phoneEightLayout.setVisibility(View.GONE);
         phoneNineNLayout.setVisibility(View.GONE);
         phoneTenLayout.setVisibility(View.GONE);
-
-
 
         emailTwoLayout.setVisibility(View.GONE);
         emailThreeLayout.setVisibility(View.GONE);
@@ -279,6 +319,25 @@ public class AddStudentProfileActivity extends AppCompatActivity {
                 });
 
                 popup.show();//showing popup menu
+            }
+        });
+
+        /**
+         *  get contacts
+         */
+
+        btnPhoneFromContact_1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (CameraUtils.checkPermissions(getApplicationContext())) {
+
+                    Intent localIntent = new Intent("android.intent.action.PICK", ContactsContract.Contacts.CONTENT_URI);
+                    startActivityForResult(localIntent, RESULT_CONTACT);
+
+                } else {
+                    requestContactPermission();
+                }
+
             }
         });
 
@@ -355,7 +414,7 @@ public class AddStudentProfileActivity extends AppCompatActivity {
 
     private void saveStudentProfile() {
 
-        final String sStudentPic  =  global_Img;
+         final String sStudentPic  =  global_Img;
 
          final String sStudentNo  =  editTextStudentNo.getText().toString().trim();
          final String sFirstName  =  editTextFirstName.getText().toString().trim();
@@ -553,43 +612,89 @@ public class AddStudentProfileActivity extends AppCompatActivity {
             }
         }
 
+        if(requestCode ==RESULT_LOAD_IMG)
+        {
 
-//        if (resultCode == RESULT_OK) {
-//            try {
-//
-//
-//                final Uri imageUri = data.getData();
-//                final InputStream imageStream = getContentResolver().openInputStream(imageUri);
-//                final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
-//
-//
-//                global_Img = String.valueOf(selectedImage);
-//
-//                Log.d("f_img",global_Img);
-//
-//                /**
-//                 * file path here
-//                 */
-//
-//
-//                Glide.with(this)
-//                        .load(imageUri)
-//                        .circleCrop()
-//                        .into(ivProfilePic);
-//
-//
-////                ivProfilePic.setImageBitmap(selectedImage);
-//
-//            } catch (FileNotFoundException e) {
-//                e.printStackTrace();
-//                Toast.makeText(AddStudentProfileActivity.this, "Something went wrong", Toast.LENGTH_LONG).show();
-//            }
-//
-//        }else {
-//            Toast.makeText(AddStudentProfileActivity.this, "You haven't picked Image",Toast.LENGTH_LONG).show();
-//        }
+            if (resultCode == RESULT_OK) {
+                    try {
+
+                        final Uri imageUri = data.getData();
+                        final InputStream imageStream = getContentResolver().openInputStream(imageUri);
+                        final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
+
+                        global_Img = String.valueOf(selectedImage);
+
+                        Log.d("f_img",global_Img);
+
+                        /**
+                         * file path here
+                         */
+
+                        Glide.with(this)
+                                .load(imageUri)
+                                .circleCrop()
+                                .into(ivProfilePic);
 
 
+        //                ivProfilePic.setImageBitmap(selectedImage);
+
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                        Toast.makeText(AddStudentProfileActivity.this, "Something went wrong", Toast.LENGTH_LONG).show();
+                    }
+
+            }else {
+            Toast.makeText(AddStudentProfileActivity.this, "You haven't picked Image",Toast.LENGTH_LONG).show();
+            }
+
+        }
+
+
+
+
+        if(requestCode == RESULT_CONTACT)
+        {
+            if (resultCode == RESULT_OK) {
+                String str = getPhoneNumber(data.getData());
+                if (str.trim().length() > 0) {
+                    editTextPhone_1.setText(str);
+                    editTextPhone_1.setSelection(editTextPhone_1.getText().length());
+                }
+            } else {
+                Toast.makeText(this,"Phone Number Not Founded ...",Toast.LENGTH_SHORT).show();
+            }
+        }
+
+
+
+
+
+    }
+
+    /**
+     * Get Contact
+     */
+    @SuppressLint("Range")
+    private String getPhoneNumber(Uri paramUri) {
+        String id = "";
+        String no="";
+        Cursor cursor = getContentResolver().query(paramUri, null, null, null, null);
+
+        while(cursor.moveToNext()){
+            id = cursor.getString(cursor.getColumnIndex("_id"));
+            if("1".equalsIgnoreCase(cursor.getString(cursor.getColumnIndex("has_phone_number")))){
+                Cursor cursorNo = getContentResolver().query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null, "contact_id = " + id, null, null);
+                while (cursorNo.moveToNext()) {
+                    if (cursorNo.getInt(cursorNo.getColumnIndex("data2")) == 2){
+                        no = no.concat(cursorNo.getString(cursorNo.getColumnIndex("data1")));
+                        break;
+                    }
+                }
+                cursorNo.close();
+            }
+        }
+        cursor.close();
+        return no;
     }
 
     /**
@@ -709,6 +814,42 @@ public class AddStudentProfileActivity extends AppCompatActivity {
                         token.continuePermissionRequest();
                     }
                 }).check();
+    }
+
+    /**
+     * Requesting Contact Permission
+     */
+    public void requestContactPermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (ContextCompat.checkSelfPermission(this, READ_CONTACTS) != PackageManager.PERMISSION_GRANTED) {
+                if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                        READ_CONTACTS)) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                    builder.setTitle("Read Contacts permission");
+                    builder.setPositiveButton(android.R.string.ok, null);
+                    builder.setMessage("Please enable access to contacts.");
+                    builder.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                        @TargetApi(Build.VERSION_CODES.M)
+                        @Override
+                        public void onDismiss(DialogInterface dialog) {
+                            requestPermissions(
+                                    new String[]
+                                            {READ_CONTACTS}
+                                    , PERMISSIONS_REQUEST_READ_CONTACTS);
+                        }
+                    });
+                    builder.show();
+                } else {
+                    ActivityCompat.requestPermissions(this,
+                            new String[]{READ_CONTACTS},
+                            PERMISSIONS_REQUEST_READ_CONTACTS);
+                }
+            } else {
+//                getPhoneNumber();
+            }
+        } else {
+//            getPhoneNumber();
+        }
     }
 
     /**

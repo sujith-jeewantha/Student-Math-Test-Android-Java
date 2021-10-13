@@ -42,11 +42,7 @@ dependencies {
 
     // for refresh
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.0.0'
-
-
-    //retrofit2 library
-    implementation 'com.squareup.retrofit2:retrofit:2.6.2'
-    implementation 'com.squareup.retrofit2:converter-gson:2.6.2'
+    
 
     //glide
     implementation 'com.github.bumptech.glide:glide:4.11.0'
@@ -76,6 +72,4 @@ dependencies {
     // import volley library
     implementation 'com.android.volley:volley:1.2.0'
 
-    //progress bar
-    implementation "com.github.skydoves:progressview:1.1.2"
 }

@@ -251,6 +251,8 @@
                     </LinearLayout>
 
                 </LinearLayout>
+
+
                 <LinearLayout
                     android:layout_marginTop="20dp"
                     android:orientation="vertical"
@@ -282,12 +284,20 @@
                         </LinearLayout>
 
                         <LinearLayout
-                            android:gravity="end"
+                            android:gravity="left"
                             android:layout_weight="1"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent">
 
                             <Button
+                                android:id="@+id/btnPhoneFromContact_1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:textSize="10dp"
+                                android:text="Import Contact"/>
+
+                            <Button
+                                android:id="@+id/btnAddMorePhone"
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:text="Add More"/>
@@ -307,7 +317,9 @@
                             android:layout_margin="2dp"
                             android:background="@color/pureWhite"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"/>
+                            android:layout_height="match_parent"
+                            android:inputType="number"
+                            android:maxLength="10"/>
 
                     </LinearLayout>
 
@@ -344,6 +356,21 @@
 
                         </LinearLayout>
 
+                        <LinearLayout
+                            android:gravity="left"
+                            android:layout_weight="1"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <Button
+                                android:id="@+id/btnPhoneFromContact_2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:textSize="10dp"
+                                android:text="Import Contact"/>
+
+                        </LinearLayout>
+
 
 
                     </LinearLayout>
@@ -359,7 +386,9 @@
                             android:layout_margin="2dp"
                             android:background="@color/pureWhite"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"/>
+                            android:layout_height="match_parent"
+                            android:inputType="number"
+                            android:maxLength="10"/>
 
                     </LinearLayout>
 
@@ -396,6 +425,21 @@
 
                         </LinearLayout>
 
+                        <LinearLayout
+                            android:gravity="left"
+                            android:layout_weight="1"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <Button
+                                android:id="@+id/btnPhoneFromContact_3"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:textSize="10dp"
+                                android:text="Import Contact"/>
+
+                        </LinearLayout>
+
 
 
                     </LinearLayout>
@@ -411,7 +455,9 @@
                             android:layout_margin="2dp"
                             android:background="@color/pureWhite"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"/>
+                            android:layout_height="match_parent"
+                            android:inputType="number"
+                            android:maxLength="10"/>
 
                     </LinearLayout>
 
@@ -448,6 +494,21 @@
 
                         </LinearLayout>
 
+                        <LinearLayout
+                            android:gravity="left"
+                            android:layout_weight="1"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <Button
+                                android:id="@+id/btnPhoneFromContact_4"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:textSize="10dp"
+                                android:text="Import Contact"/>
+
+                        </LinearLayout>
+
 
 
                     </LinearLayout>
@@ -463,7 +524,9 @@
                             android:layout_margin="2dp"
                             android:background="@color/pureWhite"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"/>
+                            android:layout_height="match_parent"
+                            android:inputType="number"
+                            android:maxLength="10"/>
 
                     </LinearLayout>
 
@@ -500,6 +563,21 @@
 
                         </LinearLayout>
 
+                        <LinearLayout
+                            android:gravity="left"
+                            android:layout_weight="1"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <Button
+                                android:id="@+id/btnPhoneFromContact_5"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:textSize="10dp"
+                                android:text="Import Contact"/>
+
+                        </LinearLayout>
+
 
 
                     </LinearLayout>
@@ -515,7 +593,9 @@
                             android:layout_margin="2dp"
                             android:background="@color/pureWhite"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"/>
+                            android:layout_height="match_parent"
+                            android:inputType="number"
+                            android:maxLength="10"/>
 
                     </LinearLayout>
 
@@ -552,6 +632,21 @@
 
                         </LinearLayout>
 
+                        <LinearLayout
+                            android:gravity="left"
+                            android:layout_weight="1"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <Button
+                                android:id="@+id/btnPhoneFromContact_6"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:textSize="10dp"
+                                android:text="Import Contact"/>
+
+                        </LinearLayout>
+
 
 
                     </LinearLayout>
@@ -567,7 +662,9 @@
                             android:layout_margin="2dp"
                             android:background="@color/pureWhite"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"/>
+                            android:layout_height="match_parent"
+                            android:inputType="number"
+                            android:maxLength="10"/>
 
                     </LinearLayout>
 
@@ -604,6 +701,21 @@
 
                         </LinearLayout>
 
+                        <LinearLayout
+                            android:gravity="left"
+                            android:layout_weight="1"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <Button
+                                android:id="@+id/btnPhoneFromContact_7"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:textSize="10dp"
+                                android:text="Import Contact"/>
+
+                        </LinearLayout>
+
 
 
                     </LinearLayout>
@@ -619,7 +731,9 @@
                             android:layout_margin="2dp"
                             android:background="@color/pureWhite"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"/>
+                            android:layout_height="match_parent"
+                            android:inputType="number"
+                            android:maxLength="10"/>
 
                     </LinearLayout>
 
@@ -653,6 +767,21 @@
                                 android:text="Phone Number 8 : "
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:gravity="left"
+                            android:layout_weight="1"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <Button
+                                android:id="@+id/btnPhoneFromContact_8"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:textSize="10dp"
+                                android:text="Import Contact"/>
 
                         </LinearLayout>
 
@@ -708,6 +837,21 @@
 
                         </LinearLayout>
 
+                        <LinearLayout
+                            android:gravity="left"
+                            android:layout_weight="1"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <Button
+                                android:id="@+id/btnPhoneFromContact_9"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:textSize="10dp"
+                                android:text="Import Contact"/>
+
+                        </LinearLayout>
+
 
 
                     </LinearLayout>
@@ -723,7 +867,9 @@
                             android:layout_margin="2dp"
                             android:background="@color/pureWhite"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"/>
+                            android:layout_height="match_parent"
+                            android:inputType="number"
+                            android:maxLength="10"/>
 
                     </LinearLayout>
 
@@ -760,6 +906,21 @@
 
                         </LinearLayout>
 
+                        <LinearLayout
+                            android:gravity="left"
+                            android:layout_weight="1"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <Button
+                                android:id="@+id/btnPhoneFromContact_10"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:textSize="10dp"
+                                android:text="Import Contact"/>
+
+                        </LinearLayout>
+
 
 
                     </LinearLayout>
@@ -775,7 +936,9 @@
                             android:layout_margin="2dp"
                             android:background="@color/pureWhite"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"/>
+                            android:layout_height="match_parent"
+                            android:inputType="number"
+                            android:maxLength="10"/>
 
                     </LinearLayout>
 
