@@ -72,7 +72,6 @@ public class StudentMain extends AppCompatActivity {
                         startActivity(intent);
                     }
                 } catch (Exception e) {
-                    Log.d("errorBtn_Go", e.toString());
                 }
 
             }

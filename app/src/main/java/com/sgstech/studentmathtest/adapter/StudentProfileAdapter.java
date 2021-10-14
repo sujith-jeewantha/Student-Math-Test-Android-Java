@@ -25,7 +25,6 @@ import java.util.List;
 public class StudentProfileAdapter extends RecyclerView.Adapter<StudentProfileAdapter.StudentProfilesViewHolder> {
 
 
-
     private Context mCtx;
     private List<Student> studentProfileList;
 
@@ -33,7 +32,6 @@ public class StudentProfileAdapter extends RecyclerView.Adapter<StudentProfileAd
         this.mCtx = mCtx;
         this.studentProfileList = studentProfileList;
     }
-
 
     @Override
     public StudentProfilesViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -47,7 +45,6 @@ public class StudentProfileAdapter extends RecyclerView.Adapter<StudentProfileAd
         Student ss = studentProfileList.get(position);
 
         String studentImg = ss.getStudent_profile_img();
-
 
         try
         {
@@ -67,28 +64,9 @@ public class StudentProfileAdapter extends RecyclerView.Adapter<StudentProfileAd
 
         }
 
-
-
-
-
-//        if(!studentImg.equals(""))
-//        {
-//            File file = new File(studentImg);
-//            Uri imageUri = Uri.fromFile(file);
-//
-//            Glide.with(holder.ivProfilePicMin)
-//                    .load(imageUri)
-//                    .into(holder.ivProfilePicMin);
-//        }
-//        else
-//        {
-//            holder.ivProfilePicMin.setImageResource(R.drawable.profile_pic);
-//        }
-
         holder.textView_student_first_name.setText("First Name :"+ss.getStudent_first_name());
         holder.textView_student_last_name.setText("Last Name :"+ss.getStudent_last_name());
         holder.textView_student_no.setText("Student No :"+ss.getStudent_no());
-
 
     }
 

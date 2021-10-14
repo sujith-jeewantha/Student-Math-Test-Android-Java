@@ -45,7 +45,6 @@ import com.karumi.dexter.MultiplePermissionsReport;
 import com.karumi.dexter.PermissionToken;
 import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
-import com.sgstech.studentmathtest.Cache.Manager_Cache;
 import com.sgstech.studentmathtest.Database.model.Student;
 import com.sgstech.studentmathtest.Manager.Manager_Permissions;
 import com.sgstech.studentmathtest.Utills.DatabaseClient;
@@ -60,9 +59,7 @@ import java.util.List;
 
 public class AddStudentProfileActivity extends AppCompatActivity{
 
-    private Manager_Cache managerCacheAddStudentProfile;
 
-    public String GLOBAL_IMAGE_NO = "";
     File image_file_global = null;
 
     // Activity request codes
@@ -475,8 +472,7 @@ public class AddStudentProfileActivity extends AppCompatActivity{
             }
 
             else if (sStudentPic.isEmpty()) {
-//                editTextStudentNo.setError("Student No required");
-//                editTextStudentNo.requestFocus();
+
                 Toast.makeText(getApplicationContext(),"Student Image required", Toast.LENGTH_LONG).show();
                 return;
 
@@ -659,8 +655,6 @@ public class AddStudentProfileActivity extends AppCompatActivity{
                                 .into(ivProfilePic);
 
 
-        //                ivProfilePic.setImageBitmap(selectedImage);
-
                     } catch (FileNotFoundException e) {
                         e.printStackTrace();
                         Toast.makeText(AddStudentProfileActivity.this, "Something went wrong", Toast.LENGTH_LONG).show();
@@ -674,11 +668,10 @@ public class AddStudentProfileActivity extends AppCompatActivity{
 
 
 
-
         if(requestCode == RESULT_CONTACT)
         {
             if (resultCode == RESULT_OK) {
-                // Check for the request code, we might be usign multiple startActivityForResult
+
                 switch (requestCode) {
                     case RESULT_PICK_CONTACT:
                         contactPicked(data);
@@ -703,8 +696,6 @@ public class AddStudentProfileActivity extends AppCompatActivity{
             }
         }
         }
-
-
 
 
 
@@ -777,24 +768,11 @@ public class AddStudentProfileActivity extends AppCompatActivity{
 
 
 
-
-
-
-
-
-
-
-
     /**
      * Display image from gallery
      */
     private void previewCapturedImage() {
         try {
-
-            //changed
-
-            //new step
-
 
             String timeStamp      = getCurrentTimeStamp();
 
@@ -857,8 +835,6 @@ public class AddStudentProfileActivity extends AppCompatActivity{
             /**
              * file path here
              */
-
-//            ivProfilePic.setImageURI(Uri.fromFile(newFile));
 
             Uri imageUri = Uri.fromFile(newFile);
 

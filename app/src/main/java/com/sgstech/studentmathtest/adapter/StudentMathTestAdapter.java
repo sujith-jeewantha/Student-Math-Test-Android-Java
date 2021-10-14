@@ -60,9 +60,6 @@ public class StudentMathTestAdapter extends RecyclerView.Adapter<StudentMathTest
         }
 
 
-
-
-
         holder.textView_student_first_name.setText("First Name :"+ss.getStudent_first_name());
         holder.textView_student_last_name.setText("Last Name :"+ss.getStudent_last_name());
         holder.textView_student_no.setText("Student No :"+ss.getStudent_no());
@@ -103,7 +100,6 @@ public class StudentMathTestAdapter extends RecyclerView.Adapter<StudentMathTest
         public void onClick(View view) {
             Student student = studentList.get(getAdapterPosition());
 
-//            Intent intent = new Intent(mCtx, MathTestMainActivity.class);
             Intent intent = new Intent(mCtx, MainActivity_Math_Test_Sub.class);
             intent.putExtra("studentMathTest", student);
 

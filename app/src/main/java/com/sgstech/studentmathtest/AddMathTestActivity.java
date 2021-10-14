@@ -55,13 +55,10 @@ public class    AddMathTestActivity extends AppCompatActivity {
     private String math_question_api_url = new Manager_API().math_question_api_url;
 
     private String strAnswer, strTxtAnswer;
-    private int intResult;
 
     private int intTimeSpend = 0;
     private int intTimerProgress;
     private float floatTimeToSolve;
-
-    private String student_no_global = "";
 
     int rStudentScore = 0;
 
@@ -76,15 +73,12 @@ public class    AddMathTestActivity extends AppCompatActivity {
             txtOptions ,
             txtTimeToSolve;
 
-    String currentTime, strQuestion, strResult, strTimeToSolve;
+    String currentTime, strResult;
 
     EditText etAnswer;
 
-    Button btnButtonList, btnEndTest , btnSaveMathTest;
+    Button  btnEndTest , btnSaveMathTest;
 
-    private EditText
-            editTextFirstName,
-            editTextLastName;
 
 
     @Override
@@ -95,29 +89,10 @@ public class    AddMathTestActivity extends AppCompatActivity {
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
         txtStudentScore = findViewById(R.id.enterAnswer);
-        editTextFirstName = findViewById(R.id.enter_student_first_name);
-        editTextLastName = findViewById(R.id.enter_student_last_name);
 
         DateFormat df = new SimpleDateFormat("EEE, d MMM yyyy, HH:mm");
         currentTime = df.format(Calendar.getInstance().getTime());
 
-
-        progressDialog            = new ProgressDialog(AddMathTestActivity.this,ProgressDialog.THEME_HOLO_DARK);
-        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        progressDialog.setTitle("Please wait moment...!");
-        progressDialog.setMessage("Retrieve Data From Question server...");
-        progressDialog.setCanceledOnTouchOutside(false);
-        progressDialog.setCancelable(false);
-        progressDialog.setButton(DialogInterface.BUTTON_NEGATIVE, "Cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-                onBackPressed();
-                finish();
-
-            }
-        });
-        progressDialog.show();
 
         layout = (LinearLayout)findViewById(R.id.button_list);
         txtQuestions        = (TextView)findViewById(R.id.txtQuestion);
@@ -191,18 +166,29 @@ public class    AddMathTestActivity extends AppCompatActivity {
         String path = math_question_api_url;
         String url = path;
 
-        //making the progressbar visible
-//        progressBar.setVisibility(View.VISIBLE);
+        progressDialog            = new ProgressDialog(AddMathTestActivity.this,ProgressDialog.THEME_HOLO_DARK);
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDialog.setTitle("Please wait moment...!");
+        progressDialog.setMessage("Retrieve Data From Question server...");
+        progressDialog.setCanceledOnTouchOutside(false);
+        progressDialog.setCancelable(false);
+        progressDialog.setButton(DialogInterface.BUTTON_NEGATIVE, "Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                onBackPressed();
+                finish();
 
-        //creating a string request to send request to the url
+            }
+        });
+        progressDialog.show();
+
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
 
                         Log.d("res", response);
-
-//                        progressBar.setVisibility(View.INVISIBLE);
 
 
                         try {
@@ -218,12 +204,9 @@ public class    AddMathTestActivity extends AppCompatActivity {
                             Log.d("res_s", strTimeToSolve);
 
                             txtQuestions.setText(strQuestion);
-//                            txtResult.setText(strResult);
 
                             intTimerProgress = Integer.parseInt(strTimeToSolve);
-                            Log.d("res_p", String.valueOf(intTimerProgress));
                             floatTimeToSolve = Float.parseFloat(strTimeToSolve);
-                            Log.d("res_p", String.valueOf(floatTimeToSolve));
 
                             int questionTime = intTimerProgress * 1000;
 
@@ -245,29 +228,16 @@ public class    AddMathTestActivity extends AppCompatActivity {
                                 }.start();
                             }
 
-                            //we have the array named hero inside the object
-                            //so here we are getting that json array
                             JSONArray heroArray = obj.getJSONArray("options");
 
                             ArrayList<Object> listdata = new ArrayList<Object>();
 
-                            //Checking whether the JSON array has some value or not
                             if (heroArray != null) {
 
-                                //Iterating JSON array
                                 for (int i=0;i<heroArray.length();i++){
 
-                                    //Adding each element of JSON array into ArrayList
                                     listdata.add(heroArray.get(i));
                                 }
-                            }
-                            //Iterating ArrayList to print each element
-
-                            System.out.println("Each element of ArrayList");
-                            for(int i=0; i<listdata.size(); i++) {
-                                //Printing each element of ArrayList
-                                System.out.println(listdata.get(i));
-                                Log.d("res_arr", String.valueOf(listdata.get(i)));
                             }
 
 
@@ -313,7 +283,6 @@ public class    AddMathTestActivity extends AppCompatActivity {
                                             String fTXT =  strAnswer.replace("Ans. : ", "").trim();
                                             txtResult.setText(fTXT);
                                             Toast.makeText(AddMathTestActivity.this,fTXT, Toast.LENGTH_SHORT).show();
-//                                            saveStudentProfile();
                                         }
                                     });
                                     layout.addView(btn);
@@ -327,27 +296,6 @@ public class    AddMathTestActivity extends AppCompatActivity {
                           */
 
 
-                            //now looping through all the elements of the json array
-                            for (int i = 0; i < heroArray.length(); i++) {
-                                //getting the json object of the particular index inside the array
-                                JSONObject heroObject = heroArray.getJSONObject(i);
-
-                                Log.d("res_sro", String.valueOf(heroObject));
-
-                                //creating a hero object and giving them the values from json object
-//                                Hero hero = new Hero(heroObject.getString("name"), heroObject.getString("imageurl"));
-
-                                //adding the hero to herolist
-//                                heroList.add(hero);
-                            }
-
-
-
-                            //creating custom adapter object
-//                            ListViewAdapter adapter = new ListViewAdapter(heroList, getApplicationContext());
-
-                            //adding the adapter to listview
-//                            listView.setAdapter(adapter);
 
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -365,41 +313,15 @@ public class    AddMathTestActivity extends AppCompatActivity {
 
         progressDialog.cancel();
 
-        //creating a request queue
         RequestQueue requestQueue = Volley.newRequestQueue(this);
 
-        //adding the string request to request queue
         requestQueue.add(stringRequest);
     }
 
     private void saveStudentProfile() {
 
-
-
-
-         //String stuScore =  txtStudentScore.getText().toString().trim();
-//        sStudentScore = Integer.parseInt(stuScore);
-
         String sStudentScore = String.valueOf(rStudentScore);
         String sTimerProgress = String.valueOf(intTimeSpend);
-
-
-//        try {
-//            if (sStudentScore < 0) {
-//                txtStudentScore.setError("test No required");
-//                txtStudentScore.requestFocus();
-//                return;
-//
-//            }
-//
-//
-//
-//        }catch (Exception e)
-//        {
-//            Toast.makeText(getApplicationContext(),"Student No required", Toast.LENGTH_LONG).show();
-//        }
-
-
 
         class SaveStudentProfile extends AsyncTask<Void, Void, Void> {
 
@@ -434,31 +356,8 @@ public class    AddMathTestActivity extends AppCompatActivity {
 
     private void loadAnotherTaskStudentProfile() {
 
-
-
-        //String stuScore =  txtStudentScore.getText().toString().trim();
-//        sStudentScore = Integer.parseInt(stuScore);
-
         String sStudentScore = String.valueOf(rStudentScore);
         String sTimerProgress = String.valueOf(intTimeSpend);
-
-
-//        try {
-//            if (sStudentScore < 0) {
-//                txtStudentScore.setError("test No required");
-//                txtStudentScore.requestFocus();
-//                return;
-//
-//            }
-//
-//
-//
-//        }catch (Exception e)
-//        {
-//            Toast.makeText(getApplicationContext(),"Student No required", Toast.LENGTH_LONG).show();
-//        }
-
-
 
         class loadAnotherTaskStudentProfile extends AsyncTask<Void, Void, Void> {
 
@@ -467,9 +366,9 @@ public class    AddMathTestActivity extends AppCompatActivity {
 
                 MathTest mathTest = new MathTest();
 
-                mathTest.setScores(String.valueOf(sStudentScore));
+                mathTest.setScores(sStudentScore);
                 mathTest.setTime_of_beginning(currentTime);
-                mathTest.setTotal_time_of_the_test(String.valueOf(sTimerProgress) + " Seconds");
+                mathTest.setTotal_time_of_the_test(sTimerProgress + " Seconds");
 
                 //adding to database
                 DatabaseClient.getInstance(getApplicationContext()).getAppDatabase()

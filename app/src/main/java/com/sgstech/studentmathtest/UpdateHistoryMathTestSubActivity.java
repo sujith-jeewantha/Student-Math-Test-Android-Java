@@ -1,29 +1,22 @@
 package com.sgstech.studentmathtest;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.sgstech.studentmathtest.Database.model.MathTest;
-import com.sgstech.studentmathtest.Database.model.Student;
-import com.sgstech.studentmathtest.Utills.DatabaseClient;
 
 public class UpdateHistoryMathTestSubActivity extends AppCompatActivity {
 
 
     private TextView
-            tvStudentNo,
-            tvFirstName,
-            tvLastName;
-
+            tvScore,
+            tvBeginTime,
+            tvTotalTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,11 +25,9 @@ public class UpdateHistoryMathTestSubActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
-
-        tvStudentNo = findViewById(R.id.student_u_no);
-        tvFirstName = findViewById(R.id.enter_student_first_name);
-        tvLastName = findViewById(R.id.enter_student_last_name);
-
+        tvScore = findViewById(R.id.txtScore);
+        tvBeginTime = findViewById(R.id.txtBeginTime);
+        tvTotalTime = findViewById(R.id.txtTotalTime);
 
         final MathTest mathTest = (MathTest) getIntent().getSerializableExtra("mathTest");
 
@@ -53,8 +44,6 @@ public class UpdateHistoryMathTestSubActivity extends AppCompatActivity {
 
     }
 
-
-
     @Override
     public void onBackPressed() {
         finish();
@@ -63,20 +52,13 @@ public class UpdateHistoryMathTestSubActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-
-
-
     private void loadStudentProfile(MathTest mathTest) {
 
-        tvStudentNo.setText(mathTest.getScores());
-        tvFirstName.setText(mathTest.getTime_of_beginning());
-        tvLastName.setText(mathTest.getTotal_time_of_the_test());
-
+        tvScore.setText(mathTest.getScores());
+        tvBeginTime.setText(mathTest.getTime_of_beginning());
+        tvTotalTime.setText(mathTest.getTotal_time_of_the_test());
 
     }
-
-
-
 
 
 }

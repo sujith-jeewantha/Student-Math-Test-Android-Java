@@ -40,8 +40,6 @@ public class MainActivity_Math_Test_Sub extends AppCompatActivity {
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
 
-        final MathTest mathTest = (MathTest) getIntent().getSerializableExtra("mathTest");
-
 
         /**
          * for check db-----------------------------------------------------------------------------
@@ -76,8 +74,6 @@ public class MainActivity_Math_Test_Sub extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-
 
         getServiceGallerys();
 

@@ -64,9 +64,6 @@ public class UpdateStudentProfileActivity extends AppCompatActivity {
 
     private static String imageStoragePath;
 
-    private String noImageText = "NOIMG";
-    private String sChecklistImg;
-
     private int targetHeight = 100;
     private int targetWidth = 130;
 
@@ -162,7 +159,6 @@ public class UpdateStudentProfileActivity extends AppCompatActivity {
         editTextEmailNine = findViewById(R.id.enterEmail_nine);
 
 
-
         phoneTwoLayout = (LinearLayout) findViewById(R.id.layoutPhone_2);
         phoneThreeLayout = (LinearLayout) findViewById(R.id.layoutPhone_3);
         phoneFourLayout = (LinearLayout) findViewById(R.id.layoutPhone_4);
@@ -244,18 +240,11 @@ public class UpdateStudentProfileActivity extends AppCompatActivity {
 
 
 
-
         final Student student = (Student) getIntent().getSerializableExtra("studentProfile");
 
         loadStudentProfile(student);
 
 
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////
-
-        /**
-         *  Camera init over
-         */
 
         findViewById(R.id.button_update).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -306,25 +295,7 @@ public class UpdateStudentProfileActivity extends AppCompatActivity {
     private void loadStudentProfile(Student student) {
 
 
-
         String studentImg = student.getStudent_profile_img();
-
-//        this.sChecklistImg = studentImg;
-//        if (studentImg.equals(this.noImageText)) {
-//            imageView = (ImageView) findViewById(R.id.ivProfile);
-//            this.ivProfilePic = imageView;
-//            imageView.setImageDrawable(getResources().getDrawable(R.drawable.profile_pic));
-//        } else {
-//            imgFile = new File(this.sChecklistImg);
-//            if (imgFile.exists()) {
-//                this.ivProfilePic = (ImageView) findViewById(R.id.ivProfile);
-//                Picasso.get().load(imgFile).resize(this.targetWidth, this.targetHeight).into(this.ivProfilePic);
-//            } else {
-////                imageView2 = (ImageView) findViewById(R.id.ivImgSChecklistU);
-////                this.ivProfilePic = imageView2;
-////                imageView2.setImageDrawable(getResources().getDrawable(R.drawable.not_complete));
-//            }
-//        }
 
 
         try {
@@ -343,8 +314,6 @@ public class UpdateStudentProfileActivity extends AppCompatActivity {
         {
 
         }
-
-
 
 
         editTextStudentNo.setText(student.getStudent_no());

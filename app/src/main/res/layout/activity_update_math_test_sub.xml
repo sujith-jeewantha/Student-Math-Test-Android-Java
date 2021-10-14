@@ -87,7 +87,7 @@
                         android:layout_height="match_parent">
 
                         <TextView
-                            android:id="@+id/student_u_no"
+                            android:id="@+id/txtScore"
                             android:textSize="20sp"
                             android:textColor="@color/white"
                             android:layout_width="match_parent"
@@ -131,7 +131,7 @@
                         android:layout_height="match_parent">
 
                         <TextView
-                            android:id="@+id/enter_student_first_name"
+                            android:id="@+id/txtBeginTime"
                             android:textSize="20sp"
                             android:textColor="@color/white"
                             android:layout_width="match_parent"
@@ -175,7 +175,7 @@
                         android:layout_height="match_parent">
 
                         <TextView
-                            android:id="@+id/enter_student_last_name"
+                            android:id="@+id/txtTotalTime"
                             android:textSize="20sp"
                             android:textColor="@color/white"
                             android:layout_width="match_parent"

@@ -23,15 +23,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-
 public class MainActivity_Student_Math_Test extends AppCompatActivity {
-
-
-    private ArrayList<Uri> arrayList;
 
     SwipeRefreshLayout pullToRefresh;
     private RecyclerView recyclerView;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,31 +46,20 @@ public class MainActivity_Student_Math_Test extends AppCompatActivity {
          */
 
 
-
         pullToRefresh = (SwipeRefreshLayout) findViewById(R.id.pullToRefresh);
         pullToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 refreshContent(); // your code
-                //pullToRefresh.setRefreshing(false);
             }
         });
-
-
-
 
         recyclerView = findViewById(R.id.recyclerview_tasks);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-
-
-
-
         getServiceGallerys();
 
-
     }
-
 
     private void refreshContent(){
 
@@ -121,7 +105,6 @@ public class MainActivity_Student_Math_Test extends AppCompatActivity {
         GetServiceGallerys gt = new GetServiceGallerys();
         gt.execute();
     }
-
 
 
 }
