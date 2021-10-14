@@ -27,21 +27,9 @@ import java.util.List;
 public class MainActivity_Math_Test_Sub extends AppCompatActivity {
 
 
-    private String serviceRegion = "";
-    private String service_site_id = "";
-    private String service_site_name = "";
-
-
-
     SwipeRefreshLayout pullToRefresh;
     private FloatingActionButton buttonAddServiceSummary;
     private RecyclerView recyclerView;
-
-    int k=1;
-    int count =0;
-    ProgressDialog progressDialog;
-    File image_file_global = null;
-    Button btnUploadImage, btnServiceBackToHome;
 
 
     @Override
@@ -65,40 +53,16 @@ public class MainActivity_Math_Test_Sub extends AppCompatActivity {
          * db check over----------------------------------------------------------------------------
          */
 
-        /**
-         * retrieve cache data----------------------------------------------------------------------
-         */
 
-        /**
-         * retrieve cache data over-----------------------------------------------------------------
-         */
 
         pullToRefresh = (SwipeRefreshLayout) findViewById(R.id.pullToRefresh);
         pullToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-//                serviceRegion       = managerCacheUpdateServiceSummary.getServiceRegionName();
-//                service_site_id     = managerCacheUpdateServiceSummary.getServiceSiteID();
-//                service_site_name   = managerCacheUpdateServiceSummary.getServiceSiteName();
-//                updateServiceSummary(service);
                 refreshContent(); // your code
 
-                //pullToRefresh.setRefreshing(false);
             }
         });
-
-        //////////////////////////////////
-
-        //delete database
-
-//        DatabaseClient.getInstance(getApplicationContext()).getAppDatabase()
-//                .serviceGalleryDao()
-//                .delete();
-
-        //////////////////////////////////
-
-//        btnUploadImage          = (Button)findViewById(R.id.button_upload_service_gallery);
-        btnServiceBackToHome    = (Button)findViewById(R.id.button_back_service_main);
 
 
         recyclerView = findViewById(R.id.recyclerview_tasks);
@@ -113,20 +77,19 @@ public class MainActivity_Math_Test_Sub extends AppCompatActivity {
             }
         });
 
-        btnServiceBackToHome.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                finish();
-//                Intent intent = new Intent(getApplicationContext(), MathTestMainActivity.class);
-//                startActivity(intent);
-            }
-        });
+
 
         getServiceGallerys();
 
     }
 
-
+    @Override
+    public void onBackPressed() {
+        finish();
+        Intent intent = new Intent(getApplicationContext(), MainActivity_Student_Math_Test.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+    }
 
     private void refreshContent(){
 
@@ -140,42 +103,6 @@ public class MainActivity_Math_Test_Sub extends AppCompatActivity {
 
     }
 
-    private void updateServiceSummary(final MathTest mathTest) {
-
-        final String sRegion = serviceRegion;
-        final String sSiteId = service_site_id;
-        final String sSiteName = service_site_name;
-
-
-        class UpdateServiceSummary extends AsyncTask<Void, Void, Void> {
-
-            @Override
-            protected Void doInBackground(Void... voids) {
-
-                DatabaseClient.getInstance(getApplicationContext()).getAppDatabase()
-                        .mathTestDao()
-                        .update(mathTest);
-                return null;
-            }
-
-            @Override
-            protected void onPostExecute(Void aVoid) {
-                super.onPostExecute(aVoid);
-                Toast.makeText(getApplicationContext(), "Updated", Toast.LENGTH_LONG).show();
-//                finish();
-//                startActivity(new Intent(MainActivity_Service_Summary.this, MainActivity_Service_Summary.class));
-            }
-        }
-
-        UpdateServiceSummary uss = new UpdateServiceSummary();
-        uss.execute();
-    }
-
-//    @Override
-//    public void onBackPressed() {
-//        finish();
-//        startActivity(getIntent());
-//    }
 
     private void getServiceGallerys() {
 
@@ -201,13 +128,6 @@ public class MainActivity_Math_Test_Sub extends AppCompatActivity {
 
         GetServiceGallerys gt = new GetServiceGallerys();
         gt.execute();
-    }
-
-    public String getCurrentTimeStamp()
-    {
-        Long tsLong     = System.currentTimeMillis()/1000;
-        String ts       = tsLong.toString();
-        return ts;
     }
 
 }

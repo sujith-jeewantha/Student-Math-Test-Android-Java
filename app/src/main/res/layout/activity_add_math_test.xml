@@ -311,6 +311,13 @@
                                     android:layout_weight="1"
                                     android:gravity="center">
 
+                                    <TextView
+                                        android:id="@+id/txtResult"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:text="Select Answer"
+                                        android:textSize="18sp"/>
+
                                     <EditText
                                         android:id="@+id/enterAnswer"
                                         android:layout_width="match_parent"
@@ -324,11 +331,7 @@
                             </LinearLayout>
 
 
-                            <TextView
-                                android:id="@+id/txtResult"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:text="sample" />
+
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -343,39 +346,17 @@
                                 <HorizontalScrollView
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent">
+
                                     <LinearLayout
-                                        android:orientation="horizontal"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="match_parent"
-                                        android:layout_marginTop="10dp">
-                                        <Button android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:text="Button One" />
-                                        <Button android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:text="Button Two" />
-                                        <Button android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:text="Button Three" />
-                                        <Button android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:text="Button Four" />
-                                        <Button android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:text="Button Five" />
-                                        <Button android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:text="Button Six" />
-                                        <Button android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:text="Button Seven" />
-                                        <Button android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:text="Button Eight" />
-                                        <Button android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:text="Button Nine" />
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="55dp"
+                                        android:orientation="vertical"
+                                        android:id="@+id/button_list"
+                                        >
+
                                     </LinearLayout>
+
                                 </HorizontalScrollView>
 
 
@@ -417,6 +398,8 @@
             android:background="@drawable/button_final_circle_red"
             android:text="END TEST"
             android:textAllCaps="true"/>
+
+
 
     </LinearLayout>
 

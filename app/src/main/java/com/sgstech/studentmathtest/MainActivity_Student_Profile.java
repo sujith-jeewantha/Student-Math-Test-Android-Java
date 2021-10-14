@@ -176,11 +176,13 @@ public class MainActivity_Student_Profile extends AppCompatActivity {
         uss.execute();
     }
 
-//    @Override
-//    public void onBackPressed() {
-//        finish();
-//        startActivity(getIntent());
-//    }
+    @Override
+    public void onBackPressed() {
+        finish();
+        Intent intent = new Intent(getApplicationContext(), StudentMain.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+    }
 
     private void getServiceGallerys() {
 

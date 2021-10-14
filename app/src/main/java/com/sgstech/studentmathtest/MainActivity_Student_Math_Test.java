@@ -27,15 +27,10 @@ import java.util.List;
 public class MainActivity_Student_Math_Test extends AppCompatActivity {
 
 
-
     private ArrayList<Uri> arrayList;
-
 
     SwipeRefreshLayout pullToRefresh;
     private RecyclerView recyclerView;
-
-
-    Button btnServiceBackToHome;
 
 
     @Override
@@ -67,21 +62,13 @@ public class MainActivity_Student_Math_Test extends AppCompatActivity {
         });
 
 
-        btnServiceBackToHome    = (Button)findViewById(R.id.button_back_service_main);
 
 
         recyclerView = findViewById(R.id.recyclerview_tasks);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
 
-        btnServiceBackToHome.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-                Intent intent = new Intent(getApplicationContext(), StudentMain.class);
-                startActivity(intent);
-            }
-        });
+
 
 
         getServiceGallerys();
@@ -102,11 +89,13 @@ public class MainActivity_Student_Math_Test extends AppCompatActivity {
 
     }
 
-//    @Override
-//    public void onBackPressed() {
-//        finish();
-//        startActivity(getIntent());
-//    }
+    @Override
+    public void onBackPressed() {
+        finish();
+        Intent intent = new Intent(getApplicationContext(), StudentMain.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+    }
 
     private void getServiceGallerys() {
         class GetServiceGallerys extends AsyncTask<Void, Void, List<Student>> {

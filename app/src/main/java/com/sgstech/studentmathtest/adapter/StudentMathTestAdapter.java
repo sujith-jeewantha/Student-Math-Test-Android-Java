@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -41,14 +42,26 @@ public class StudentMathTestAdapter extends RecyclerView.Adapter<StudentMathTest
 
         String studentImg = ss.getStudent_profile_img();
 
+        try
+        {
+            if (!studentImg.equals(""))
+            {
+                File file = new File(studentImg);
+                Uri imageUri = Uri.fromFile(file);
 
-        File file = new File(studentImg);
-        Uri imageUri = Uri.fromFile(file);
+                Glide.with(holder.ivProfilePicMin)
+                        .load(imageUri)
+                        .circleCrop()
+                        .into(holder.ivProfilePicMin);
+            }
+        }catch (Exception e)
+        {
+            Toast.makeText(mCtx.getApplicationContext(), "Something wrong", Toast.LENGTH_LONG).show();
+        }
 
-        Glide.with(holder.ivProfilePicMin)
-                .load(imageUri)
-                .circleCrop()
-                .into(holder.ivProfilePicMin);
+
+
+
 
         holder.textView_student_first_name.setText("First Name :"+ss.getStudent_first_name());
         holder.textView_student_last_name.setText("Last Name :"+ss.getStudent_last_name());

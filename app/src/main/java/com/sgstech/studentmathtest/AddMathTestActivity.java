@@ -7,11 +7,14 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
@@ -35,6 +38,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.lang.reflect.Array;
 import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
@@ -46,11 +50,11 @@ import java.util.List;
 import java.util.Map;
 
 
-public class AddMathTestActivity extends AppCompatActivity {
+public class    AddMathTestActivity extends AppCompatActivity {
 
     private String math_question_api_url = new Manager_API().math_question_api_url;
 
-    private String strAnswer;
+    private String strAnswer, strTxtAnswer;
     private int intResult;
 
     private int intTimeSpend = 0;
@@ -63,9 +67,10 @@ public class AddMathTestActivity extends AppCompatActivity {
 
     ProgressDialog progressDialog;
 
+    LinearLayout layout;
+
     TextView
             txtStudentScore,
-            txtQuestionsQty,
             txtQuestions ,
             txtResult ,
             txtOptions ,
@@ -75,7 +80,7 @@ public class AddMathTestActivity extends AppCompatActivity {
 
     EditText etAnswer;
 
-    Button btnSFinalSubmit, btnEndTest;
+    Button btnButtonList, btnEndTest , btnSaveMathTest;
 
     private EditText
             editTextFirstName,
@@ -114,7 +119,7 @@ public class AddMathTestActivity extends AppCompatActivity {
         });
         progressDialog.show();
 
-        txtQuestionsQty     = (TextView)findViewById(R.id.txtQuestionQty);
+        layout = (LinearLayout)findViewById(R.id.button_list);
         txtQuestions        = (TextView)findViewById(R.id.txtQuestion);
         txtResult           = (TextView)findViewById(R.id.txtResult);
         txtOptions          = (TextView)findViewById(R.id.txtOptions);
@@ -122,21 +127,22 @@ public class AddMathTestActivity extends AppCompatActivity {
 
         etAnswer = (EditText) findViewById(R.id.enterAnswer);
 
-        btnSFinalSubmit          = (Button)findViewById(R.id.btn_submit_ans);
+        btnSaveMathTest =   (Button) findViewById(R.id.button_save_math_test);
         btnEndTest          = (Button)findViewById(R.id.button_end_test);
 
         loadData();
 
 
-        findViewById(R.id.button_save_math_test).setOnClickListener(new View.OnClickListener() {
+        btnSaveMathTest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 try {
 
                     strAnswer =   etAnswer.getText().toString().trim();
+                    strTxtAnswer = txtResult.getText().toString().trim();
 
-                    if(strAnswer.equals(strResult))
+                    if((strAnswer.equals(strResult)) || (strTxtAnswer.equals(strResult)))
                     {
                         rStudentScore = 10;
                     }
@@ -212,7 +218,7 @@ public class AddMathTestActivity extends AppCompatActivity {
                             Log.d("res_s", strTimeToSolve);
 
                             txtQuestions.setText(strQuestion);
-                            txtResult.setText(strResult);
+//                            txtResult.setText(strResult);
 
                             intTimerProgress = Integer.parseInt(strTimeToSolve);
                             Log.d("res_p", String.valueOf(intTimerProgress));
@@ -230,7 +236,6 @@ public class AddMathTestActivity extends AppCompatActivity {
 
                                         intTimeSpend++;
 
-
                                     }
 
                                     public void onFinish() {
@@ -244,16 +249,83 @@ public class AddMathTestActivity extends AppCompatActivity {
                             //so here we are getting that json array
                             JSONArray heroArray = obj.getJSONArray("options");
 
+                            ArrayList<Object> listdata = new ArrayList<Object>();
+
+                            //Checking whether the JSON array has some value or not
+                            if (heroArray != null) {
+
+                                //Iterating JSON array
+                                for (int i=0;i<heroArray.length();i++){
+
+                                    //Adding each element of JSON array into ArrayList
+                                    listdata.add(heroArray.get(i));
+                                }
+                            }
+                            //Iterating ArrayList to print each element
+
+                            System.out.println("Each element of ArrayList");
+                            for(int i=0; i<listdata.size(); i++) {
+                                //Printing each element of ArrayList
+                                System.out.println(listdata.get(i));
+                                Log.d("res_arr", String.valueOf(listdata.get(i)));
+                            }
+
+
+
+
+                        /**
+                         * Button generate-------------------------------------------------
+                         */
+
                             if(heroArray.length() <= 0)
                             {
                                 etAnswer.setVisibility(View.VISIBLE);
+                                btnSaveMathTest.setVisibility(View.GONE);
+                                txtResult.setVisibility(View.GONE);
                             }
                             else
                             {
                                 etAnswer.setVisibility(View.GONE);
+
+                                txtResult.setVisibility(View.VISIBLE);
+
+
+                                for(int i=0;i<heroArray.length();i++)
+                                {
+
+                                    listdata.add(heroArray.get(i));
+
+
+                                    Button btn = new Button(AddMathTestActivity.this);
+                                    LinearLayout.LayoutParams tr = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                                    layout.setWeightSum(12.0f);
+                                    layout.setOrientation(LinearLayout.VERTICAL);
+                                    tr.weight = 0;
+                                    btn.setLayoutParams(tr);
+                                    btn.setHeight(150);
+
+                                    btn.setWidth(150);
+                                    btn.setText("Ans. : " + listdata.get(i));
+                                    btn.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
+                                            strAnswer = btn.getText().toString().toString();
+                                            String fTXT =  strAnswer.replace("Ans. : ", "").trim();
+                                            txtResult.setText(fTXT);
+                                            Toast.makeText(AddMathTestActivity.this,fTXT, Toast.LENGTH_SHORT).show();
+//                                            saveStudentProfile();
+                                        }
+                                    });
+                                    layout.addView(btn);
+
+                                }
+
                             }
 
-                            Log.d("res_sr", String.valueOf(heroArray));
+                         /**
+                          * Button Generate-------------------------------------------------
+                          */
+
 
                             //now looping through all the elements of the json array
                             for (int i = 0; i < heroArray.length(); i++) {

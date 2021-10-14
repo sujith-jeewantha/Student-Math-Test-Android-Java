@@ -376,8 +376,6 @@ public class AddStudentProfileActivity extends AppCompatActivity{
                 {
                     e.printStackTrace();
                     Toast.makeText(getApplicationContext(),"Student Image required", Toast.LENGTH_LONG).show();
-                    Intent intent       = new Intent(getBaseContext(), AddStudentProfileActivity.class);
-                    startActivity(intent);
 
                 }
 
@@ -427,6 +425,13 @@ public class AddStudentProfileActivity extends AppCompatActivity{
     }
 
 
+    @Override
+    public void onBackPressed() {
+        finish();
+        Intent intent = new Intent(getApplicationContext(), MainActivity_Student_Profile.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+    }
 
 
     private void saveStudentProfile() {

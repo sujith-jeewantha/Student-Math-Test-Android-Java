@@ -296,7 +296,8 @@ public class UpdateStudentProfileActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         finish();
-        Intent intent = new Intent(UpdateStudentProfileActivity.this, MainActivity_Student_Profile.class);
+        Intent intent = new Intent(getApplicationContext(), MainActivity_Student_Profile.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
 
