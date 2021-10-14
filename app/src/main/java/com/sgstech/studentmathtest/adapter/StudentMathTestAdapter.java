@@ -24,6 +24,7 @@ public class StudentMathTestAdapter extends RecyclerView.Adapter<StudentMathTest
 
     private Context mCtx;
     private List<Student> studentList;
+    private String studentNo;
 
     public StudentMathTestAdapter(Context mCtx, List<Student> studentList) {
         this.mCtx = mCtx;
@@ -41,6 +42,8 @@ public class StudentMathTestAdapter extends RecyclerView.Adapter<StudentMathTest
         Student ss = studentList.get(position);
 
         String studentImg = ss.getStudent_profile_img();
+
+        studentNo = ss.getStudent_no();
 
         try
         {
@@ -102,6 +105,7 @@ public class StudentMathTestAdapter extends RecyclerView.Adapter<StudentMathTest
 
             Intent intent = new Intent(mCtx, MainActivity_Math_Test_Sub.class);
             intent.putExtra("studentMathTest", student);
+            intent.putExtra("student_no",studentNo);
 
             mCtx.startActivity(intent);
         }

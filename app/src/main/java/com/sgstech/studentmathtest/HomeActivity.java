@@ -13,8 +13,6 @@ public class HomeActivity extends AppCompatActivity {
 
     Button btnGetStart;
 
-    String  user_id_global , user_email_global;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,8 +20,6 @@ public class HomeActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
-        user_id_global          = getIntent().getStringExtra("user_id");
-        user_email_global       = getIntent().getStringExtra("user_email");
 
         btnGetStart = (Button) findViewById(R.id.btnGetStart);
 
@@ -31,8 +27,6 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent       = new Intent(getBaseContext(), StudentMain.class);
-                intent.putExtra("user_id",user_id_global);
-                intent.putExtra("user_email",user_email_global);
                 startActivity(intent);
             }
         });

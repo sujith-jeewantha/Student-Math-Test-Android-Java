@@ -362,7 +362,7 @@ public class AddStudentProfileActivity extends AppCompatActivity{
                 try {
                     if(global_Img.isEmpty())
                     {
-                        Toast.makeText(getApplicationContext(),"Student Image required", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(),"Student Image required", Toast.LENGTH_SHORT).show();
                     }
                     else
                     {
@@ -372,7 +372,7 @@ public class AddStudentProfileActivity extends AppCompatActivity{
                 catch (Exception e)
                 {
                     e.printStackTrace();
-                    Toast.makeText(getApplicationContext(),"Student Image required", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(),"Student Image required", Toast.LENGTH_SHORT).show();
 
                 }
 
@@ -473,7 +473,7 @@ public class AddStudentProfileActivity extends AppCompatActivity{
 
             else if (sStudentPic.isEmpty()) {
 
-                Toast.makeText(getApplicationContext(),"Student Image required", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(),"Student Image required", Toast.LENGTH_SHORT).show();
                 return;
 
             }
@@ -481,7 +481,7 @@ public class AddStudentProfileActivity extends AppCompatActivity{
 
         }catch (Exception e)
         {
-            Toast.makeText(getApplicationContext(),"Student No required", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(),"Student No required", Toast.LENGTH_SHORT).show();
         }
 
 
@@ -546,7 +546,7 @@ public class AddStudentProfileActivity extends AppCompatActivity{
                 super.onPostExecute(aVoid);
                 finish();
                 startActivity(new Intent(getApplicationContext(), MainActivity_Student_Profile.class));
-                Toast.makeText(getApplicationContext(), "Saved", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "Saved", Toast.LENGTH_SHORT).show();
             }
         }
 
@@ -657,11 +657,11 @@ public class AddStudentProfileActivity extends AppCompatActivity{
 
                     } catch (FileNotFoundException e) {
                         e.printStackTrace();
-                        Toast.makeText(AddStudentProfileActivity.this, "Something went wrong", Toast.LENGTH_LONG).show();
+                        Toast.makeText(AddStudentProfileActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show();
                     }
 
             }else {
-            Toast.makeText(AddStudentProfileActivity.this, "You haven't picked Image",Toast.LENGTH_LONG).show();
+            Toast.makeText(AddStudentProfileActivity.this, "You haven't picked Image",Toast.LENGTH_SHORT).show();
             }
 
         }
@@ -690,7 +690,7 @@ public class AddStudentProfileActivity extends AppCompatActivity{
                     Cursor numbers = getContentResolver().query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null, ContactsContract.CommonDataKinds.Phone.CONTACT_ID + " = " + contactId, null, null);
                     while (numbers.moveToNext()) {
                         num = numbers.getString(numbers.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
-                        Toast.makeText(AddStudentProfileActivity.this, "Number=" + num, Toast.LENGTH_LONG).show();
+                        Toast.makeText(AddStudentProfileActivity.this, "Number=" + num, Toast.LENGTH_SHORT).show();
                     }
                 }
             }
@@ -937,7 +937,7 @@ public class AddStudentProfileActivity extends AppCompatActivity{
         }else{
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 if (shouldShowRequestPermissionRationale(Manifest.permission.READ_CONTACTS)) {
-                    Toast.makeText(AddStudentProfileActivity.this, "Read contacts permission is required to function app correctly", Toast.LENGTH_LONG).show();
+                    Toast.makeText(AddStudentProfileActivity.this, "Read contacts permission is required to function app correctly", Toast.LENGTH_SHORT).show();
                 }else {
                     ActivityCompat.requestPermissions(AddStudentProfileActivity.this,
                             new String[]{Manifest.permission.READ_CONTACTS},
@@ -952,7 +952,7 @@ public class AddStudentProfileActivity extends AppCompatActivity{
     private boolean checkPermission(){
         if (ActivityCompat.checkSelfPermission(AddStudentProfileActivity.this, READ_CONTACTS) != PackageManager.PERMISSION_GRANTED) {
             if (ActivityCompat.shouldShowRequestPermissionRationale(AddStudentProfileActivity.this, READ_CONTACTS)) {
-                Toast.makeText(AddStudentProfileActivity.this, "Contact read permission needed. Please allow in App Settings for additional functionality.", Toast.LENGTH_LONG).show();
+                Toast.makeText(AddStudentProfileActivity.this, "Contact read permission needed. Please allow in App Settings for additional functionality.", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.fromParts("package", AddStudentProfileActivity.this.getPackageName(), null));
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

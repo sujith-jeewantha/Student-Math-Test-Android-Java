@@ -24,13 +24,6 @@ import java.util.List;
 public class MainActivity_Student_Profile extends AppCompatActivity {
 
 
-
-    private String serviceRegion = "";
-    private String service_site_id = "";
-    private String service_site_name = "";
-
-
-
     SwipeRefreshLayout pullToRefresh;
     private FloatingActionButton buttonAddServiceSummary;
     private RecyclerView recyclerView;

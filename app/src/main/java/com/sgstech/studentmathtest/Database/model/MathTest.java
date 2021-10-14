@@ -15,6 +15,9 @@ public class MathTest implements Serializable {
     @PrimaryKey(autoGenerate = true)
     public int id;
 
+    @ColumnInfo(name = "test_student_no")
+    public String test_student_no;
+
     @ColumnInfo(name = "scores")
     public String scores;
 
@@ -36,6 +39,14 @@ public class MathTest implements Serializable {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getTest_student_no() {
+        return test_student_no;
+    }
+
+    public void setTest_student_no(String test_student_no) {
+        this.test_student_no = test_student_no;
     }
 
     public String getScores() {

@@ -16,35 +16,62 @@
 
         <LinearLayout
             android:orientation="vertical"
+            android:gravity="center"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <LinearLayout
                 android:layout_below="@+id/rec_lay"
+                android:layout_gravity="center"
+                android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
 
 
-                <TextView
-                    android:text="@string/tests"
-                    android:textColor="@color/main_yellow"
-                    android:textStyle="bold"
-                    android:textSize="20sp"
-                    android:gravity="center"
-                    android:layout_marginLeft="150dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"/>
+                <LinearLayout
+                    android:layout_below="@+id/rec_lay"
+                    android:layout_marginLeft="20dp"
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
-                <Button
-                    android:id="@+id/btn_sort"
-                    android:gravity="end"
+
+
+                    <TextView
+                        android:text="@string/tests"
+                        android:textColor="@color/main_yellow"
+                        android:textStyle="bold"
+                        android:textSize="20sp"
+                        android:gravity="center"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"/>
+
+
+
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_gravity="center"
-                    android:background="@drawable/ic_sort"
-                    android:layout_marginLeft="80dp"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"/>
+                    android:gravity="center"
+                    android:layout_marginLeft="40dp"
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+
+                    <Button
+                        android:id="@+id/btn_sort"
+                        android:gravity="end"
+                        android:layout_gravity="center"
+                        android:background="@drawable/ic_sort"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"/>
+
+                </LinearLayout>
 
             </LinearLayout>
 

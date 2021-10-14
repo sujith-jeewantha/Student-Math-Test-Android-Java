@@ -321,31 +321,6 @@ public class Student implements Serializable {
     public boolean finished;
 
 
-    /*
-    * Getters and Setters
-    * */
-
-
-
-
-
-    /**
-     * Unit No
-     */
-
-
-
-
-//    public String getUnitNo() {
-//        return student_unit_no;
-//    }
-
-//    public void setUnitNo(String student_unit_no) {
-//        this.student_unit_no = student_unit_no;
-//    }
-
-
-
 
     public boolean isFinished() {
         return finished;

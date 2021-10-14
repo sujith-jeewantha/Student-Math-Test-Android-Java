@@ -15,8 +15,15 @@ import java.util.List;
 public interface MathTestDao {
 
 
-    @Query("SELECT * FROM mathTest")
-    List<MathTest> getAll();
+    @Query("SELECT * FROM mathTest WHERE test_student_no =:student_no")
+    List<MathTest> getAll(String student_no);
+
+    @Query("SELECT * FROM mathTest WHERE test_student_no =:student_no ORDER BY scores ASC ")
+    List<MathTest> getAllASC(String student_no);
+
+    @Query("SELECT * FROM mathTest WHERE test_student_no =:student_no ORDER BY scores DESC")
+    List<MathTest> getAllDESC(String student_no);
+
 
     @Insert
     void insert(MathTest mathTest);

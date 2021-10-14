@@ -31,6 +31,7 @@ public class UpdateHistoryMathTestSubActivity extends AppCompatActivity {
 
         final MathTest mathTest = (MathTest) getIntent().getSerializableExtra("mathTest");
 
+
         loadStudentProfile(mathTest);
 
         findViewById(R.id.button_update).setOnClickListener(new View.OnClickListener() {

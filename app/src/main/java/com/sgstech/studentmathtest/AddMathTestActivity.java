@@ -32,6 +32,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.sgstech.studentmathtest.Database.model.MathTest;
+import com.sgstech.studentmathtest.SharedPreferance.Manager_Cache;
 import com.sgstech.studentmathtest.Utills.DatabaseClient;
 
 import org.json.JSONArray;
@@ -54,7 +55,9 @@ public class    AddMathTestActivity extends AppCompatActivity {
 
     private String math_question_api_url = new Manager_API().math_question_api_url;
 
-    private String strAnswer, strTxtAnswer;
+    private Manager_Cache managerCacheStudentNo;
+
+    private String strAnswer, strTxtAnswer, studentNO;
 
     private int intTimeSpend = 0;
     private int intTimerProgress;
@@ -90,6 +93,11 @@ public class    AddMathTestActivity extends AppCompatActivity {
 
         txtStudentScore = findViewById(R.id.enterAnswer);
 
+        managerCacheStudentNo = Manager_Cache.getPreferences(this);
+
+        studentNO = getIntent().getStringExtra("add_student_no");
+        saveCachedStudentNo();
+
         DateFormat df = new SimpleDateFormat("EEE, d MMM yyyy, HH:mm");
         currentTime = df.format(Calendar.getInstance().getTime());
 
@@ -116,6 +124,8 @@ public class    AddMathTestActivity extends AppCompatActivity {
 
                     strAnswer =   etAnswer.getText().toString().trim();
                     strTxtAnswer = txtResult.getText().toString().trim();
+                    getCachedStudentNo();
+                    Toast.makeText(getApplicationContext(),"add_student_no" + studentNO, Toast.LENGTH_SHORT).show();
 
                     if((strAnswer.equals(strResult)) || (strTxtAnswer.equals(strResult)))
                     {
@@ -133,7 +143,7 @@ public class    AddMathTestActivity extends AppCompatActivity {
                 {
                     e.printStackTrace();
                     Log.d("err_s", e.getMessage());
-                    Toast.makeText(getApplicationContext(),"Something wrong", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(),"Something wrong", Toast.LENGTH_SHORT).show();
                     Intent intent       = new Intent(getBaseContext(), MainActivity_Math_Test_Sub.class);
                     startActivity(intent);
 
@@ -148,7 +158,7 @@ public class    AddMathTestActivity extends AppCompatActivity {
             public void onClick(View view) {
                 finish();
                 startActivity(new Intent(getApplicationContext(), MainActivity_Math_Test_Sub.class));
-                Toast.makeText(getApplicationContext(), "Saved", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "Saved", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -198,10 +208,6 @@ public class    AddMathTestActivity extends AppCompatActivity {
                             String strQuestion = obj.getString("question");
                             strResult = obj.getString("result");
                             String strTimeToSolve = obj.getString("timetosolve");
-
-                            Log.d("res_s", strQuestion);
-                            Log.d("res_s", strResult);
-                            Log.d("res_s", strTimeToSolve);
 
                             txtQuestions.setText(strQuestion);
 
@@ -307,7 +313,6 @@ public class    AddMathTestActivity extends AppCompatActivity {
                     public void onErrorResponse(VolleyError error) {
                         //displaying the error in toast if occurrs
                         Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
-                        Log.d("res", error.getMessage());
                     }
                 });
 
@@ -316,6 +321,14 @@ public class    AddMathTestActivity extends AppCompatActivity {
         RequestQueue requestQueue = Volley.newRequestQueue(this);
 
         requestQueue.add(stringRequest);
+    }
+
+    private void saveCachedStudentNo() {
+        managerCacheStudentNo.setCachedStudentNO(studentNO);
+    }
+
+    private void getCachedStudentNo() {
+        studentNO = managerCacheStudentNo.getCachedStudentNO();
     }
 
     private void saveStudentProfile() {
@@ -330,7 +343,8 @@ public class    AddMathTestActivity extends AppCompatActivity {
 
                 MathTest mathTest = new MathTest();
 
-                mathTest.setScores(String.valueOf(sStudentScore));
+                mathTest.setTest_student_no(studentNO);
+                mathTest.setScores(sStudentScore);
                 mathTest.setTime_of_beginning(currentTime);
                 mathTest.setTotal_time_of_the_test(String.valueOf(sTimerProgress) + " Seconds");
 
@@ -346,7 +360,7 @@ public class    AddMathTestActivity extends AppCompatActivity {
                 super.onPostExecute(aVoid);
                 finish();
                 startActivity(new Intent(getApplicationContext(), AddMathTestActivity.class));
-                Toast.makeText(getApplicationContext(), "Saved", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "Saved", Toast.LENGTH_SHORT).show();
             }
         }
 
@@ -382,7 +396,7 @@ public class    AddMathTestActivity extends AppCompatActivity {
                 super.onPostExecute(aVoid);
                 finish();
                 startActivity(new Intent(getApplicationContext(), AddMathTestActivity.class));
-                Toast.makeText(getApplicationContext(), "Saved", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "Saved", Toast.LENGTH_SHORT).show();
             }
         }
 

@@ -588,7 +588,7 @@ public class UpdateStudentProfileActivity extends AppCompatActivity {
             }
         }catch (Exception e)
         {
-            Toast.makeText(getApplicationContext(),"Student No required", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(),"Student No required", Toast.LENGTH_SHORT).show();
         }
 
 
@@ -634,7 +634,7 @@ public class UpdateStudentProfileActivity extends AppCompatActivity {
             @Override
             protected void onPostExecute(Void aVoid) {
                 super.onPostExecute(aVoid);
-                Toast.makeText(getApplicationContext(), "Updated", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "Updated", Toast.LENGTH_SHORT).show();
                 finish();
                 startActivity(new Intent(UpdateStudentProfileActivity.this, MainActivity_Student_Profile.class));
             }
@@ -659,7 +659,7 @@ public class UpdateStudentProfileActivity extends AppCompatActivity {
             @Override
             protected void onPostExecute(Void aVoid) {
                 super.onPostExecute(aVoid);
-                Toast.makeText(getApplicationContext(), "Deleted", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "Deleted", Toast.LENGTH_SHORT).show();
                 finish();
                 startActivity(new Intent(UpdateStudentProfileActivity.this, MainActivity_Student_Profile.class));
             }

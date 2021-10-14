@@ -21,6 +21,7 @@ public class MathTestSubAdapter extends RecyclerView.Adapter<MathTestSubAdapter.
     private Context mCtx;
     private List<MathTest> mathTestList;
 
+
     public MathTestSubAdapter(Context mCtx, List<MathTest> mathTestList) {
         this.mCtx = mCtx;
         this.mathTestList = mathTestList;
@@ -37,7 +38,6 @@ public class MathTestSubAdapter extends RecyclerView.Adapter<MathTestSubAdapter.
     public void onBindViewHolder(MathTestSubViewHolder holder, int position) {
 
         MathTest mt = mathTestList.get(position);
-
 
         holder.textView_test_score.setText("Score :"+mt.getScores());
         holder.textView_test_start_time.setText("Beginning time :"+mt.getTime_of_beginning());
