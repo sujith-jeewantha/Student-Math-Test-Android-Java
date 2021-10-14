@@ -17,7 +17,9 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.amitshekhar.DebugDB;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.sgstech.studentmathtest.Cache.Manager_Cache;
 import com.sgstech.studentmathtest.Database.model.Student;
+import com.sgstech.studentmathtest.Utills.DatabaseClient;
 import com.sgstech.studentmathtest.adapter.StudentProfileAdapter;
 
 
@@ -174,11 +176,11 @@ public class MainActivity_Student_Profile extends AppCompatActivity {
         uss.execute();
     }
 
-    @Override
-    public void onBackPressed() {
-        finish();
-        startActivity(getIntent());
-    }
+//    @Override
+//    public void onBackPressed() {
+//        finish();
+//        startActivity(getIntent());
+//    }
 
     private void getServiceGallerys() {
 

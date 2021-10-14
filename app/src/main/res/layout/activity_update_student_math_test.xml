@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".UpdateStudentMathTestActivity"
+    tools:context=".MathTestMainActivity"
     android:background="@color/main_blue">
 
     <ScrollView
@@ -272,7 +272,7 @@
                                         android:gravity="center">
 
                                         <TextView
-                                            android:id="@+id/txtTimeToSolve"
+                                            android:id="@+id/txtTimeToSolvep"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:textStyle="bold"

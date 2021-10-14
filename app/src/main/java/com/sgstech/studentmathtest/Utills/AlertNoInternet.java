@@ -1,4 +1,4 @@
-package com.sgstech.studentmathtest;
+package com.sgstech.studentmathtest.Utills;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,6 +7,8 @@ import android.view.WindowManager;
 import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.sgstech.studentmathtest.R;
 
 public class AlertNoInternet extends AppCompatActivity {
 

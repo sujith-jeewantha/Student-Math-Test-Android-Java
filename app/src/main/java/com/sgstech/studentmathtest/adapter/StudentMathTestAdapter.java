@@ -15,7 +15,6 @@ import com.bumptech.glide.Glide;
 import com.sgstech.studentmathtest.Database.model.Student;
 import com.sgstech.studentmathtest.MainActivity_Math_Test_Sub;
 import com.sgstech.studentmathtest.R;
-import com.sgstech.studentmathtest.UpdateStudentMathTestActivity;
 
 import java.io.File;
 import java.util.List;
@@ -91,7 +90,7 @@ public class StudentMathTestAdapter extends RecyclerView.Adapter<StudentMathTest
         public void onClick(View view) {
             Student student = studentList.get(getAdapterPosition());
 
-//            Intent intent = new Intent(mCtx, UpdateStudentMathTestActivity.class);
+//            Intent intent = new Intent(mCtx, MathTestMainActivity.class);
             Intent intent = new Intent(mCtx, MainActivity_Math_Test_Sub.class);
             intent.putExtra("studentMathTest", student);
 

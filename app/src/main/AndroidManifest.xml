@@ -20,6 +20,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.StudentMathTest">
         <activity
+            android:name=".ImagesFromServerActivity"
+            android:exported="true" />
+        <activity
             android:name=".HomeActivity"
             android:exported="true"
             android:screenOrientation="portrait">
@@ -46,7 +49,7 @@
             android:configChanges="orientation"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".AlertNoInternet"
+            android:name=".Utills.AlertNoInternet"
             android:configChanges="orientation"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Dialog" />
@@ -59,15 +62,11 @@
             android:configChanges="orientation"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".UpdateStudentMathTestActivity"
-            android:configChanges="orientation"
-            android:screenOrientation="portrait" />
-        <activity
             android:name=".UpdateStudentProfileActivity"
             android:configChanges="orientation"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".HistryMathTestSubActivity"
+            android:name=".UpdateHistoryMathTestSubActivity"
             android:configChanges="orientation"
             android:screenOrientation="portrait" />
 

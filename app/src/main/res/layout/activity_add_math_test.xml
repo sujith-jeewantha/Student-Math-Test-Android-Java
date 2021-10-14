@@ -74,7 +74,7 @@
                             <TextView
                                 android:textSize="20sp"
                                 android:textColor="@color/main_yellow"
-                                android:text="Student NO : "
+                                android:text="Score : "
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"/>
 
@@ -87,18 +87,13 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent">
 
-                            <EditText
-                                android:id="@+id/student_s_no"
-                                android:layout_marginLeft="2dp"
-                                android:layout_marginRight="2dp"
+                            <TextView
+                                android:id="@+id/student_score"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:background="@color/white"
                                 android:textColor="@color/black"
                                 android:gravity="center"
-                                android:textAlignment="center"
-                                android:inputType="number"
-                                android:maxLength="3"/>
+                                android:textAlignment="center"/>
 
                         </LinearLayout>
 
@@ -112,87 +107,13 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
 
-                        <LinearLayout
-                            android:orientation="horizontal"
-                            android:gravity="center"
-                            android:layout_weight="1"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent">
-
-                            <LinearLayout
-                                android:gravity="center"
-                                android:layout_weight="2"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent">
-
-                                <TextView
-                                    android:textSize="20sp"
-                                    android:textColor="@color/main_yellow"
-                                    android:text="First Name : "
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"/>
-
-                            </LinearLayout>
 
 
 
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:gravity="center"
-                            android:layout_weight="1"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent">
-
-                            <EditText
-                                android:id="@+id/enter_student_first_name"
-                                android:background="@color/pureWhite"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"/>
-
-                        </LinearLayout>
 
                     </LinearLayout>
 
-                    <LinearLayout
-                        android:orientation="vertical"
-                        android:layout_marginTop="20dp"
-                        android:gravity="center"
-                        android:layout_weight="1"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
 
-                        <LinearLayout
-                            android:layout_marginTop="2dp"
-                            android:gravity="center"
-                            android:layout_weight="1"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent">
-
-                            <TextView
-                                android:textSize="20sp"
-                                android:textColor="@color/main_yellow"
-                                android:text="Last Name : "
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"/>
-
-                        </LinearLayout>
-                        <LinearLayout
-                            android:layout_marginTop="2dp"
-                            android:gravity="center"
-                            android:layout_weight="1"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent">
-
-                            <EditText
-                                android:id="@+id/enter_student_last_name"
-                                android:background="@color/pureWhite"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"/>
-
-                        </LinearLayout>
-
-                    </LinearLayout>
 
 
 
@@ -460,15 +381,7 @@
 
                             </LinearLayout>
 
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:text="sample" />
 
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:text="sample" />
 
                         </LinearLayout>
 
@@ -486,13 +399,23 @@
 
 
         <Button
-            android:id="@+id/button_save_student_profile"
+            android:id="@+id/button_save_math_test"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="15dp"
             android:background="@drawable/button_final_circle"
             android:text="SUBMIT"
+            android:textAllCaps="true"/>
+
+        <Button
+            android:id="@+id/button_end_test"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/button_final_circle_red"
+            android:text="END TEST"
             android:textAllCaps="true"/>
 
     </LinearLayout>

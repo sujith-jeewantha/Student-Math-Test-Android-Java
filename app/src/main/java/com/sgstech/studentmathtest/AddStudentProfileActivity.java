@@ -5,8 +5,10 @@ import static android.Manifest.permission.READ_CONTACTS;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.ContentResolver;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -21,6 +23,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.ContactsContract;
 import android.provider.MediaStore;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -42,7 +45,10 @@ import com.karumi.dexter.MultiplePermissionsReport;
 import com.karumi.dexter.PermissionToken;
 import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
+import com.sgstech.studentmathtest.Cache.Manager_Cache;
 import com.sgstech.studentmathtest.Database.model.Student;
+import com.sgstech.studentmathtest.Manager.Manager_Permissions;
+import com.sgstech.studentmathtest.Utills.DatabaseClient;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -86,6 +92,16 @@ public class AddStudentProfileActivity extends AppCompatActivity{
 
     int etPhoneNo = -1;
     int etEmailNo = -1;
+
+    private String TAG = "Contacts";
+    private static final int RESULT_PICK_CONTACT = 5;
+
+    String phoneNo;
+    String id;
+    String name;
+    String email;
+    Cursor cursor;
+    Cursor c;
 
 
     /**
@@ -305,7 +321,8 @@ public class AddStudentProfileActivity extends AppCompatActivity{
                             case R.id.id_internet:
                                 // do your code
 
-                                Toast.makeText(getApplicationContext(),"I", Toast.LENGTH_LONG).show();
+                                Intent intent = new Intent(AddStudentProfileActivity.this, ImagesFromServerActivity.class);
+                                startActivity(intent);
 
 
                                 return true;
@@ -331,11 +348,11 @@ public class AddStudentProfileActivity extends AppCompatActivity{
             public void onClick(View view) {
                 if (CameraUtils.checkPermissions(getApplicationContext())) {
 
-                    Intent localIntent = new Intent("android.intent.action.PICK", ContactsContract.Contacts.CONTENT_URI);
-                    startActivityForResult(localIntent, RESULT_CONTACT);
+                   Intent contactPickerIntent = new Intent(Intent.ACTION_PICK,ContactsContract.CommonDataKinds.Phone.CONTENT_URI);
+                   startActivityForResult(contactPickerIntent, RESULT_CONTACT);
 
                 } else {
-                    requestContactPermission();
+                    check();
                 }
 
             }
@@ -585,6 +602,7 @@ public class AddStudentProfileActivity extends AppCompatActivity{
     /**
      * Activity result method will be called after closing the camera
      */
+    @SuppressLint("Range")
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         // if the result is capturing Image
@@ -655,15 +673,32 @@ public class AddStudentProfileActivity extends AppCompatActivity{
         if(requestCode == RESULT_CONTACT)
         {
             if (resultCode == RESULT_OK) {
-                String str = getPhoneNumber(data.getData());
-                if (str.trim().length() > 0) {
-                    editTextPhone_1.setText(str);
-                    editTextPhone_1.setSelection(editTextPhone_1.getText().length());
+                // Check for the request code, we might be usign multiple startActivityForResult
+                switch (requestCode) {
+                    case RESULT_PICK_CONTACT:
+                        contactPicked(data);
+                        break;
                 }
             } else {
-                Toast.makeText(this,"Phone Number Not Founded ...",Toast.LENGTH_SHORT).show();
+                Log.e("ContactFragment", "Failed to pick contact");
+            }if (resultCode == Activity.RESULT_OK) {
+            Uri contactData = data.getData();
+            c = getContentResolver().query(contactData, null, null, null, null);
+            if (c.moveToFirst()) {
+                @SuppressLint("Range") String contactId = c.getString(c.getColumnIndex(ContactsContract.Contacts._ID));
+                @SuppressLint("Range") String hasNumber = c.getString(c.getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER));
+                String num = "";
+                if (Integer.valueOf(hasNumber) == 1) {
+                    Cursor numbers = getContentResolver().query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null, ContactsContract.CommonDataKinds.Phone.CONTACT_ID + " = " + contactId, null, null);
+                    while (numbers.moveToNext()) {
+                        num = numbers.getString(numbers.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
+                        Toast.makeText(AddStudentProfileActivity.this, "Number=" + num, Toast.LENGTH_LONG).show();
+                    }
+                }
             }
         }
+        }
+
 
 
 
@@ -675,27 +710,75 @@ public class AddStudentProfileActivity extends AppCompatActivity{
      * Get Contact
      */
     @SuppressLint("Range")
-    private String getPhoneNumber(Uri paramUri) {
-        String id = "";
-        String no="";
-        Cursor cursor = getContentResolver().query(paramUri, null, null, null, null);
+    private void contactPicked(Intent data) {
 
-        while(cursor.moveToNext()){
-            id = cursor.getString(cursor.getColumnIndex("_id"));
-            if("1".equalsIgnoreCase(cursor.getString(cursor.getColumnIndex("has_phone_number")))){
-                Cursor cursorNo = getContentResolver().query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null, "contact_id = " + id, null, null);
-                while (cursorNo.moveToNext()) {
-                    if (cursorNo.getInt(cursorNo.getColumnIndex("data2")) == 2){
-                        no = no.concat(cursorNo.getString(cursorNo.getColumnIndex("data1")));
-                        break;
+        Uri uri = data.getData();
+        Log.i(TAG, "contactPicked() uri " + uri.toString());
+
+        ContentResolver cr = AddStudentProfileActivity.this.getContentResolver();
+
+        try {
+            Cursor cur = cr.query(ContactsContract.Contacts.CONTENT_URI, null, null, null, null);
+            if (null != cur && cur.getCount() > 0) {
+                cur.moveToFirst();
+                for (String column : cur.getColumnNames()) {
+                    Log.i(TAG, "contactPicked() Contacts column " + column + " : " + cur.getString(cur.getColumnIndex(column)));
+                }
+            }
+
+            if (cur.getCount() > 0) {
+                //Query the content uri
+                cursor = AddStudentProfileActivity.this.getContentResolver().query(uri, null, null, null, null);
+
+                if (null != cursor && cursor.getCount() > 0) {
+                    cursor.moveToFirst();
+                    for (String column : cursor.getColumnNames()) {
+                        Log.i(TAG, "contactPicked() uri column " + column + " : " + cursor.getString(cursor.getColumnIndex(column)));
                     }
                 }
-                cursorNo.close();
+
+                cursor.moveToFirst();
+                id = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts._ID));
+                Log.i(TAG, "contactPicked() uri id " + id);
+                String contact_id = cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.CONTACT_ID));
+                Log.i(TAG, "contactPicked() uri contact id " + contact_id);
+                // column index of the contact name
+                name = cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME));
+                // column index of the phone number
+                phoneNo = cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
+                //get Email id of selected contact....
+                Log.e("ContactsFragment", "::>> " + id + name + phoneNo);
+
+                Cursor cur1 = cr.query(ContactsContract.CommonDataKinds.Email.CONTENT_URI, null,
+                        ContactsContract.CommonDataKinds.Email.CONTACT_ID + " = ?", new String[]{contact_id}, null);
+
+                if (null != cur1 && cur1.getCount() > 0) {
+                    cur1.moveToFirst();
+                    for (String column : cur1.getColumnNames()) {
+                        Log.i(TAG, "contactPicked() Email column " + column + " : " + cur1.getString(cur1.getColumnIndex(column)));
+                        email = cur1.getString(cur1.getColumnIndex(ContactsContract.CommonDataKinds.Email.DATA));
+                    }
+
+                    //HERE YOU GET name, phoneno & email of selected contact from contactlist.....
+                    Log.e("setcontactDetails","::>>" + name+"\nPhoneno:" + phoneNo+"\nEmail: " + email);
+                } else {
+                    Log.e("setcontactDetails","::>>" + name+"\nPhoneno:" + phoneNo+"\nEmail: " + email);
+                }
             }
+        } catch (IndexOutOfBoundsException e) {
+            e.printStackTrace();
         }
-        cursor.close();
-        return no;
     }
+
+
+
+
+
+
+
+
+
+
 
     /**
      * Display image from gallery
@@ -850,6 +933,58 @@ public class AddStudentProfileActivity extends AppCompatActivity{
         } else {
 //            getPhoneNumber();
         }
+    }
+
+
+    /**
+     * --------------------------------------------------------------------
+     */
+
+    private void check(){
+
+
+        if (ContextCompat.checkSelfPermission(AddStudentProfileActivity.this, Manifest.permission.READ_CONTACTS)
+                == PackageManager.PERMISSION_GRANTED) {
+            Runnable r = new Runnable() {
+                @Override
+                public void run() {
+//                    getContacts();
+                }
+            };
+            Thread thread = new Thread(r);
+            thread.start();
+        }else{
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                if (shouldShowRequestPermissionRationale(Manifest.permission.READ_CONTACTS)) {
+                    Toast.makeText(AddStudentProfileActivity.this, "Read contacts permission is required to function app correctly", Toast.LENGTH_LONG).show();
+                }else {
+                    ActivityCompat.requestPermissions(AddStudentProfileActivity.this,
+                            new String[]{Manifest.permission.READ_CONTACTS},
+                            1);                }
+
+            }
+        }
+
+
+    }
+
+    private boolean checkPermission(){
+        if (ActivityCompat.checkSelfPermission(AddStudentProfileActivity.this, READ_CONTACTS) != PackageManager.PERMISSION_GRANTED) {
+            if (ActivityCompat.shouldShowRequestPermissionRationale(AddStudentProfileActivity.this, READ_CONTACTS)) {
+                Toast.makeText(AddStudentProfileActivity.this, "Contact read permission needed. Please allow in App Settings for additional functionality.", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.fromParts("package", AddStudentProfileActivity.this.getPackageName(), null));
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivityForResult(intent, 789);
+                return false;
+            }else {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    requestPermissions(new String[]{READ_CONTACTS}, 123);
+                }
+                return false;
+            }
+        }
+        return true;
     }
 
     /**

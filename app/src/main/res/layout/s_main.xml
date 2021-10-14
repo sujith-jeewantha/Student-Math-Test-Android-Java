@@ -35,37 +35,32 @@
             </LinearLayout>
 
                     <LinearLayout
-                        android:layout_marginTop="150sp"
-                        android:layout_marginBottom="150dp"
                         android:orientation="vertical"
                         android:gravity="center"
                         android:layout_weight="1"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                        android:layout_height="wrap_content">
 
 
 
 
                         <LinearLayout
-                            android:layout_marginBottom="25dp"
                             android:layout_weight="1"
                             android:orientation="horizontal"
                             android:gravity="center"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent">
+                            android:layout_height="wrap_content">
 
                             <LinearLayout
-                                android:id="@+id/serviceSummaryLayout"
                                 android:layout_margin="5dp"
                                 android:background="@color/main_blue"
                                 android:gravity="center"
                                 android:orientation="vertical"
                                 android:layout_weight="1"
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent">
+                                android:layout_height="wrap_content">
 
                                 <LinearLayout
-                                    android:id="@+id/btnLinServiceSummary"
                                     android:orientation="vertical"
                                     android:gravity="center"
                                     android:background="@drawable/layout_bg"
@@ -73,86 +68,24 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent">
 
-
-                                    <LinearLayout
+                                    <TextView
+                                        android:text="STUDENTS"
+                                        android:textSize="20dp"
+                                        android:textColor="@color/main_yellow"
+                                        android:layout_marginBottom="10dp"
+                                        android:layout_marginTop="10dp"
                                         android:gravity="center"
-                                        android:layout_weight="1"
                                         android:layout_width="match_parent"
-                                        android:layout_height="wrap_content">
+                                        android:layout_height="wrap_content"/>
 
-                                        <TextView
-                                            android:gravity="center"
-                                            android:textColor="@color/main_yellow"
-                                            android:text="Students"
-                                            android:layout_width="match_parent"
-                                            android:layout_height="wrap_content"/>
+                                    <Button
+                                        android:id="@+id/btnStudents"
+                                        android:background="@drawable/student"
+                                        android:layout_marginBottom="10dp"
+                                        android:layout_marginTop="10dp"
+                                        android:layout_width="100dp"
+                                        android:layout_height="100dp"/>
 
-                                    </LinearLayout>
-                                    <LinearLayout
-                                        android:gravity="center"
-                                        android:layout_weight="2"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content">
-
-                                        <ImageView
-                                            android:background="@drawable/student"
-                                            android:layout_width="100sp"
-                                            android:layout_height="100sp"/>
-
-                                    </LinearLayout>
-
-
-
-                                </LinearLayout>
-
-
-                            </LinearLayout>
-                            <LinearLayout
-                                android:id="@+id/ssfsfs"
-                                android:layout_margin="5dp"
-                                android:background="@color/main_blue"
-                                android:gravity="center"
-                                android:orientation="vertical"
-                                android:layout_weight="1"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent">
-
-                                <LinearLayout
-                                    android:id="@+id/btnLinMathTest"
-                                    android:orientation="vertical"
-                                    android:gravity="center"
-                                    android:background="@drawable/layout_bg"
-                                    android:layout_margin="2sp"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent">
-
-
-                                    <LinearLayout
-                                        android:gravity="center"
-                                        android:layout_weight="1"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content">
-
-                                        <TextView
-                                            android:gravity="center"
-                                            android:textColor="@color/main_yellow"
-                                            android:text="Students"
-                                            android:layout_width="match_parent"
-                                            android:layout_height="wrap_content"/>
-
-                                    </LinearLayout>
-                                    <LinearLayout
-                                        android:gravity="center"
-                                        android:layout_weight="2"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content">
-
-                                        <ImageView
-                                            android:background="@drawable/student"
-                                            android:layout_width="100sp"
-                                            android:layout_height="100sp"/>
-
-                                    </LinearLayout>
 
 
 
@@ -162,49 +95,40 @@
                             </LinearLayout>
 
                             <LinearLayout
-                                android:id="@+id/serviceGalleryLayout"
                                 android:layout_margin="5dp"
                                 android:background="@color/main_blue"
                                 android:orientation="vertical"
                                 android:layout_weight="1"
+                                android:layout_marginBottom="10dp"
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent">
+                                android:layout_height="wrap_content">
 
                                 <LinearLayout
-                                    android:id="@+id/btnLinServiceGallery"
                                     android:orientation="vertical"
                                     android:background="@drawable/layout_bg"
                                     android:layout_margin="2sp"
                                     android:gravity="center"
+                                    android:layout_marginBottom="10dp"
                                     android:layout_width="match_parent"
-                                    android:layout_height="match_parent">
+                                    android:layout_height="wrap_content">
 
-                                    <LinearLayout
+                                    <TextView
+                                        android:text="MATH TEST"
+                                        android:textSize="20dp"
+                                        android:textColor="@color/main_yellow"
+                                        android:layout_marginBottom="10dp"
+                                        android:layout_marginTop="10dp"
                                         android:gravity="center"
-                                        android:layout_weight="1"
                                         android:layout_width="match_parent"
-                                        android:layout_height="wrap_content">
+                                        android:layout_height="wrap_content"/>
 
-                                        <TextView
-                                            android:gravity="center"
-                                            android:textColor="@color/main_yellow"
-                                            android:text="Math Test"
-                                            android:layout_width="match_parent"
-                                            android:layout_height="wrap_content"/>
-
-                                    </LinearLayout>
-                                    <LinearLayout
-                                        android:gravity="center"
-                                        android:layout_weight="2"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content">
-
-                                        <ImageView
-                                            android:background="@drawable/test"
-                                            android:layout_width="100sp"
-                                            android:layout_height="100sp"/>
-
-                                    </LinearLayout>
+                                    <Button
+                                        android:id="@+id/btnMathTest"
+                                        android:background="@drawable/test"
+                                        android:layout_marginBottom="10dp"
+                                        android:layout_marginTop="10dp"
+                                        android:layout_width="100dp"
+                                        android:layout_height="100dp"/>
 
 
                                 </LinearLayout>
@@ -212,6 +136,11 @@
                             </LinearLayout>
 
                         </LinearLayout>
+
+
+
+
+
 
 
 

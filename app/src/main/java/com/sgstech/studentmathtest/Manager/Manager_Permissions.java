@@ -1,4 +1,4 @@
-package com.sgstech.studentmathtest;
+package com.sgstech.studentmathtest.Manager;
 
 import android.Manifest;
 import android.app.AlertDialog;

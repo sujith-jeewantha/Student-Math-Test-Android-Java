@@ -10,10 +10,9 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.sgstech.studentmathtest.Database.model.MathTest;
-import com.sgstech.studentmathtest.HistryMathTestSubActivity;
+import com.sgstech.studentmathtest.UpdateHistoryMathTestSubActivity;
 import com.sgstech.studentmathtest.R;
 
-import java.util.List;
 import java.util.List;
 
 public class MathTestSubAdapter extends RecyclerView.Adapter<MathTestSubAdapter.MathTestSubViewHolder> {
@@ -71,7 +70,7 @@ public class MathTestSubAdapter extends RecyclerView.Adapter<MathTestSubAdapter.
         public void onClick(View view) {
             MathTest mathTest = mathTestList.get(getAdapterPosition());
 
-            Intent intent = new Intent(mCtx, HistryMathTestSubActivity.class);
+            Intent intent = new Intent(mCtx, UpdateHistoryMathTestSubActivity.class);
             intent.putExtra("mathTest", mathTest);
 
             mCtx.startActivity(intent);

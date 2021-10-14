@@ -1,31 +1,24 @@
 package com.sgstech.studentmathtest;
 
-import android.app.ProgressDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.amitshekhar.DebugDB;
-import com.google.android.material.snackbar.Snackbar;
 import com.sgstech.studentmathtest.Database.model.Student;
+import com.sgstech.studentmathtest.Utills.DatabaseClient;
 import com.sgstech.studentmathtest.adapter.StudentMathTestAdapter;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -109,11 +102,11 @@ public class MainActivity_Student_Math_Test extends AppCompatActivity {
 
     }
 
-    @Override
-    public void onBackPressed() {
-        finish();
-        startActivity(getIntent());
-    }
+//    @Override
+//    public void onBackPressed() {
+//        finish();
+//        startActivity(getIntent());
+//    }
 
     private void getServiceGallerys() {
         class GetServiceGallerys extends AsyncTask<Void, Void, List<Student>> {

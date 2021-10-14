@@ -16,6 +16,8 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.FileProvider;
 
 import com.karumi.dexter.BuildConfig;
+import com.sgstech.studentmathtest.AddStudentProfileActivity;
+import com.sgstech.studentmathtest.UpdateStudentProfileActivity;
 
 import java.io.File;
 import java.text.SimpleDateFormat;

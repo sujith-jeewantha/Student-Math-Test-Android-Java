@@ -18,6 +18,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.amitshekhar.DebugDB;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.sgstech.studentmathtest.Database.model.MathTest;
+import com.sgstech.studentmathtest.Utills.DatabaseClient;
 import com.sgstech.studentmathtest.adapter.MathTestSubAdapter;
 
 import java.io.File;
@@ -115,9 +116,9 @@ public class MainActivity_Math_Test_Sub extends AppCompatActivity {
         btnServiceBackToHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
-                Intent intent = new Intent(getApplicationContext(), UpdateStudentMathTestActivity.class);
-                startActivity(intent);
+//                finish();
+//                Intent intent = new Intent(getApplicationContext(), MathTestMainActivity.class);
+//                startActivity(intent);
             }
         });
 
@@ -170,11 +171,11 @@ public class MainActivity_Math_Test_Sub extends AppCompatActivity {
         uss.execute();
     }
 
-    @Override
-    public void onBackPressed() {
-        finish();
-        startActivity(getIntent());
-    }
+//    @Override
+//    public void onBackPressed() {
+//        finish();
+//        startActivity(getIntent());
+//    }
 
     private void getServiceGallerys() {
 

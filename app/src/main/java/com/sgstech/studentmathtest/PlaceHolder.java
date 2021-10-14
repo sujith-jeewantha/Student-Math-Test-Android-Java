@@ -2,9 +2,11 @@ package com.sgstech.studentmathtest;
 
 public class PlaceHolder {
 
-    private String questions;
-    private int result;
-    private int timetosolve;
+    String questions;
+    String result;
+    String timetosolve;
+    String options;
+
 
     public String getQuestions() {
         return questions;
@@ -14,23 +16,29 @@ public class PlaceHolder {
         this.questions = questions;
     }
 
-    public int getResult() {
+    public String getResult() {
         return result;
     }
 
-    public void setResult(int result) {
+    public void setResult(String result) {
         this.result = result;
     }
 
-    public int getTimetosolve() {
+    public String getTimetosolve() {
         return timetosolve;
     }
 
-    public void setTimetosolve(int timetosolve) {
+    public void setTimetosolve(String timetosolve) {
         this.timetosolve = timetosolve;
     }
 
+    public String getOptions() {
+        return options;
+    }
 
+    public void setOptions(String options) {
+        this.options = options;
+    }
 
 
 }

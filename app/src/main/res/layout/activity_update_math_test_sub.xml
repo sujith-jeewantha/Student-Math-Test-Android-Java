@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".HistryMathTestSubActivity"
+    tools:context=".UpdateHistoryMathTestSubActivity"
     android:background="@color/main_blue">
 
     <ScrollView
@@ -207,6 +207,8 @@
             android:background="@drawable/button_final_circle"
             android:text="OK"
             android:textAllCaps="true" />
+
+
 
 
 

@@ -1,4 +1,4 @@
-package com.sgstech.studentmathtest;
+package com.sgstech.studentmathtest.Utills;
 
 import static com.sgstech.studentmathtest.Database.AppDatabase.MIGRATION_1_2;
 

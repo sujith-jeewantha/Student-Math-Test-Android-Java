@@ -20,6 +20,7 @@
         <entry key="app/src/main/res/drawable/ic_add.xml" value="0.21145833333333333" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.21145833333333333" />
         <entry key="app/src/main/res/drawable/ic_left_arrow.xml" value="0.21574074074074073" />
+        <entry key="app/src/main/res/drawable/ic_sort.xml" value="0.21145833333333333" />
         <entry key="app/src/main/res/drawable/layout_bg.xml" value="0.21145833333333333" />
         <entry key="app/src/main/res/drawable/layout_bg_l.xml" value="0.21145833333333333" />
         <entry key="app/src/main/res/drawable/layout_shape.xml" value="0.21145833333333333" />
@@ -30,11 +31,12 @@
         <entry key="app/src/main/res/drawable/photo_image.xml" value="0.21145833333333333" />
         <entry key="app/src/main/res/drawable/profile_pic.xml" value="0.21145833333333333" />
         <entry key="app/src/main/res/layout/activity_add_breakdown_summary.xml" value="0.22871376811594202" />
-        <entry key="app/src/main/res/layout/activity_add_math_test.xml" value="0.13489583333333333" />
+        <entry key="app/src/main/res/layout/activity_add_math_test.xml" value="0.2" />
         <entry key="app/src/main/res/layout/activity_add_service_summary.xml" value="0.1953125" />
         <entry key="app/src/main/res/layout/activity_add_student_profile.xml" value="0.1953125" />
         <entry key="app/src/main/res/layout/activity_alert_no_internet.xml" value="0.1953125" />
         <entry key="app/src/main/res/layout/activity_home.xml" value="0.1953125" />
+        <entry key="app/src/main/res/layout/activity_images_from_server.xml" value="0.1953125" />
         <entry key="app/src/main/res/layout/activity_main_math_test_sub.xml" value="0.13489583333333333" />
         <entry key="app/src/main/res/layout/activity_main_service_gallery.xml" value="0.1953125" />
         <entry key="app/src/main/res/layout/activity_main_service_site_info.xml" value="0.1953125" />

@@ -7,8 +7,6 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -35,6 +33,7 @@ import com.karumi.dexter.PermissionToken;
 import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 import com.sgstech.studentmathtest.Database.model.Student;
+import com.sgstech.studentmathtest.Utills.DatabaseClient;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -226,8 +225,8 @@ public class UpdateStudentProfileActivity extends AppCompatActivity {
                             case R.id.id_internet:
                                 // do your code
 
-                                Toast.makeText(getApplicationContext(),"I", Toast.LENGTH_LONG).show();
-
+                                Intent intent = new Intent(UpdateStudentProfileActivity.this, ImagesFromServerActivity.class);
+                                startActivity(intent);
 
                                 return true;
 
